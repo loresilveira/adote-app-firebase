@@ -17,7 +17,7 @@ export class AnimaisProvider {
   }
 
   getAll() {
-    return this.db.list(this.PATH, ref => ref.orderByChild('name'))
+    return this.db.list(this.PATH, ref => ref.orderByChild('nome'))
       .snapshotChanges()
       .map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
@@ -31,16 +31,19 @@ export class AnimaisProvider {
       });
   }
  
-  save(contact: any) {
+  save(animal: any) {
     return new Promise((resolve, reject) => {
-      if (contact.key) {
+      if (animal.key) {
         this.db.list(this.PATH)
-          .update(contact.key, { name: contact.name, tel: contact.tel })
+          .update(animal.key, { nome: animal.nome, tipo: animal.tipo, porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
+            vermifugado: animal.vermifugado, vacinado: animal.vacinado
+          })
           .then(() => resolve())
           .catch((e) => reject(e));
       } else {
         this.db.list(this.PATH)
-          .push({ name: contact.name, tel: contact.tel })
+          .push({ nome: animal.nome, tipo: animal.tipo, porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
+            vermifugado: animal.vermifugado, vacinado: animal.vacinado })
           .then(() => resolve());
       }
     })
