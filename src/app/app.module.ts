@@ -10,6 +10,7 @@ import { AnimaisProvider } from '../providers/animais/animais';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AnimalPageModule } from '../pages/animal/animal.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
+    AnimalPageModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyCh3j2HD3jVE9mfDYiI0_Z-oA7wsTakVrE",
       authDomain: "fir-adote-app.firebaseapp.com",

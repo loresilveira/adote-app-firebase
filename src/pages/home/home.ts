@@ -22,10 +22,10 @@ export class HomePage {
 
   editAnimal(animal: any) {
     // Maneira 1
-    // this.navCtrl.push('AnimalEditPage', { animal: animal });
+    this.navCtrl.push('AnimalEditPage', { animal: animal });
 
     // Maneira 2
-    this.navCtrl.push('AnimalEditPage', { key: animal.key });
+    // this.navCtrl.push('AnimalEditPage', { key: animal.key });
   }
 
   removeAnimal(key: string) {
@@ -39,4 +39,6 @@ export class HomePage {
         });
     }
   }
+
+
 }

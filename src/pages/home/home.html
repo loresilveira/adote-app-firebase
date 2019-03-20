@@ -12,7 +12,7 @@
     <ion-item-sliding *ngFor="let animal of animais | async">
       <ion-item>
         <h1>{{ animal.nome }}</h1>
-        <p>{{ contact.tel }}</p>
+        <p>{{ animal.tipo }}</p>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="secondary" (click)="editContact(contact)">
