@@ -11,6 +11,7 @@ import { AnimaisProvider } from '../providers/animais/animais';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AnimalPageModule } from '../pages/animal/animal.module';
+import { UsuariosProvider } from '../providers/usuarios/usuarios';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { AnimalPageModule } from '../pages/animal/animal.module';
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AnimaisProvider
+    AnimaisProvider,
+    UsuariosProvider
   ]
 })
 export class AppModule { }
