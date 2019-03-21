@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 // import { Observable } from 'rxjs-compat';
 // import { map } from 'rxjs-compat/operators/map';
+import 'rxjs/add/operator/map'
 
 /*
   Generated class for the AnimaisProvider provider.
@@ -38,16 +39,16 @@ export class AnimaisProvider {
       if (animal.key) {
         this.db.list(this.PATH)
           .update(animal.key, { nome: animal.nome, tipo: animal.tipo
-            // , porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
-            // vermifugado: animal.vermifugado, vacinado: animal.vacinado
+            , porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
+            vermifugado: animal.vermifugado, vacinado: animal.vacinado
           })
           .then(() => resolve())
           .catch((e) => reject(e));
       } else {
         this.db.list(this.PATH)
           .push({ nome: animal.nome, tipo: animal.tipo
-            // , porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
-            // vermifugado: animal.vermifugado, vacinado: animal.vacinado
+            , porte: animal.porte, pelagem: animal.pelagem, sexo: animal.sexo, castrado: animal.castrado, 
+            vermifugado: animal.vermifugado, vacinado: animal.vacinado
            })
           .then(() => resolve());
       }

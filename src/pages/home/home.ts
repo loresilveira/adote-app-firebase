@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
+import { AnimalPage } from '../animal/animal';
 
 @Component({
   selector: 'page-home',
@@ -12,12 +13,13 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private provider: AnimaisProvider,
     private toast: ToastController) {
+      console.log('Hello Home Page')
 
     this.animais = this.provider.getAll();
   }
 
   newAnimal() {
-    this.navCtrl.push('AnimalEditPage');
+    this.navCtrl.push(AnimalPage);
   }
 
   editAnimal(animal: any) {
