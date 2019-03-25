@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Animais
+      Animais recomendados
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -10,9 +10,21 @@
 
   <ion-list>
     <ion-item-sliding *ngFor="let animal of animais | async">
+        <ion-card>
+            <img src="img/nin-live.png"/>
+            <ion-card-content>
+              <ion-card-title>
+                  <h1>{{ animal.nome }}</h1>
+                </ion-card-title>
+              <p>
+                The most popular industrial group ever, and largely
+                responsible for bringing the music to a mass audience.
+              </p>
+            </ion-card-content>
+          </ion-card>
       <ion-item>
-        <h1>{{ animal.nome }}</h1>
-        <p>{{ animal.tipo }}</p>
+        
+        
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="secondary" (click)="editAnimal(animal)">

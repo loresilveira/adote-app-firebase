@@ -1,45 +1,29 @@
 <ion-header>
   <ion-navbar color="primary">
+    <ion-buttons left>
+      <button ion-button (click)="openMenu()">
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      Animais recomendados
+      RecAdoption
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let animal of animais | async">
-        <ion-card>
-            <img src="img/nin-live.png"/>
-            <ion-card-content>
-              <ion-card-title>
-                  <h1>{{ animal.nome }}</h1>
-                </ion-card-title>
-              <p>
-                The most popular industrial group ever, and largely
-                responsible for bringing the music to a mass audience.
-              </p>
-            </ion-card-content>
-          </ion-card>
-      <ion-item>
-        
-        
-      </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="secondary" (click)="editAnimal(animal)">
-          <ion-icon name="create"></ion-icon>
-        </button>
-        <button ion-button color="danger" (click)="removeAnimal(animal.key)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <button ion-button (click)='goToListaAnimaisPage()'>Lista de Animais</button>
 
-  <ion-fab bottom right>
-    <button ion-fab color="primary" (click)="newAnimal()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
+  <button ion-button full (click)='goToListaUsuarioPage()'>Full Button</button>
+  <!-- <ion-list>
+
+    <ion-card *ngFor="let animal of animais" class="card">
+      
+        {{animal.nome}}
+
+    <ion-card>
+  </ion-list> -->
+
+
 </ion-content>

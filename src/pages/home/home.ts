@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController } from 'ionic-angular';
+import { NavController, ToastController, MenuController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalPage } from '../animal/animal';
+import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 
 @Component({
   selector: 'page-home',
@@ -12,10 +13,15 @@ export class HomePage {
   animais: Observable<any>;
 
   constructor(public navCtrl: NavController, private provider: AnimaisProvider,
-    private toast: ToastController) {
+    private toast: ToastController
+    ,public menu: MenuController) {
       console.log('Hello Home Page')
 
     this.animais = this.provider.getAll();
+  }
+
+  openMenu() {
+    this.menu.open();
   }
 
   newAnimal() {
@@ -40,6 +46,10 @@ export class HomePage {
           this.toast.create({ message: 'Erro ao remover o animal.', duration: 3000 }).present();
         });
     }
+  }
+
+  goToListaAnimaisPage(){
+    this.navCtrl.push(ListaAnimaisPage);
   }
 
 
