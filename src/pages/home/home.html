@@ -1,10 +1,10 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-buttons left>
+    <!-- <ion-buttons left>
       <button ion-button (click)="openMenu()">
         <ion-icon name="menu"></ion-icon>
       </button>
-    </ion-buttons>
+    </ion-buttons> -->
     <ion-title>
       RecAdoption
     </ion-title>
@@ -12,10 +12,11 @@
 </ion-header>
 
 <ion-content padding>
+  <img src="/assets/imgs/principal.png"/>
 
-  <button ion-button (click)='goToListaAnimaisPage()'>Lista de Animais</button>
-
-  <button ion-button full (click)='goToListaUsuarioPage()'>Full Button</button>
+  <button ion-button full (click)='goToListaUsuarioPage()'>Suas preferências</button>
+  <button ion-button color="secondary" full (click)='goToListaAnimaisPage()'>Lista de Animais</button>
+  <button ion-button color="danger" full (click)='goToRecomendacaoPage()'>Recomendações</button>
   <!-- <ion-list>
 
     <ion-card *ngFor="let animal of animais" class="card">

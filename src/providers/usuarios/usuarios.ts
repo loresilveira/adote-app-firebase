@@ -31,11 +31,16 @@ export class UsuariosProvider {
       if (usuario.key) {
         this.db.list(this.PATH)
           .update(usuario.key, { 
-            nome: usuario.nome, pref_porte: usuario.pref_porte, 
-            pref_pelagem: usuario.pref_pelagem, pref_sexo: usuario.pref_sexo, 
-            pref_amigavel_crianca: usuario.pref_amigavel_crianca, pref_apartamento: usuario.pref_apartamento,
-            pref_guarda: usuario.pref_guarda, pref_brincadeira: usuario.pref_brincadeira, 
-            pref_exercicio: usuario.pref_exercicio, pref_queda_pelo: usuario.pref_queda_pelo,
+            nome: usuario.nome, 
+            pref_porte: usuario.pref_porte, 
+            pref_pelagem: usuario.pref_pelagem, 
+            pref_sexo: usuario.pref_sexo, 
+            pref_amigavel_crianca: usuario.pref_amigavel_crianca,
+            pref_apartamento: usuario.pref_apartamento,
+            pref_guarda: usuario.pref_guarda, 
+            pref_brincadeira: usuario.pref_brincadeira, 
+            pref_exercicio: usuario.pref_exercicio, 
+            pref_queda_pelo: usuario.pref_queda_pelo,
             pref_tendencia_latir: usuario.pref_tendencia_latir
           })
           .then(() => resolve())

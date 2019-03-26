@@ -58,10 +58,10 @@
       <ion-select [(ngModel)]="pref_sexo" formControlName="pref_sexo">
           <ion-option value="nao">Não há</ion-option>
         <ion-option value="femea">Fêmea</ion-option>
-        <ion-option value="Macho">Macho</ion-option>
+        <ion-option value="macho">Macho</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!form.controls.sexo.valid &&
+    <ion-item *ngIf="!form.controls.pref_sexo.valid &&
      (form.controls.pref_sexo.dirty || form.controls.pref_sexo.touched)"
       color="danger">
       <div [hidden]="!form.controls.pref_sexo.errors.required">

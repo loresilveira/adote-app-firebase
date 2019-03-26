@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-navbar color="primary">
+      <ion-title>
+        Preferências do usuário
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+  
+    <ion-list>
+      <ion-item-sliding *ngFor="let usuario of usuarios | async">
+          <ion-card>
+              
+              <ion-card-content>
+                <ion-card-title>
+                    <h1>{{ usuario.nome }}</h1>
+                    <p>{{usuario.pref_porte}}</p>
+                    <p>{{usuario.pref_pelagem}}</p>
+                    <p>{{usuario.pref_sexo}}</p>
+                    <p>{{usuario.pref_amigavel_crianca}}</p>
+                  </ion-card-title>
+                <p>
+                  The most popular industrial group ever, and largely
+                  responsible for bringing the music to a mass audience.
+                </p>
+              </ion-card-content>
+            </ion-card>
+        <ion-item>
+          
+          
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="secondary" (click)="editUsuario(usuario)">
+            <ion-icon name="create"></ion-icon>
+          </button>
+          <button ion-button color="danger" (click)="removeUsuario(usuario.key)">
+            <ion-icon name="trash"></ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  
+    <ion-fab bottom right>
+      <button ion-fab color="primary" (click)="newUsuario()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+  </ion-content>

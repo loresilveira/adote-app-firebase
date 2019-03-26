@@ -18,6 +18,8 @@ import { MenuPageModule } from '../pages/menu/menu.module';
 import { ListaAnimaisPage } from '../pages/lista-animais/lista-animais';
 import { ListaAnimaisPageModule } from '../pages/lista-animais/lista-animais.module';
 import { UsuarioPageModule } from '../pages/usuario/usuario.module';
+import { ListaUsuariosPage } from '../pages/lista-usuarios/lista-usuarios';
+import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { UsuarioPageModule } from '../pages/usuario/usuario.module';
     IonicModule.forRoot(MyApp),
     AnimalPageModule,
     ListaAnimaisPageModule,
+    ListaUsuariosPageModule,
     UsuarioPageModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyCh3j2HD3jVE9mfDYiI0_Z-oA7wsTakVrE",

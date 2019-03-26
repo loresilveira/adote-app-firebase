@@ -4,6 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalPage } from '../animal/animal';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
+import { UsuarioPage } from '../usuario/usuario';
+import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
 
 @Component({
   selector: 'page-home',
@@ -48,9 +50,16 @@ export class HomePage {
     }
   }
 
+  goToListaUsuarioPage(){
+    this.navCtrl.push(ListaUsuariosPage);
+  }
+
   goToListaAnimaisPage(){
     this.navCtrl.push(ListaAnimaisPage);
   }
 
+  goToRecomendacaoPage(){
+
+  }
 
 }
