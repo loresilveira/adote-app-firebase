@@ -9,30 +9,41 @@
 <ion-content padding>
 
   <ion-list>
+
     <ion-item-sliding *ngFor="let animal of animais | async">
-        <ion-card>
-           
-            <ion-card-content>
-              <ion-card-title>
-                  <h1>{{ animal.nome }}</h1>
-                </ion-card-title>
-              <p>
-                The most popular industrial group ever, and largely
-                responsible for bringing the music to a mass audience.
-              </p>
-            </ion-card-content>
-          </ion-card>
-      <ion-item>
         
-        
-      </ion-item>
+     <ion-item>{{animal.nome}}
+       <p> <b>Porte:</b> {{animal.porte}} ...
+            <b>Pelagem:</b> {{animal.pelagem}}
+       </p>
+       <p>
+         <b>Sexo: </b> {{animal.sexo}} ...
+         <b>Amigável criança:</b> {{animal.amigavel_crianca}}
+       </p>
+       <p>
+         <b>Adapta em apto:</b> {{animal.apartamento}}
+       </p>
+       <p>
+          <b>Cão de guarda:</b> {{animal.guarda}}
+       </p>
+       <p>
+         <b>Gosto por brincadeira:</b> {{animal.brincadeira}}         
+       </p>
+       <p>
+          <b>Tendência em latir:</b> {{animal.exercicio}}
+       </p>
+     </ion-item>
+
+
       <ion-item-options side="left">
         <button ion-button color="secondary" (click)="editAnimal(animal)">
           <ion-icon name="create"></ion-icon>
         </button>
+
         <button ion-button color="danger" (click)="removeAnimal(animal.key)">
           <ion-icon name="trash"></ion-icon>
         </button>
+
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

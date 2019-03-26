@@ -45,16 +45,16 @@ export class AnimalPage {
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.animal.key],
-      nome: [this.animal.nome, Validators.required],
-      porte:[this.animal.porte, Validators.required],
-      pelagem:[this.animal.pelagem , Validators.required],
-      sexo:[this.animal.sexo, Validators.required],
-      amigavel_crianca: [this.animal.amigavel_crianca, Validators.required],
-      apartamento: [this.animal.apartamento, Validators.required],
-      guarda: [this.animal.guarda, Validators.required],
-      brincadeira: [this.animal.brincadeira, Validators.required],
-      exercicio: [this.animal.exercicio, Validators.required],
-      queda_pelo: [this.animal.queda_pelo, Validators.required],
+      nome: [this.animal.nome, ], //Validators.required
+      porte:[this.animal.porte,],
+      pelagem:[this.animal.pelagem , ],
+      sexo:[this.animal.sexo, ],
+      amigavel_crianca: [this.animal.amigavel_crianca, ],
+      apartamento: [this.animal.apartamento, ],
+      guarda: [this.animal.guarda,],
+      brincadeira: [this.animal.brincadeira,],
+      exercicio: [this.animal.exercicio,],
+      queda_pelo: [this.animal.queda_pelo,],
       tendencia_latir: [this.animal.tendencia_latir, Validators.required],
   
     });

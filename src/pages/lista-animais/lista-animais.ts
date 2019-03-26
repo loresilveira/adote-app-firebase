@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, NavParams, IonicPage } from 'ionic-angular';
+import { NavController, ToastController, NavParams, IonicPage, AlertController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalPage } from '../animal/animal';
@@ -15,7 +15,8 @@ export class ListaAnimaisPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private alert: AlertController) {
 
     this.animais = this.provider.getAll();
   }
@@ -32,22 +33,42 @@ export class ListaAnimaisPage {
 
   editAnimal(animal: any) {
     // Maneira 1
-    this.navCtrl.push('AnimalEditPage', { animal: animal });
+    this.navCtrl.push('AnimalPage', { animal: animal });
 
     // Maneira 2
     // this.navCtrl.push('AnimalEditPage', { key: animal.key });
   }
 
   removeAnimal(key: string) {
-    if (key) {
-      this.provider.remove(key)
-        .then(() => {
-          this.toast.create({ message: 'Animal removido sucesso.', duration: 3000 }).present();
-        })
-        .catch(() => {
-          this.toast.create({ message: 'Erro ao remover o animal.', duration: 3000 }).present();
-        });
-    }
+    let alert = this.alert.create({
+      title: 'Excluir animal',
+      message: 'Deseja excluir?',
+      buttons: [
+        {
+            text: 'Não',
+            handler: () => {
+                console.log('Cancelado');
+            }
+        },
+        {
+            text: 'Sim',
+            handler: () => {
+              if (key) {
+                this.provider.remove(key)
+                  .then(() => {
+                    this.toast.create({ message: 'Animal removido com sucesso.', duration: 3000 }).present();
+                  })
+                  .catch(() => {
+                    this.toast.create({ message: 'Erro ao remover animal.', duration: 3000 }).present();
+                  });
+              }
+            }
+        }
+    ]
+    });
+    alert.present();
+
+    
   }
 
 }

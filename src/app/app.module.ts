@@ -20,6 +20,7 @@ import { ListaAnimaisPageModule } from '../pages/lista-animais/lista-animais.mod
 import { UsuarioPageModule } from '../pages/usuario/usuario.module';
 import { ListaUsuariosPage } from '../pages/lista-usuarios/lista-usuarios';
 import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
+import { DialogoProvider } from '../providers/dialogo/dialogo';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,9 @@ import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AnimaisProvider,
-    UsuariosProvider
+    UsuariosProvider,
+    DialogoProvider,
+    DialogoProvider
   ]
 })
 export class AppModule { }
