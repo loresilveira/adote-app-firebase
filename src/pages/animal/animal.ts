@@ -18,22 +18,22 @@ export class AnimalPage {
     private formBuilder: FormBuilder, private provider: AnimaisProvider,
     private toast: ToastController) {
 
-    // maneira 1
-    this.animal = this.navParams.data.animal || { };
-    this.createForm();
-
-    // // maneira 2
-    // this.contact = { };
+    // // maneira 1
+    // this.animal = this.navParams.data.animal || { };
     // this.createForm();
 
-    // if (this.navParams.data.key) {
-    //   const subscribe = this.provider.get(this.navParams.data.key).subscribe((c: any) => {
-    //     subscribe.unsubscribe();
+    // // maneira 2
+    this.animal = { };
+    this.createForm();
 
-    //     this.contact = c;
-    //     this.createForm();
-    //   })
-    // }
+    if (this.navParams.data.key) {
+      const subscribe = this.provider.get(this.navParams.data.key).subscribe((c: any) => {
+        subscribe.unsubscribe();
+
+        this.animal = c;
+        this.createForm();
+      })
+    }
 
     this.setupPageTitle();
   }

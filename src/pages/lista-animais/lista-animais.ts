@@ -33,10 +33,10 @@ export class ListaAnimaisPage {
 
   editAnimal(animal: any) {
     // Maneira 1
-    this.navCtrl.push('AnimalPage', { animal: animal });
+    // this.navCtrl.push('AnimalPage', { animal: animal });
 
     // Maneira 2
-    // this.navCtrl.push('AnimalEditPage', { key: animal.key });
+    this.navCtrl.push('AnimalPage', { key: animal.key });
   }
 
   removeAnimal(key: string) {
