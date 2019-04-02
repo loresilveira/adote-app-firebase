@@ -11,6 +11,7 @@ import { AnimaisProvider } from '../providers/animais/animais';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AnimalPageModule } from '../pages/animal/animal.module';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UsuariosProvider } from '../providers/usuarios/usuarios';
 
 import { MenuPageModule } from '../pages/menu/menu.module';
@@ -21,6 +22,7 @@ import { UsuarioPageModule } from '../pages/usuario/usuario.module';
 import { ListaUsuariosPage } from '../pages/lista-usuarios/lista-usuarios';
 import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
 import { DialogoProvider } from '../providers/dialogo/dialogo';
+import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { DialogoProvider } from '../providers/dialogo/dialogo';
       storageBucket: "fir-adote-app.appspot.com",
       messagingSenderId: "895899701153"
     }),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -57,7 +60,8 @@ import { DialogoProvider } from '../providers/dialogo/dialogo';
     AnimaisProvider,
     UsuariosProvider,
     DialogoProvider,
-    DialogoProvider
+    DialogoProvider,
+    RecomendacaoProvider
   ]
 })
 export class AppModule { }

@@ -19,28 +19,28 @@ export class UsuarioPage {
     private formBuilder: FormBuilder, private provider: UsuariosProvider,
     private toast: ToastController) {
 
-    // maneira 1
-    this.usuario = this.navParams.data.usuario || { };
-    this.createForm();
-
-    // // maneira 2
-    // this.contact = { };
+    // // maneira 1
+    // this.usuario = this.navParams.data.usuario || { };
     // this.createForm();
 
-    // if (this.navParams.data.key) {
-    //   const subscribe = this.provider.get(this.navParams.data.key).subscribe((c: any) => {
-    //     subscribe.unsubscribe();
+    // maneira 2
+    this.usuario = { };
+    this.createForm();
 
-    //     this.contact = c;
-    //     this.createForm();
-    //   })
-    // }
+    if (this.navParams.data.key) {
+      const subscribe = this.provider.get(this.navParams.data.key).subscribe((c: any) => {
+        subscribe.unsubscribe();
+
+        this.usuario = c;
+        this.createForm();
+      })
+    }
 
     this.setupPageTitle();
   }
 
   private setupPageTitle() {
-    this.title = this.navParams.data.usuario ? 'Alterando Usuário' : 'Novo usuário';
+    this.title = this.navParams.data.key ? 'Alterando Usuário' : 'Novo usuário';
   }
 
   createForm() {

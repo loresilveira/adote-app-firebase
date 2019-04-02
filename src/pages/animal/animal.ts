@@ -39,7 +39,7 @@ export class AnimalPage {
   }
 
   private setupPageTitle() {
-    this.title = this.navParams.data.animal ? 'Alterando Animal' : 'Novo animal';
+    this.title = this.navParams.data.key ? 'Alterando Animal' : 'Novo animal';
   }
 
   createForm() {
@@ -55,7 +55,7 @@ export class AnimalPage {
       brincadeira: [this.animal.brincadeira,],
       exercicio: [this.animal.exercicio,],
       queda_pelo: [this.animal.queda_pelo,],
-      tendencia_latir: [this.animal.tendencia_latir, Validators.required],
+      tendencia_latir: [this.animal.tendencia_latir],
   
     });
   }

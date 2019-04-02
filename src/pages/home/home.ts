@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, MenuController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
@@ -6,60 +6,76 @@ import { AnimalPage } from '../animal/animal';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { UsuarioPage } from '../usuario/usuario';
 import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  animais: Observable<any>;
+  public user: any;
+  @ViewChild('usuario') email;
+  @ViewChild('senha') password;
 
   constructor(public navCtrl: NavController, private provider: AnimaisProvider,
-    private toast: ToastController
-    ,public menu: MenuController) {
-      console.log('Hello Home Page')
+    private toast: ToastController,
+    public firebaseauth: AngularFireAuth) {
 
-    this.animais = this.provider.getAll();
-  }
+    console.log('Hello Home Page')
 
-  openMenu() {
-    this.menu.open();
-  }
-
-  newAnimal() {
-    this.navCtrl.push(AnimalPage);
-  }
-
-  editAnimal(animal: any) {
-    // Maneira 1
-    this.navCtrl.push('AnimalEditPage', { animal: animal });
-
-    // Maneira 2
-    // this.navCtrl.push('AnimalEditPage', { key: animal.key });
-  }
-
-  removeAnimal(key: string) {
-    if (key) {
-      this.provider.remove(key)
-        .then(() => {
-          this.toast.create({ message: 'Animal removido sucesso.', duration: 3000 }).present();
-        })
-        .catch(() => {
-          this.toast.create({ message: 'Erro ao remover o animal.', duration: 3000 }).present();
-        });
-    }
-  }
-
-  goToListaUsuarioPage(){
-    this.navCtrl.push(ListaUsuariosPage);
-  }
-
-  goToListaAnimaisPage(){
-    this.navCtrl.push(ListaAnimaisPage);
-  }
-
-  goToRecomendacaoPage(){
+    firebaseauth.user.subscribe((data => {
+      this.user = data;
+    }));
 
   }
+
+  public LoginComEmail(): void {
+    this.firebaseauth.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
+      .then(() => {
+        this.exibirToast('Login efetuado com sucesso');
+      })
+      .catch((erro: any) => {
+        this.exibirToast(erro);
+      });
+  }
+  public cadastrarUsuario(): void {
+    this.firebaseauth.auth.createUserWithEmailAndPassword(this.email.value, this.password.value)
+      .then(() => {
+        this.exibirToast('Usuário criado com sucesso');
+      })
+      .catch((erro: any) => {
+        console.log(erro);
+      });
+  }
+  public Sair(): void {
+    this.firebaseauth.auth.signOut()
+      .then(() => {
+        this.exibirToast('Você saiu');
+      })
+      .catch((erro: any) => {
+        this.exibirToast(erro);
+      });
+  }
+  private exibirToast(mensagem: string): void {
+    let toast = this.toast.create({
+      duration: 3000,
+      position: 'botton'
+    });
+    toast.setMessage(mensagem);
+    toast.present();
+  }
+
+
+  // goToListaUsuarioPage(){
+  //   this.navCtrl.push(ListaUsuariosPage);
+  // }
+
+  // goToListaAnimaisPage(){
+  //   this.navCtrl.push(ListaAnimaisPage);
+  // }
+
+  // goToRecomendacaoPage(){
+
+  // }
 
 }
