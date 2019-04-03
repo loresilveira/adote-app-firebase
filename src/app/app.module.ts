@@ -23,6 +23,7 @@ import { ListaUsuariosPage } from '../pages/lista-usuarios/lista-usuarios';
 import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
 import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
+import { RegisterPageModule } from '../pages/register/register.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
     ListaAnimaisPageModule,
     ListaUsuariosPageModule,
     UsuarioPageModule,
+    RegisterPageModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyCh3j2HD3jVE9mfDYiI0_Z-oA7wsTakVrE",
       authDomain: "fir-adote-app.firebaseapp.com",
@@ -46,7 +48,7 @@ import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
       messagingSenderId: "895899701153"
     }),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
+    AngularFireAuthModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

@@ -7,63 +7,66 @@ import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { UsuarioPage } from '../usuario/usuario';
 import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { User } from 'firebase';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public user: any;
-  @ViewChild('usuario') email;
-  @ViewChild('senha') password;
+  user = {} as User;
 
-  constructor(public navCtrl: NavController, private provider: AnimaisProvider,
-    private toast: ToastController,
-    public firebaseauth: AngularFireAuth) {
+  constructor(public navCtrl: NavController,
+    private provider: AnimaisProvider,
+    private toast: ToastController) {
 
     console.log('Hello Home Page')
 
-    firebaseauth.user.subscribe((data => {
-      this.user = data;
-    }));
+    // firebaseauth.user.subscribe((data => {
+    //   this.user = data;
+    // }));
 
   }
 
-  public LoginComEmail(): void {
-    this.firebaseauth.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
-      .then(() => {
-        this.exibirToast('Login efetuado com sucesso');
-      })
-      .catch((erro: any) => {
-        this.exibirToast(erro);
-      });
-  }
-  public cadastrarUsuario(): void {
-    this.firebaseauth.auth.createUserWithEmailAndPassword(this.email.value, this.password.value)
-      .then(() => {
-        this.exibirToast('Usuário criado com sucesso');
-      })
-      .catch((erro: any) => {
-        console.log(erro);
-      });
-  }
-  public Sair(): void {
-    this.firebaseauth.auth.signOut()
-      .then(() => {
-        this.exibirToast('Você saiu');
-      })
-      .catch((erro: any) => {
-        this.exibirToast(erro);
-      });
-  }
-  private exibirToast(mensagem: string): void {
-    let toast = this.toast.create({
-      duration: 3000,
-      position: 'botton'
-    });
-    toast.setMessage(mensagem);
-    toast.present();
-  }
+  register(){
+    this.navCtrl.push('RegisterPage')
+   }
+
+  // public LoginComEmail(): void {
+  //   this.firebaseauth.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
+  //     .then(() => {
+  //       this.exibirToast('Login efetuado com sucesso');
+  //     })
+  //     .catch((erro: any) => {
+  //       this.exibirToast(erro);
+  //     });
+  // }
+  // public cadastrarUsuario(): void {
+  //   this.firebaseauth.auth.createUserWithEmailAndPassword(this.email.value, this.password.value)
+  //     .then(() => {
+  //       this.exibirToast('Usuário criado com sucesso');
+  //     })
+  //     .catch((erro: any) => {
+  //       console.log(erro);
+  //     });
+  // }
+  // public Sair(): void {
+  //   this.firebaseauth.auth.signOut()
+  //     .then(() => {
+  //       this.exibirToast('Você saiu');
+  //     })
+  //     .catch((erro: any) => {
+  //       this.exibirToast(erro);
+  //     });
+  // }
+  // private exibirToast(mensagem: string): void {
+  //   let toast = this.toast.create({
+  //     duration: 3000,
+  //     position: 'botton'
+  //   });
+  //   toast.setMessage(mensagem);
+  //   toast.present();
+  // }
 
 
   // goToListaUsuarioPage(){
