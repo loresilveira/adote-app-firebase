@@ -14,15 +14,15 @@
 
     <ion-item>
         <ion-label floating>Email</ion-label>
-        <ion-input type="text" [(ngModel)]= "user.email"></ion-input>
+        <ion-input type="text" [(ngModel)]= "usuario.email"></ion-input>
       </ion-item>
     
       
       <ion-item>
           <ion-label floating>Senha</ion-label>
-          <ion-input type="password" [(ngModel)]= "user.password"></ion-input>
+          <ion-input type="password" [(ngModel)]= "usuario.password"></ion-input>
         </ion-item>
 
         <button ion-button block
-        (click)="register(user)">Cadastrar</button> 
+        (click)="register()">Cadastrar</button> 
 </ion-content>

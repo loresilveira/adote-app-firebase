@@ -7,24 +7,26 @@ import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { UsuarioPage } from '../usuario/usuario';
 import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from 'firebase';
+import { User } from '../../models/user';
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  user = {} as User;
 
+
+  public user: User = {
+    email: '',
+    password : ''
+  }
   constructor(public navCtrl: NavController,
     private provider: AnimaisProvider,
-    private toast: ToastController) {
+    private toast: ToastController,
+    public firebaseauth: AngularFireAuth) {
 
     console.log('Hello Home Page')
-
-    // firebaseauth.user.subscribe((data => {
-    //   this.user = data;
-    // }));
 
   }
 
@@ -41,15 +43,15 @@ export class HomePage {
   //       this.exibirToast(erro);
   //     });
   // }
-  // public cadastrarUsuario(): void {
-  //   this.firebaseauth.auth.createUserWithEmailAndPassword(this.email.value, this.password.value)
-  //     .then(() => {
-  //       this.exibirToast('Usuário criado com sucesso');
-  //     })
-  //     .catch((erro: any) => {
-  //       console.log(erro);
-  //     });
-  // }
+  cadastrarUsuario() {
+    this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
+      .then(() => {
+        console.log('Usuário criado com sucesso');
+      })
+      .catch((erro: any) => {
+        console.log(erro);
+      });
+  }
   // public Sair(): void {
   //   this.firebaseauth.auth.signOut()
   //     .then(() => {

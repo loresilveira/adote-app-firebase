@@ -2,13 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
-
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { AuthService } from '../../services/auth.service';
+import { ListaAnimaisPage } from '../lista-animais/lista-animais';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
 @Component({
@@ -16,24 +12,28 @@ import { AngularFireAuth } from 'angularfire2/auth';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  user = {} as User;
+  usuario  = {
+    email:'',
+    password:''
+  }
+  user : User;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private firebaseauth: AngularFireAuth) {
+    private auth: AuthProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RegisterPage');
   }
 
-  register(user: User) {
-    this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
-        .then(() => {
-          console.log('Usuário criado com sucesso');
-        })
-        .catch((erro: any) => {
-          console.log(erro);
-        });
+  
+  register() {
+
+    this.user.email = this.usuario.email;
+    this.user.password = this.usuario.password;
+
+    this.auth.signUp(this.user).then(()=> { console.log(this.user.email+ ' '+ this.user.password)})
+
   }
 }

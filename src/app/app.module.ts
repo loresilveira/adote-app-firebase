@@ -11,7 +11,7 @@ import { AnimaisProvider } from '../providers/animais/animais';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AnimalPageModule } from '../pages/animal/animal.module';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { UsuariosProvider } from '../providers/usuarios/usuarios';
 
 import { MenuPageModule } from '../pages/menu/menu.module';
@@ -24,6 +24,8 @@ import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.
 import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 import { RegisterPageModule } from '../pages/register/register.module';
+import { AuthService } from '../services/auth.service';
+import { AuthProvider } from '../providers/auth/auth';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { RegisterPageModule } from '../pages/register/register.module';
     }),
     AngularFireDatabaseModule,
     AngularFireAuthModule
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -63,7 +66,9 @@ import { RegisterPageModule } from '../pages/register/register.module';
     UsuariosProvider,
     DialogoProvider,
     DialogoProvider,
-    RecomendacaoProvider
+    RecomendacaoProvider,
+    AuthService,
+    AuthProvider
   ]
 })
 export class AppModule { }
