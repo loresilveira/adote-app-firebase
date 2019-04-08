@@ -7,11 +7,12 @@ import { HomePage } from '../pages/home/home';
 import { ListaAnimaisPage } from '../pages/lista-animais/lista-animais';
 import { AnimalPage } from '../pages/animal/animal';
 import { UsuarioPage } from '../pages/usuario/usuario';
+import { LoginPage } from '../pages/login/login';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:any = LoginPage;
   @ViewChild(Nav) nav: Nav
 
   pages:Array <{title: string, component: any}>;

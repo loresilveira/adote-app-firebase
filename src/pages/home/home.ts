@@ -30,20 +30,18 @@ export class HomePage {
 
   }
 
-  register(){
-    this.navCtrl.push('RegisterPage')
-   }
+  login(){
+    this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
+      .then(() => {
+        this.exibirToast('Login efetuado com sucesso');
+        this.navCtrl.push(ListaAnimaisPage);
+      })
+      .catch((erro: any) => {
+        this.exibirToast(erro);
+      });
+  }
 
-  // public LoginComEmail(): void {
-  //   this.firebaseauth.auth.signInWithEmailAndPassword(this.email.value, this.password.value)
-  //     .then(() => {
-  //       this.exibirToast('Login efetuado com sucesso');
-  //     })
-  //     .catch((erro: any) => {
-  //       this.exibirToast(erro);
-  //     });
-  // }
-  cadastrarUsuario() {
+  cadastrar() {
     this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
       .then(() => {
         console.log('Usuário criado com sucesso');
@@ -52,7 +50,17 @@ export class HomePage {
         console.log(erro);
       });
   }
-  // public Sair(): void {
+
+  exibirToast(mensagem: string){
+    let toast = this.toast.create({
+      duration: 3000,
+      position: 'botton'
+    });
+    toast.setMessage(mensagem);
+    toast.present();
+  }
+
+   // public Sair(): void {
   //   this.firebaseauth.auth.signOut()
   //     .then(() => {
   //       this.exibirToast('Você saiu');
@@ -61,15 +69,6 @@ export class HomePage {
   //       this.exibirToast(erro);
   //     });
   // }
-  // private exibirToast(mensagem: string): void {
-  //   let toast = this.toast.create({
-  //     duration: 3000,
-  //     position: 'botton'
-  //   });
-  //   toast.setMessage(mensagem);
-  //   toast.present();
-  // }
-
 
   // goToListaUsuarioPage(){
   //   this.navCtrl.push(ListaUsuariosPage);

@@ -26,11 +26,13 @@ import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 import { RegisterPageModule } from '../pages/register/register.module';
 import { AuthService } from '../services/auth.service';
 import { AuthProvider } from '../providers/auth/auth';
+import { LoginPage } from '../pages/login/login';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
 
   ],
   imports: [
@@ -56,7 +58,8 @@ import { AuthProvider } from '../providers/auth/auth';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LoginPage
   ],
   providers: [
     StatusBar,
