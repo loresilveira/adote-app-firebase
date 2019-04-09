@@ -29,26 +29,31 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(){
-    this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
-      .then(() => {
+  async login(user: User){
+
+    try{
+      const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+      if(result){
         this.exibirToast('Login efetuado com sucesso');
         this.navCtrl.push(ListaAnimaisPage);
-      })
-      .catch((erro: any) => {
-        this.exibirToast(erro);
-      });
+      }
+    }
+    catch(e) {
+      console.error(e);
+    }
+      
   }
 
-  cadastrar() {
-    this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
-      .then(() => {
-        console.log('Usuário criado com sucesso');
-        this.navCtrl.push(RegisterPage)      
-      })
-      .catch((erro: any) => {
-        console.log(erro);
-      });
+  async cadastrar(user: User) {
+    try{
+      const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+      if  (result){
+        this.exibirToast('Cadastro efetuado com sucesso');
+        this.navCtrl.push(RegisterPage); 
+      }
+    }catch(e){
+      console.error(e);    
+    }
   }
 
   exibirToast(mensagem: string){

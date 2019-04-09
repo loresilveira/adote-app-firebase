@@ -12,17 +12,43 @@
 
 <ion-content padding>
 
-    <ion-item>
-        <ion-label floating>Email</ion-label>
-        <ion-input type="text" [(ngModel)]= "usuario.email"></ion-input>
-      </ion-item>
-    
-      
-      <ion-item>
-          <ion-label floating>Senha</ion-label>
-          <ion-input type="password" [(ngModel)]= "usuario.password"></ion-input>
-        </ion-item>
+  <ion-item>
+    <ion-label floating>Onde você mora:</ion-label>
+    <ion-select [(ngModel)]="adotante.pref_porte">
+      <ion-option value="nao">Sem preferência</ion-option>
+      <ion-option value="pequeno">Pequeno</ion-option>
+      <ion-option value="medio">Médio</ion-option>
+      <ion-option value="grande">Grande</ion-option>
+    </ion-select>
+  </ion-item>
 
-        <button ion-button block
-        (click)="register()">Cadastrar</button> 
+
+  <ion-item>
+    <ion-label floating>Pelagem</ion-label>
+    <ion-select [(ngModel)]="adotante.pref_pelagem">
+      <ion-option value="nao">Sem preferência</ion-option>
+      <ion-option value="curta">Curta</ion-option>
+      <ion-option value="longa">Longa</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Sexo</ion-label>
+    <ion-select [(ngModel)]="adotante.pref_sexo">
+      <ion-option value="nao"> Sem preferência</ion-option>
+        <ion-option value="femea">Fêmea</ion-option>
+        <ion-option value="macho">Macho</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label floating>Amigável com crianças</ion-label>
+    <ion-select [(ngModel)]="adotante.pref_amigavel_crianca">
+      <ion-option value="nao_sei">Não necessita</ion-option>
+        <ion-option value="sim">Sim</ion-option>
+        <ion-option value="nao">Não</ion-option>
+    </ion-select>
+  </ion-item>
+
+  <button ion-button block (click)="register()">Cadastrar</button>
 </ion-content>

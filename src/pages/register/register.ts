@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../../services/auth.service';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { AuthProvider } from '../../providers/auth/auth';
+import { Adotante } from '../../models/adotante';
 
 @IonicPage()
 @Component({
@@ -12,11 +13,13 @@ import { AuthProvider } from '../../providers/auth/auth';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  usuario  = {
-    email:'',
-    password:''
-  }
-  user : User;
+  // usuario  = {
+  //   email:'',
+  //   password:''
+  // }
+  // user : User;
+
+  adotante = {} as Adotante;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -30,10 +33,10 @@ export class RegisterPage {
   
   register() {
 
-    this.user.email = this.usuario.email;
-    this.user.password = this.usuario.password;
+    // this.user.email = this.usuario.email;
+    // this.user.password = this.usuario.password;
 
-    this.auth.signUp(this.user).then(()=> { console.log(this.user.email+ ' '+ this.user.password)})
+    // this.auth.signUp(this.user).then(()=> { console.log(this.user.email+ ' '+ this.user.password)})
 
   }
 }
