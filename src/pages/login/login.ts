@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,10 +19,8 @@ import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 })
 export class LoginPage {
 
-  public user: User = {
-    email: '',
-    password : ''
-  }
+  user = {} as User;
+  
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController,public firebaseauth: AngularFireAuth) {
   }
@@ -45,6 +44,7 @@ export class LoginPage {
     this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
       .then(() => {
         console.log('Usuário criado com sucesso');
+        this.navCtrl.push(RegisterPage)      
       })
       .catch((erro: any) => {
         console.log(erro);
