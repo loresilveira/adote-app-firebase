@@ -6,7 +6,7 @@ export interface Adotante{
     pref_amigavel_crianca: string; // 1-Sim / 2-Não
     pref_guarda: string; // 1-Sim / 2-Não
     pref_brincadeira: string; // 1- Sim / 2- Não
-    pref_exercicio: string; // 1- Pouco / 2-Médio / 3-Muito
+    // pref_exercicio: string; // 1- Pouco / 2-Médio / 3-Muito
     pref_queda_pelo: string; // 1- Pouco / 2-Médio / 3-Muito
     pref_tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
 }
