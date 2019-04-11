@@ -14,18 +14,13 @@ import { AnimalPageModule } from '../pages/animal/animal.module';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { UsuariosProvider } from '../providers/usuarios/usuarios';
 
-import { MenuPageModule } from '../pages/menu/menu.module';
-
-import { ListaAnimaisPage } from '../pages/lista-animais/lista-animais';
 import { ListaAnimaisPageModule } from '../pages/lista-animais/lista-animais.module';
 import { UsuarioPageModule } from '../pages/usuario/usuario.module';
-import { ListaUsuariosPage } from '../pages/lista-usuarios/lista-usuarios';
 import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
-import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 import { RegisterPageModule } from '../pages/register/register.module';
-import { AuthService } from '../services/auth.service';
-import { AuthProvider } from '../providers/auth/auth';
+
+
 import { LoginPage } from '../pages/login/login';
 
 @NgModule({
@@ -67,11 +62,8 @@ import { LoginPage } from '../pages/login/login';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AnimaisProvider,
     UsuariosProvider,
-    DialogoProvider,
-    DialogoProvider,
     RecomendacaoProvider,
-    AuthService,
-    AuthProvider
+   
   ]
 })
 export class AppModule { }

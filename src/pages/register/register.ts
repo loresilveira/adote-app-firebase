@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { User } from '../../models/user';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AuthService } from '../../services/auth.service';
-import { ListaAnimaisPage } from '../lista-animais/lista-animais';
-import { AuthProvider } from '../../providers/auth/auth';
 import { Adotante } from '../../models/adotante';
 
 @IonicPage()
@@ -13,25 +8,18 @@ import { Adotante } from '../../models/adotante';
   templateUrl: 'register.html',
 })
 export class RegisterPage {
-  // usuario  = {
-  //   email:'',
-  //   password:''
-  // }
-  // user : User;
 
   adotante = {} as Adotante;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    private auth: AuthProvider) {
+    public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
-  }
 
   
   register() {
+
+
 
     // this.user.email = this.usuario.email;
     // this.user.password = this.usuario.password;

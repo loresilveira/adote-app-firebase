@@ -5,12 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { RegisterPage } from '../register/register';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+
 
 @IonicPage()
 @Component({
@@ -25,9 +20,6 @@ export class LoginPage {
               private toast: ToastController,public firebaseauth: AngularFireAuth) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
-  }
 
   async login(user: User){
 
@@ -45,15 +37,16 @@ export class LoginPage {
   }
 
   async cadastrar(user: User) {
-    try{
-      const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-      if  (result){
-        this.exibirToast('Cadastro efetuado com sucesso');
-        this.navCtrl.push(RegisterPage); 
-      }
-    }catch(e){
-      console.error(e);    
-    }
+    this.navCtrl.push(RegisterPage); 
+    // try{
+    //   const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+    //   if  (result){
+    //     this.exibirToast('Cadastro efetuado com sucesso');
+    //     this.navCtrl.push(RegisterPage); 
+    //   }
+    // }catch(e){
+    //   console.error(e);    
+    // }
   }
 
   exibirToast(mensagem: string){
