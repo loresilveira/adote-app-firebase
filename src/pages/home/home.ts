@@ -24,14 +24,32 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     private provider: AnimaisProvider,
     private toast: ToastController,
-    public firebaseauth: AngularFireAuth) {
+    public afAuth: AngularFireAuth) {
 
     console.log('Hello Home Page')
 
   }
 
+  ionViewWillLoad(){
+
+    this.afAuth.authState.subscribe(data => {
+      if(data && data.email && data.uid){
+        this.user.email = data.email;
+        this.toast.create({
+          message: 'Bem vindo ao RecSysAdoption, ${data.email}',
+          duration: 3000
+        }).present();
+      }else{
+        this.toast.create({
+          message: 'Não foi possível se autenticar',
+          duration: 3000
+        }).present();
+      }
+    })
+  }
+
   login(){
-    this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
+    this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
       .then(() => {
         this.exibirToast('Login efetuado com sucesso');
         this.navCtrl.push(ListaAnimaisPage);
@@ -42,7 +60,7 @@ export class HomePage {
   }
 
   cadastrar() {
-    this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
+    this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
       .then(() => {
         console.log('Usuário criado com sucesso');
       })

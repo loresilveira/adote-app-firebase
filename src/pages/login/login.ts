@@ -4,6 +4,7 @@ import { User } from '../../models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { RegisterPage } from '../register/register';
+import { HomePage } from '../home/home';
 
 
 
@@ -27,7 +28,7 @@ export class LoginPage {
       const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
       if(result){
         this.exibirToast('Login efetuado com sucesso');
-        this.navCtrl.push(ListaAnimaisPage);
+        this.navCtrl.push(HomePage);
       }
     }
     catch(e) {
