@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Adotante } from '../../models/adotante';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @IonicPage()
 @Component({
@@ -12,13 +14,19 @@ export class RegisterPage {
   adotante = {} as Adotante;
 
   constructor(public navCtrl: NavController,
-    public navParams: NavParams) {
+    public navParams: NavParams,
+    private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase) {
   }
 
 
   
   register() {
-
+    this.afAuth.authState.subscribe(auth => {
+      this.afDatabase.object('adotante/${auth.uid}').set(this.adotante).then(() =>
+        this.navCtrl.setRoot('HomePage') 
+      );
+    })
 
 
     // this.user.email = this.usuario.email;
