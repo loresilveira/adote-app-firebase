@@ -22,7 +22,7 @@ export class RegisterPage {
 
   
   register() {
-    this.afAuth.authState.subscribe(auth => {
+    this.afAuth.authState.take(1).subscribe(auth => {
       this.afDatabase.object('adotante/${auth.uid}').set(this.adotante).then(() =>
         this.navCtrl.setRoot('HomePage') 
       );

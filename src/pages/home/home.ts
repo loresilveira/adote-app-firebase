@@ -6,8 +6,11 @@ import { AnimalPage } from '../animal/animal';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { UsuarioPage } from '../usuario/usuario';
 import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
+
 import { AngularFireAuth } from 'angularfire2/auth';
+import {AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
+import { Adotante } from '../../models/adotante';
 
 
 @Component({
@@ -15,7 +18,7 @@ import { User } from '../../models/user';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  adotante: AngularFireObject<Adotante>;
 
   public user: User = {
     email: '',
@@ -24,7 +27,8 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     private provider: AnimaisProvider,
     private toast: ToastController,
-    public afAuth: AngularFireAuth) {
+    public afAuth: AngularFireAuth,
+    private afDatabase : AngularFireDatabase) {
 
     console.log('Hello Home Page')
 
@@ -32,13 +36,15 @@ export class HomePage {
 
   ionViewWillLoad(){
 
-    this.afAuth.authState.subscribe(data => {
+    this.afAuth.authState.take(1).subscribe(data => {
       if(data && data.email && data.uid){
         this.user.email = data.email;
         this.toast.create({
           message: 'Bem vindo ao RecSysAdoption, ${data.email}',
           duration: 3000
         }).present();
+
+        this.adotante = this.afDatabase.object('adotante/${data.uid}')
       }else{
         this.toast.create({
           message: 'Não foi possível se autenticar',

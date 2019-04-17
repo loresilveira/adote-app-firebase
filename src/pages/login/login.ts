@@ -38,16 +38,16 @@ export class LoginPage {
   }
 
   async cadastrar(user: User) {
-    this.navCtrl.push(RegisterPage); 
-    // try{
-    //   const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-    //   if  (result){
-    //     this.exibirToast('Cadastro efetuado com sucesso');
-    //     this.navCtrl.push(RegisterPage); 
-    //   }
-    // }catch(e){
-    //   console.error(e);    
-    // }
+    // this.navCtrl.push(RegisterPage); 
+    try{
+      const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+      if  (result){
+        this.exibirToast('Cadastro efetuado com sucesso');
+        this.navCtrl.push(RegisterPage); 
+      }
+    }catch(e){
+      console.error(e);    
+    }
   }
 
   exibirToast(mensagem: string){
