@@ -40,11 +40,11 @@ export class HomePage {
       if(data && data.email && data.uid){
         this.user.email = data.email;
         this.toast.create({
-          message: 'Bem vindo ao RecSysAdoption, ${data.email}',
+          message: `Bem vindo ao RecSysAdoption, ${data.email}`,
           duration: 3000
         }).present();
 
-        this.adotante = this.afDatabase.object('adotante/${data.uid}')
+        this.adotante = this.afDatabase.object(`adotante/${data.uid}`)
       }else{
         this.toast.create({
           message: 'Não foi possível se autenticar',

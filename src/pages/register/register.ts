@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Adotante } from '../../models/adotante';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -23,8 +24,8 @@ export class RegisterPage {
   
   register() {
     this.afAuth.authState.take(1).subscribe(auth => {
-      this.afDatabase.object('adotante/${auth.uid}').set(this.adotante).then(() =>
-        this.navCtrl.setRoot('HomePage') 
+      this.afDatabase.object(`adotante/${auth.uid}`).set(this.adotante).then(() =>
+        this.navCtrl.setRoot(HomePage) 
       );
     })
 
