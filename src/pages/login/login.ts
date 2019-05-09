@@ -5,6 +5,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
+import { ProfilePage } from '../profile/profile';
 
 
 
@@ -21,14 +22,13 @@ export class LoginPage {
               private toast: ToastController,public firebaseauth: AngularFireAuth) {
   }
 
-
+ 
   async login(user: User){
 
     try{
       const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
       if(result){
-        this.exibirToast('Login efetuado com sucesso');
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(HomePage);
       }
     }
     catch(e) {
@@ -37,27 +37,10 @@ export class LoginPage {
       
   }
 
-  async cadastrar(user: User) {
-    // this.navCtrl.push(RegisterPage); 
-    try{
-      const result = this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-      if  (result){
-        this.exibirToast('Cadastro efetuado com sucesso');
-        this.navCtrl.push(RegisterPage); 
-      }
-    }catch(e){
-      console.error(e);    
-    }
+  register(){
+    this.navCtrl.push(RegisterPage)
   }
 
-  exibirToast(mensagem: string){
-    let toast = this.toast.create({
-      duration: 3000,
-      position: 'botton'
-    });
-    toast.setMessage(mensagem);
-    toast.present();
-  }
 
 
 }

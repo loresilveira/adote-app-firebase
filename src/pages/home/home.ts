@@ -8,7 +8,7 @@ import { UsuarioPage } from '../usuario/usuario';
 import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import {AngularFireDatabase, AngularFireList, AngularFireObject } from 'angularfire2/database';
+import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
 
@@ -18,14 +18,14 @@ import { Adotante } from '../../models/adotante';
   templateUrl: 'home.html'
 })
 export class HomePage {
-  adotante: AngularFireObject<Adotante>;
+
+  adotante : Observable<any>;
 
   public user: User = {
     email: '',
     password : ''
   }
   constructor(public navCtrl: NavController,
-    private provider: AnimaisProvider,
     private toast: ToastController,
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase) {
@@ -43,8 +43,11 @@ export class HomePage {
           message: `Bem vindo ao RecSysAdoption, ${data.email}`,
           duration: 3000
         }).present();
+        // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
 
-        this.adotante = this.afDatabase.object(`adotante/${data.uid}`)
+        this.adotante = this.afDatabase.object(`adotante/${data.uid}`).valueChanges()
+
+        console.log(this.adotante)
       }else{
         this.toast.create({
           message: 'Não foi possível se autenticar',
@@ -54,26 +57,7 @@ export class HomePage {
     })
   }
 
-  login(){
-    this.afAuth.auth.signInWithEmailAndPassword(this.user.email, this.user.password)
-      .then(() => {
-        this.exibirToast('Login efetuado com sucesso');
-        this.navCtrl.push(ListaAnimaisPage);
-      })
-      .catch((erro: any) => {
-        this.exibirToast(erro);
-      });
-  }
 
-  cadastrar() {
-    this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password)
-      .then(() => {
-        console.log('Usuário criado com sucesso');
-      })
-      .catch((erro: any) => {
-        console.log(erro);
-      });
-  }
 
   exibirToast(mensagem: string){
     let toast = this.toast.create({
