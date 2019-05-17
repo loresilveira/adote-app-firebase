@@ -4,7 +4,8 @@ import { Adotante } from '../../models/adotante';
 import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HomePage } from '../home/home';
-
+import { Observable } from 'rxjs';
+import { UsuariosProvider } from '../../providers/usuarios/usuarios';
 
 
 @IonicPage()
@@ -14,14 +15,21 @@ import { HomePage } from '../home/home';
 })
 export class ProfilePage {
 
-  adotante = {} as Adotante;
+  adotante: Adotante;
+  adot : Observable<any>;
 
-  constructor(private afAuth : AngularFireAuth, private afDatabase : AngularFireDatabase,
+  constructor(private afAuth : AngularFireAuth, private afDatabase : AngularFireDatabase, private db : UsuariosProvider,
     public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
+    this.afAuth.authState.take(1).subscribe(data => {
+      if(data && data.email && data.uid){
+        this.adot = this.afDatabase.object(`adotante/${data.uid}`).valueChanges();
+      
+      }
+    })
   }
 
   createProfile(){

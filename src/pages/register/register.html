@@ -1,11 +1,15 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Cadastro</ion-title>
+    <ion-title>Primeiro login</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  
+  <div class="titulo">
+      <p>Faça seu primeiro login para criar o seu perfil</p>
+  </div>
     <ion-item>
         <ion-label floating>Email</ion-label>
         <ion-input type="text" [(ngModel)]="user.email"></ion-input>
@@ -18,7 +22,7 @@
       </ion-item>
     
 <div class="botoes">
-    <button  ion-button block (click)="register()">Cadastrar</button>
+    <button  ion-button block (click)="login()">Login</button>
 </div>
   
 </ion-content>

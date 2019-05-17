@@ -18,17 +18,21 @@ export class RegisterPage {
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
-    private afAuth: AngularFireAuth) {
+    private firebaseauth: AngularFireAuth) {
   }
 
-  async register(user: User) {
-      try{
-        const result = await this.afAuth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-        console.log(result);
-        this.navCtrl.push(ProfilePage);
-      }catch(e){
-        console.error(e);    
+  async login(user: User){
+
+    try{
+      const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
+      if(result){
+        this.navCtrl.setRoot(ProfilePage);
       }
     }
+    catch(e) {
+      console.error(e);
+    }
+      
+  }
  
 }

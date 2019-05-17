@@ -29,8 +29,9 @@
 
   Olá {{user.email}}
   <p>{{(adotante | async)?.nome}}</p>
-  
-
+  <button ion-button block (click)="goToPerfil()">Preferências</button>
+  <button ion-button block (click)="goToListaAnimaisPage()">Lista de Animais</button>
+  <button ion-button block (click)="goToListaAnimaisPage()">Recomendados</button>
 
 
 </ion-content>

@@ -11,6 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
+import { ProfilePage } from '../profile/profile';
 
 
 @Component({
@@ -45,7 +46,9 @@ export class HomePage {
         }).present();
         // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
 
-        this.adotante = this.afDatabase.object(`adotante/${data.uid}`).valueChanges()
+        this.adotante = this.afDatabase.object(`adotante/${data.uid}`).valueChanges();
+
+        if (this.adotante)
 
         console.log(this.adotante)
       }else{
@@ -78,13 +81,13 @@ export class HomePage {
   //     });
   // }
 
-  // goToListaUsuarioPage(){
-  //   this.navCtrl.push(ListaUsuariosPage);
-  // }
+  goToPerfil(){
+    this.navCtrl.push(ProfilePage);
+  }
 
-  // goToListaAnimaisPage(){
-  //   this.navCtrl.push(ListaAnimaisPage);
-  // }
+  goToListaAnimaisPage(){
+    this.navCtrl.push(ListaAnimaisPage);
+  }
 
   // goToRecomendacaoPage(){
 
