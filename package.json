@@ -37,8 +37,9 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "3.2.1",
-    "@types/node": "^11.13.0",
-    "typescript": "~2.6.2"
+    "@types/node": "^11.13.20",
+    "ts-loader": "^6.0.4",
+    "typescript": "^2.6.2"
   },
   "description": "An Ionic project"
 }
