@@ -39,14 +39,7 @@ export class LoginPage {
   }
 
   async register(user: User) {
-   // this.navCtrl.push(RegisterPage)
-    try{
-      const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-      console.log(result);
-      this.navCtrl.push(RegisterPage);
-    }catch(e){
-      console.error(e);    
-    }
+   this.navCtrl.push(RegisterPage);
 }
 
 

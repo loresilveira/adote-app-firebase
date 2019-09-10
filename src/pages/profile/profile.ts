@@ -15,25 +15,15 @@ import { UsuariosProvider } from '../../providers/usuarios/usuarios';
 })
 export class ProfilePage {
 
-  adotante: Adotante;
-  adot : Observable<any>;
+  adotante = {} as Adotante;
+  
 
-  constructor(private afAuth : AngularFireAuth, private afDatabase : AngularFireDatabase, private db : UsuariosProvider,
+  constructor(private afAuth : AngularFireAuth, private afDatabase : AngularFireDatabase, 
     public navCtrl: NavController, public navParams: NavParams) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ProfilePage');
-    this.afAuth.authState.take(1).subscribe(data => {
-      if(data && data.email && data.uid){
-        this.adot = this.afDatabase.object(`adotante/${data.uid}`).valueChanges();
-      
-      }
-    })
   }
 
   createProfile(){
     this.afAuth.authState.take(1).subscribe(auth => 
-      {this.afDatabase.object(`adotante/${auth.uid}`).set(this.adotante).then(() => this.navCtrl.push(HomePage))})
+      {this.afDatabase.object(`adotante/${auth.uid}`).set(this.adotante).then(() => this.navCtrl.setRoot(HomePage))})
   }
 }

@@ -21,18 +21,14 @@ export class RegisterPage {
     private firebaseauth: AngularFireAuth) {
   }
 
-  async login(user: User){
-
-    try{
-      const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
-      if(result){
-        this.navCtrl.setRoot(ProfilePage);
-      }
-    }
-    catch(e) {
-      console.error(e);
-    }
-      
+  
+  async register(user: User) {
+     try{
+       const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+       console.log(result);
+       this.navCtrl.push(ProfilePage);
+     }catch(e){
+       console.error(e);    
+   }
   }
- 
 }

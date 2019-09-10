@@ -20,7 +20,7 @@ import { ProfilePage } from '../profile/profile';
 })
 export class HomePage {
 
-  adotante : Observable<any>;
+  adotante : Observable<Adotante>;
 
   public user: User = {
     email: '',
@@ -46,7 +46,7 @@ export class HomePage {
         }).present();
         // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
 
-        this.adotante = this.afDatabase.object(`adotante/${data.uid}`).valueChanges();
+        this.adotante = this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges();
 
         if (this.adotante)
 
