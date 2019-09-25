@@ -34,15 +34,16 @@ export class AnimaisProvider {
         this.db.list(this.PATH)
           .update(animal.key, { 
             nome: animal.nome, 
-            porte: animal.porte, 
-            pelagem: animal.pelagem, 
-            sexo: animal.sexo, 
-            amigavel_crianca: animal.amigavel_crianca, 
-            apartamento: animal.apartamento, 
-            guarda: animal.guarda, brincadeira: animal.brincadeira, 
-            exercicio: animal.exercicio,
-            queda_pelo: animal.queda_pelo, 
-            tendencia_latir: animal.tendencia_latir
+            pref_moradia: animal.pref_moradia,
+            pref_porte: animal.pref_porte,
+            pref_pelagem: animal.pref_pelagem, 
+            pref_sexo: animal.pref_sexo, 
+            // amigavel_crianca: animal.amigavel_crianca, 
+            // apartamento: animal.apartamento, 
+            // guarda: animal.guarda, brincadeira: animal.brincadeira, 
+            // exercicio: animal.exercicio,
+            // queda_pelo: animal.queda_pelo, 
+            // tendencia_latir: animal.tendencia_latir
           })
           .then(() => resolve())
           .catch((e) => reject(e));
@@ -50,16 +51,17 @@ export class AnimaisProvider {
         this.db.list(this.PATH)
           .push({ 
             nome: animal.nome, 
-            porte: animal.porte, 
-            pelagem: animal.pelagem, 
-            sexo: animal.sexo, 
-            amigavel_crianca: animal.amigavel_crianca, 
-            apartamento: animal.apartamento, 
-            guarda: animal.guarda, 
-            brincadeira: animal.brincadeira, 
-            exercicio: animal.exercicio,
-            queda_pelo: animal.queda_pelo, 
-            tendencia_latir: animal.tendencia_latir
+            pref_moradia: animal.pref_moradia,
+            pref_porte: animal.pref_porte,
+            pref_pelagem: animal.pref_pelagem, 
+            pref_sexo: animal.pref_sexo,
+            // amigavel_crianca: animal.amigavel_crianca, 
+            // apartamento: animal.apartamento, 
+            // guarda: animal.guarda, 
+            // brincadeira: animal.brincadeira, 
+            // exercicio: animal.exercicio,
+            // queda_pelo: animal.queda_pelo, 
+            // tendencia_latir: animal.tendencia_latir
            })
           .then(() => resolve());
       }

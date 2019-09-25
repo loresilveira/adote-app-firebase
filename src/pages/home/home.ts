@@ -12,6 +12,8 @@ import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
 import { ProfilePage } from '../profile/profile';
+import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
+import { AnimalModel } from '../../models/animal';
 
 
 @Component({
@@ -21,6 +23,8 @@ import { ProfilePage } from '../profile/profile';
 export class HomePage {
 
   adotante : Observable<Adotante>;
+  animais: Observable<any>;
+  resultadoJaccard : any;
 
   public user: User = {
     email: '',
@@ -29,14 +33,21 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     private toast: ToastController,
     public afAuth: AngularFireAuth,
-    private afDatabase : AngularFireDatabase) {
+    private afDatabase : AngularFireDatabase,
+    private provider: AnimaisProvider,
+    private recomendacao : RecomendacaoProvider) {
 
     console.log('Hello Home Page')
+    
 
   }
 
   ionViewWillLoad(){
 
+    
+  }
+
+  ngOnInit(){
     this.afAuth.authState.take(1).subscribe(data => {
       if(data && data.email && data.uid){
         this.user.email = data.email;
@@ -47,10 +58,8 @@ export class HomePage {
         // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
 
         this.adotante = this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges();
-
-        if (this.adotante)
-
-        console.log(this.adotante)
+        this.animais = this.provider.getAll();
+        this.calculaDistancia();
       }else{
         this.toast.create({
           message: 'Não foi possível se autenticar',
@@ -58,8 +67,13 @@ export class HomePage {
         }).present();
       }
     })
+    
   }
 
+  calculaDistancia (){
+    this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
+    console.log('jaccard'+this.resultadoJaccard)
+  }
 
 
   exibirToast(mensagem: string){

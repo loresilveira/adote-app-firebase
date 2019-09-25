@@ -46,16 +46,16 @@ export class AnimalPage {
     this.form = this.formBuilder.group({
       key: [this.animal.key],
       nome: [this.animal.nome, ], //Validators.required
+      apartamento: [this.animal.apartamento, ],
       porte:[this.animal.porte,],
       pelagem:[this.animal.pelagem , ],
       sexo:[this.animal.sexo, ],
-      amigavel_crianca: [this.animal.amigavel_crianca, ],
-      apartamento: [this.animal.apartamento, ],
-      guarda: [this.animal.guarda,],
-      brincadeira: [this.animal.brincadeira,],
-      exercicio: [this.animal.exercicio,],
-      queda_pelo: [this.animal.queda_pelo,],
-      tendencia_latir: [this.animal.tendencia_latir],
+      // amigavel_crianca: [this.animal.amigavel_crianca, ],
+      // guarda: [this.animal.guarda,],
+      // brincadeira: [this.animal.brincadeira,],
+      // exercicio: [this.animal.exercicio,],
+      // queda_pelo: [this.animal.queda_pelo,],
+      // tendencia_latir: [this.animal.tendencia_latir],
   
     });
   }

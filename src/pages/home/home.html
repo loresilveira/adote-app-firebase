@@ -25,10 +25,16 @@
 
 <ion-content padding>
 
-  <img src="/assets/imgs/principal.png" />
+  <img src="/assets/imgs/logo.png" />
 
   Olá {{user.email}}
   <p>{{(adotante | async)?.nome}}</p>
+  <p>{{(adotante | async)?.pref_moradia}}</p>
+  <p>{{(adotante | async)?.pref_porte}}</p>
+  <p>{{(adotante | async)?.pref_pelagem}}</p>
+  <p>{{(adotante | async)?.pref_sexo}}</p>
+
+
   <button ion-button block (click)="goToPerfil()">Preferências</button>
   <button ion-button block (click)="goToListaAnimaisPage()">Lista de Animais</button>
   <button ion-button block (click)="goToListaAnimaisPage()">Recomendados</button>

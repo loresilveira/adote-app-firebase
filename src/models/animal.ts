@@ -1,4 +1,4 @@
-export interface Adotante{
+export interface AnimalModel{
     nome : string;
     pref_moradia: string; // 1-Casa / 2-Apartamento
     pref_porte: string; // 1-pequeno / 2-médio / 3-grande
