@@ -21,8 +21,6 @@ export class ListaAnimaisPage {
     this.animais = this.provider.getAll();
   }
 
-
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAnimaisPage');
   }

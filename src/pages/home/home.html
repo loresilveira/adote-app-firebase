@@ -29,10 +29,10 @@
 
   Olá {{user.email}}
   <p>{{(adotante | async)?.nome}}</p>
-  <p>{{(adotante | async)?.pref_moradia}}</p>
-  <p>{{(adotante | async)?.pref_porte}}</p>
-  <p>{{(adotante | async)?.pref_pelagem}}</p>
-  <p>{{(adotante | async)?.pref_sexo}}</p>
+  <p>{{(adotante | async)?.moradia}}</p>
+  <p>{{(adotante | async)?.porte}}</p>
+  <p>{{(adotante | async)?.pelagem}}</p>
+  <p>{{(adotante | async)?.sexo}}</p>
 
 
   <button ion-button block (click)="goToPerfil()">Preferências</button>

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AnimaisProvider } from '../animais/animais';
-import { UsuariosProvider } from '../usuarios/usuarios';
 import { Observable } from 'rxjs';
 declare var require:  any;
 var jaccard = require("jaccard");
@@ -12,7 +11,7 @@ animais:  Observable<any>;
    
   constructor(
               private animaisProvider : AnimaisProvider,
-              private usuariosProvider: UsuariosProvider) {
+              ) {
     console.log('Hello RecomendacaoProvider Provider');
 
  }

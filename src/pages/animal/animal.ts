@@ -46,9 +46,9 @@ export class AnimalPage {
     this.form = this.formBuilder.group({
       key: [this.animal.key],
       nome: [this.animal.nome, ], //Validators.required
-      apartamento: [this.animal.apartamento, ],
-      porte:[this.animal.porte,],
-      pelagem:[this.animal.pelagem , ],
+      moradia: [this.animal.moradia, ],
+      porte:[this.animal.porte, ],
+      pelagem:[this.animal.pelagem, ],
       sexo:[this.animal.sexo, ],
       // amigavel_crianca: [this.animal.amigavel_crianca, ],
       // guarda: [this.animal.guarda,],

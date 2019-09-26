@@ -12,11 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AnimalPageModule } from '../pages/animal/animal.module';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
-import { UsuariosProvider } from '../providers/usuarios/usuarios';
-
 import { ListaAnimaisPageModule } from '../pages/lista-animais/lista-animais.module';
-import { UsuarioPageModule } from '../pages/usuario/usuario.module';
-import { ListaUsuariosPageModule } from '../pages/lista-usuarios/lista-usuarios.module';
 import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 import { RegisterPageModule } from '../pages/register/register.module';
 
@@ -36,8 +32,6 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     IonicModule.forRoot(MyApp),
     AnimalPageModule,
     ListaAnimaisPageModule,
-    ListaUsuariosPageModule,
-    UsuarioPageModule,
     RegisterPageModule,
     ProfilePageModule,
     AngularFireModule.initializeApp({
@@ -63,7 +57,6 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AnimaisProvider,
-    UsuariosProvider,
     RecomendacaoProvider,
    
   ]

@@ -34,10 +34,10 @@ export class AnimaisProvider {
         this.db.list(this.PATH)
           .update(animal.key, { 
             nome: animal.nome, 
-            pref_moradia: animal.pref_moradia,
-            pref_porte: animal.pref_porte,
-            pref_pelagem: animal.pref_pelagem, 
-            pref_sexo: animal.pref_sexo, 
+            moradia: animal.moradia,
+            porte: animal.porte,
+            pelagem: animal.pelagem, 
+            sexo: animal.sexo, 
             // amigavel_crianca: animal.amigavel_crianca, 
             // apartamento: animal.apartamento, 
             // guarda: animal.guarda, brincadeira: animal.brincadeira, 
@@ -51,10 +51,10 @@ export class AnimaisProvider {
         this.db.list(this.PATH)
           .push({ 
             nome: animal.nome, 
-            pref_moradia: animal.pref_moradia,
-            pref_porte: animal.pref_porte,
-            pref_pelagem: animal.pref_pelagem, 
-            pref_sexo: animal.pref_sexo,
+            moradia: animal.moradia,
+            porte: animal.porte,
+            pelagem: animal.pelagem, 
+            sexo: animal.sexo,
             // amigavel_crianca: animal.amigavel_crianca, 
             // apartamento: animal.apartamento, 
             // guarda: animal.guarda, 

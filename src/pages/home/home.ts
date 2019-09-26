@@ -2,19 +2,13 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, MenuController } from 'ionic-angular';
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
-import { AnimalPage } from '../animal/animal';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
-import { UsuarioPage } from '../usuario/usuario';
-import { ListaUsuariosPage } from '../lista-usuarios/lista-usuarios';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
 import { ProfilePage } from '../profile/profile';
 import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
-import { AnimalModel } from '../../models/animal';
-
 
 @Component({
   selector: 'page-home',

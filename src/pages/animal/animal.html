@@ -18,31 +18,31 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Cabível em um apartamento?</ion-label>
-      <ion-select [(ngModel)]="pref_moradia" formControlName="pref_moradia">
+      <ion-label stacked>Ideal para apartamento?</ion-label>
+      <ion-select [(ngModel)]="moradia" formControlName="moradia">
         <!-- <ion-option value="nao_sei">Não Sei</ion-option> -->
         <ion-option value="casa">Não</ion-option>
         <ion-option value="apto">Sim</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!form.controls.pref_moradia.valid &&
-     (form.controls.pref_moradia.dirty || form.controls.pref_moradia.touched)" color="danger">
-      <div [hidden]="!form.controls.pref_moradia.errors.required">
+    <ion-item *ngIf="!form.controls.moradia.valid &&
+     (form.controls.moradia.dirty || form.controls.moradia.touched)" color="danger">
+      <div [hidden]="!form.controls.moradia.errors.required">
         O campo é obrigatório
       </div>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Porte</ion-label>
-      <ion-select [(ngModel)]="pref_porte" formControlName="pref_porte">
+      <ion-select [(ngModel)]="porte" formControlName="porte">
         <ion-option value="pequeno">Pequeno</ion-option>
         <ion-option value="medio">Médio</ion-option>
         <ion-option value="grande">Grande</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!form.controls.pref_porte.valid &&
-     (form.controls.pref_porte.dirty || form.controls.pref_porte.touched)" color="danger">
-      <div [hidden]="!form.controls.pref_porte.errors.required">
+    <ion-item *ngIf="!form.controls. porte.valid &&
+     (form.controls.porte.dirty || form.controls. porte.touched)" color="danger">
+      <div [hidden]="!form.controls.porte.errors.required">
         O campo é obrigatório
       </div>
     </ion-item>
@@ -50,28 +50,28 @@
     
     <ion-item>
       <ion-label stacked>Pelagem</ion-label>
-      <ion-select [(ngModel)]="pref_pelagem" formControlName="pref_pelagem">
+      <ion-select [(ngModel)]="pelagem" formControlName="pelagem">
         <ion-option value="curta">Curta</ion-option>
         <ion-option value="longa">Longa</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!form.controls.pref_pelagem.valid &&
-     (form.controls.pref_pelagem.dirty || form.controls.pref_pelagem.touched)" color="danger">
-      <div [hidden]="!form.controls.pref_pelagem.errors.required">
+    <ion-item *ngIf="!form.controls.pelagem.valid &&
+     (form.controls.pelagem.dirty || form.controls.pelagem.touched)" color="danger">
+      <div [hidden]="!form.controls.pelagem.errors.required">
         O campo é obrigatório
       </div>
     </ion-item>
 
     <ion-item>
       <ion-label stacked>Sexo</ion-label>
-      <ion-select [(ngModel)]="pref_sexo" formControlName="pref_sexo">
+      <ion-select [(ngModel)]="sexo" formControlName="sexo">
         <ion-option value="femea">Fêmea</ion-option>
         <ion-option value="macho">Macho</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item *ngIf="!form.controls.pref_sexo.valid && 
-    (form.controls.pref_sexo.dirty || form.controls.pref_sexo.touched)" color="danger">
-      <div [hidden]="!form.controls.pref_sexo.errors.required">
+    <ion-item *ngIf="!form.controls.sexo.valid && 
+    (form.controls.sexo.dirty || form.controls.sexo.touched)" color="danger">
+      <div [hidden]="!form.controls.sexo.errors.required">
         O campo é obrigatório
       </div>
     </ion-item>
