@@ -3,6 +3,9 @@ import { NavController, ToastController, NavParams, IonicPage, AlertController }
 import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalPage } from '../animal/animal';
+import { Adotante } from '../../models/adotante';
+import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
+import { AnimalModel } from '../../models/animal';
 
 @IonicPage()
 @Component({
@@ -11,18 +14,44 @@ import { AnimalPage } from '../animal/animal';
 })
 export class ListaAnimaisPage {
 
-  animais: Observable<any>;
+
+  resultadoJaccard : any;
+
+  animais: any[];
+
+  public adotante : Adotante = {
+    nome : "",
+    moradia: "",
+    porte: "",
+    pelagem: "",
+    sexo: "",
+  }
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,
     private toast: ToastController,
-    private alert: AlertController) {
-
-    this.animais = this.provider.getAll();
+    private alert: AlertController,
+    private recomendacao : RecomendacaoProvider) {
+    this.adotante = navParams.get('adotante');
+    this.provider.getAll().subscribe(res => { this.animais = res})
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAnimaisPage');
+  }
+
+  ngOnInit(){
+    this.calculaDistancia();
+  }
+
+  calculaDistancia (){
+    if(this.animais && this.adotante){
+      //this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
+      console.log(this.animais);
+      console.log(this.adotante)
+    }
+  
   }
 
   newAnimal() {

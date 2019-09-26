@@ -1,14 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, ToastController, MenuController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
-import { AnimaisProvider } from '../../providers/animais/animais';
 import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
 import { ProfilePage } from '../profile/profile';
-import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
 
 @Component({
   selector: 'page-home',
@@ -16,9 +13,8 @@ import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao'
 })
 export class HomePage {
 
-  adotante : Observable<Adotante>;
-  animais: Observable<any>;
-  resultadoJaccard : any;
+  adotante : Adotante;
+  
 
   public user: User = {
     email: '',
@@ -27,9 +23,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     private toast: ToastController,
     public afAuth: AngularFireAuth,
-    private afDatabase : AngularFireDatabase,
-    private provider: AnimaisProvider,
-    private recomendacao : RecomendacaoProvider) {
+    private afDatabase : AngularFireDatabase,) {
 
     console.log('Hello Home Page')
     
@@ -50,10 +44,9 @@ export class HomePage {
           duration: 3000
         }).present();
         // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
-
-        this.adotante = this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges();
-        this.animais = this.provider.getAll();
-        this.calculaDistancia();
+  
+        this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
+        
       }else{
         this.toast.create({
           message: 'Não foi possível se autenticar',
@@ -63,12 +56,6 @@ export class HomePage {
     })
     
   }
-
-  calculaDistancia (){
-    this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
-    console.log('jaccard'+this.resultadoJaccard)
-  }
-
 
   exibirToast(mensagem: string){
     let toast = this.toast.create({
@@ -94,7 +81,8 @@ export class HomePage {
   }
 
   goToListaAnimaisPage(){
-    this.navCtrl.push(ListaAnimaisPage);
+   
+    this.navCtrl.push(ListaAnimaisPage, {'adotante':this.adotante});
   }
 
   // goToRecomendacaoPage(){

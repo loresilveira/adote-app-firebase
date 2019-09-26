@@ -8,9 +8,9 @@
 
 <ion-content padding>
 
-  <ion-list>
+  <ion-list *ngIf="animais != null">
 
-    <ion-item-sliding *ngFor="let animal of animais | async">
+    <ion-item-sliding *ngFor="let animal of animais">
         
      <ion-item>{{animal.nome}}
        <p> <b>Porte:</b> {{animal.porte}} ...

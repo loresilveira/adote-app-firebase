@@ -26,13 +26,16 @@
 <ion-content padding>
 
   <img src="/assets/imgs/logo.png" />
-
   Olá {{user.email}}
-  <p>{{(adotante | async)?.nome}}</p>
-  <p>{{(adotante | async)?.moradia}}</p>
-  <p>{{(adotante | async)?.porte}}</p>
-  <p>{{(adotante | async)?.pelagem}}</p>
-  <p>{{(adotante | async)?.sexo}}</p>
+<div *ngIf="adotante != null">
+  
+  <p>{{adotante.nome}}</p>
+  <p>{{adotante.moradia}}</p>
+  <p>{{adotante.porte}}</p>
+  <p>{{adotante.pelagem}}</p>
+  <p>{{adotante.sexo}}</p>
+</div>
+ 
 
 
   <button ion-button block (click)="goToPerfil()">Preferências</button>

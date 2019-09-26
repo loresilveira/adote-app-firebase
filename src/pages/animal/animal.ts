@@ -50,7 +50,7 @@ export class AnimalPage {
       porte:[this.animal.porte, ],
       pelagem:[this.animal.pelagem, ],
       sexo:[this.animal.sexo, ],
-      // amigavel_crianca: [this.animal.amigavel_crianca, ],
+      // amigavel_crianca: [this.animais.amigavel_crianca, ],
       // guarda: [this.animal.guarda,],
       // brincadeira: [this.animal.brincadeira,],
       // exercicio: [this.animal.exercicio,],
