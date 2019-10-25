@@ -17,15 +17,16 @@ export class ListaAnimaisPage {
 
   resultadoJaccard : any;
 
-  animais: any[];
-
-  public adotante : Adotante = {
-    nome : "",
-    moradia: "",
-    porte: "",
-    pelagem: "",
-    sexo: "",
-  }
+   animais: any[];
+   adotante : any[];
+  
+  // public adotante : Adotante = {
+  //   nome : "",
+  //   moradia: "",
+  //   porte: "",
+  //   pelagem: "",
+  //   sexo: "",
+  // }
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -34,22 +35,35 @@ export class ListaAnimaisPage {
     private alert: AlertController,
     private recomendacao : RecomendacaoProvider) {
     this.adotante = navParams.get('adotante');
-    this.provider.getAll().subscribe(res => { this.animais = res})
+    
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAnimaisPage');
+    this.provider.getAll().subscribe(res => { 
+      this.animais = res;
+      this.calculaDistancia();
+    }
+      )
   }
 
   ngOnInit(){
-    this.calculaDistancia();
+    
   }
 
   calculaDistancia (){
+    console.log(this.animais);
+    console.log(this.adotante)
     if(this.animais && this.adotante){
-      //this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
-      console.log(this.animais);
-      console.log(this.adotante)
+      // this.animais.forEach(item =>{
+      //   this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(item))
+      // console.log(this.resultadoJaccard)
+      // })
+      
+      this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(this.animais))
+      this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(this.animais))
+      console.log(this.resultadoJaccard)
+     
     }
   
   }

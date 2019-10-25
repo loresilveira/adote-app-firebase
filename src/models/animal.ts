@@ -1,9 +1,9 @@
 export interface AnimalModel{
     key: string;
+    nome : string;
     moradia: string; // 1-Casa / 2-Apartamento
-    nome: string;
-    pelagem: string; // 1-curta / 2-longa
     porte: string; // 1-pequeno / 2-médio / 3-grande
+    pelagem: string; // 1-curta / 2-longa
     sexo: string; // 1- Fêmea / 2- Macho
     // amigavel_crianca: string; // 1-Sim / 2-Não
     // guarda: string; // 1-Sim / 2-Não
