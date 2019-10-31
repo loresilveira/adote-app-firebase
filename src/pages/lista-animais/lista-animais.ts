@@ -43,7 +43,8 @@ export class ListaAnimaisPage {
     console.log('ionViewDidLoad ListaAnimaisPage');
     this.provider.getAll().subscribe(res => { 
       this.animais = res;
-      this.calculaDistancia();
+      //this.jaccardSimilarity();
+      this.cosineSimilaraty();
     }
       )
   }
@@ -52,29 +53,33 @@ export class ListaAnimaisPage {
     
   }
 
-  calculaDistancia (){
-    console.log(this.animais);
-    console.log(this.adotante)
+ jaccardSimilarity (){
     if(this.animais && this.adotante){
       let adotante = Object.keys(this.adotante).map(key => this.adotante[key])
       this.animais.forEach(animal =>{
-        let objeto = Object.keys(animal).map(key => animal[key])
-       objeto.shift();
-console.log(objeto)
-             let measure = this.recomendacao.distancia(adotante, objeto)
+        let objeto = Object.keys(animal).map(key => animal[key]);
+         objeto.shift();
+        let measure = this.recomendacao.distancia(adotante, objeto)
              console.log(measure)
 
-
       })
-      console.log(this.animalArray)
-
-             // let measureMoradia = this.recomendacao.distancia(this.adotante.moradia, item.moradia)
-
-     // this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
-     // this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), this.animais)
-     
+      console.log(this.animalArray);
     }
   
+  }
+
+  cosineSimilaraty (){
+    if(this.animais && this.adotante){
+      let adotante = Object.keys(this.adotante).map(key => this.adotante[key])
+      this.animais.forEach(animal =>{
+        let objeto = Object.keys(animal).map(key => animal[key]);
+         objeto.shift();
+        let measure = this.recomendacao.similaridadeCosseno(adotante, objeto)
+             console.log(measure)
+
+      })
+      console.log(this.animalArray);
+    }
   }
 
   newAnimal() {
