@@ -30,6 +30,7 @@
     "ionic-angular": "3.9.3",
     "ionicons": "3.0.0",
     "jaccard": "^0.4.0",
+    "jaccard-similarity-sentences": "^1.0.2",
     "rxjs": "^6.0.0",
     "rxjs-compat": "^6.4.0",
     "sw-toolbox": "3.6.0",

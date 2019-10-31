@@ -18,15 +18,16 @@ export class ListaAnimaisPage {
   resultadoJaccard : any;
 
    animais: any[];
-   adotante : any[];
+   animalArray: any[];
+  //  adotante : any[];
   
-  // public adotante : Adotante = {
-  //   nome : "",
-  //   moradia: "",
-  //   porte: "",
-  //   pelagem: "",
-  //   sexo: "",
-  // }
+   adotante : Adotante = {
+    nome : "",
+    moradia: "",
+    porte: "",
+    pelagem: "",
+    sexo: "",
+  }
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
@@ -55,14 +56,22 @@ export class ListaAnimaisPage {
     console.log(this.animais);
     console.log(this.adotante)
     if(this.animais && this.adotante){
-      // this.animais.forEach(item =>{
-      //   this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(item))
-      // console.log(this.resultadoJaccard)
-      // })
-      
-      this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(this.animais))
-      this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), Object.keys(this.animais))
-      console.log(this.resultadoJaccard)
+      let adotante = Object.keys(this.adotante).map(key => this.adotante[key])
+      this.animais.forEach(animal =>{
+        let objeto = Object.keys(animal).map(key => animal[key])
+       objeto.shift();
+console.log(objeto)
+             let measure = this.recomendacao.distancia(adotante, objeto)
+             console.log(measure)
+
+
+      })
+      console.log(this.animalArray)
+
+             // let measureMoradia = this.recomendacao.distancia(this.adotante.moradia, item.moradia)
+
+     // this.resultadoJaccard = this.recomendacao.distancia(this.adotante, this.animais)
+     // this.resultadoJaccard = this.recomendacao.distancia(Object.keys(this.adotante), this.animais)
      
     }
   
