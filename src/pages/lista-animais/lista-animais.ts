@@ -44,42 +44,36 @@ export class ListaAnimaisPage {
     this.provider.getAll().subscribe(res => { 
       this.animais = res;
       //this.jaccardSimilarity();
-      this.cosineSimilaraty();
+      this.cosineSimilaraty(this.adotante, this.animais);
     }
       )
   }
 
-  ngOnInit(){
-    
+
+ jaccardSimilarity (arr1: any, arr2: any){
+      let vetor1 = Object.keys(arr1).map(key => arr1[key])
+      arr2.forEach(item =>{
+        let vetor2 = Object.keys(item).map(key => item[key]);
+         vetor2.shift();
+        let measure = this.recomendacao.distancia(vetor1, vetor2)
+             console.log(measure)
+      })  
   }
 
- jaccardSimilarity (){
-    if(this.animais && this.adotante){
-      let adotante = Object.keys(this.adotante).map(key => this.adotante[key])
-      this.animais.forEach(animal =>{
-        let objeto = Object.keys(animal).map(key => animal[key]);
-         objeto.shift();
-        let measure = this.recomendacao.distancia(adotante, objeto)
+  cosineSimilaraty (arr1: any, arr2: any){    
+      let vetor1 = Object.keys(arr1).map(key => arr1[key])
+      arr2.forEach(item =>{
+        let vetor2 = Object.keys(item).map(key => item[key]);
+         vetor2.shift();
+        let measure = this.recomendacao.similaridadeCosseno(vetor1, vetor2)
              console.log(measure)
 
       })
-      console.log(this.animalArray);
-    }
   
   }
 
-  cosineSimilaraty (){
-    if(this.animais && this.adotante){
-      let adotante = Object.keys(this.adotante).map(key => this.adotante[key])
-      this.animais.forEach(animal =>{
-        let objeto = Object.keys(animal).map(key => animal[key]);
-         objeto.shift();
-        let measure = this.recomendacao.similaridadeCosseno(adotante, objeto)
-             console.log(measure)
+  ordenar() {
 
-      })
-      console.log(this.animalArray);
-    }
   }
 
   newAnimal() {
