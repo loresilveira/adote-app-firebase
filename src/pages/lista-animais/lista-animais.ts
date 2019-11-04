@@ -33,47 +33,33 @@ export class ListaAnimaisPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,
     private toast: ToastController,
-    private alert: AlertController,
-    private recomendacao : RecomendacaoProvider) {
+    private alert: AlertController,) {
     this.adotante = navParams.get('adotante');
     
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAnimaisPage');
-    this.provider.getAll().subscribe(res => { 
-      this.animais = res;
-      //this.jaccardSimilarity();
-      this.cosineSimilaraty(this.adotante, this.animais);
-    }
-      )
+
   }
 
+//  jaccardSimilarity (arr1: any, arr2: any){
+//       let vetor1 = Object.keys(arr1).map(key => arr1[key])
+//       arr2.forEach(item =>{
+//         let vetor2 = Object.keys(item).map(key => item[key]);
+//          vetor2.shift();
+//         let measure = this.recomendacao.distancia(vetor1, vetor2)
+//              console.log(measure)
+//       })  
+//   }
 
- jaccardSimilarity (arr1: any, arr2: any){
-      let vetor1 = Object.keys(arr1).map(key => arr1[key])
-      arr2.forEach(item =>{
-        let vetor2 = Object.keys(item).map(key => item[key]);
-         vetor2.shift();
-        let measure = this.recomendacao.distancia(vetor1, vetor2)
-             console.log(measure)
-      })  
-  }
-
-  cosineSimilaraty (arr1: any, arr2: any){    
-      let vetor1 = Object.keys(arr1).map(key => arr1[key])
-      arr2.forEach(item =>{
-        let vetor2 = Object.keys(item).map(key => item[key]);
-         vetor2.shift();
-        let measure = this.recomendacao.similaridadeCosseno(vetor1, vetor2)
-             console.log(measure)
-
-      })
-  
-  }
-
-  ordenar() {
-
+  ordenar(lista: any) {
+    let ordenados = lista.sort((a,b)=>{
+      if(a.similaridade < b.similaridade) {return -1}
+      if(a.similaridade > b.similaridade) {return 1}
+      return 0;
+    })
+    return ordenados;
   }
 
   newAnimal() {

@@ -3,13 +3,15 @@ import { AngularFireDatabase } from 'angularfire2/database';
 // import { Observable } from 'rxjs-compat';
 // import { map } from 'rxjs-compat/operators/map';
 import 'rxjs/add/operator/map'
+import { LoadingController } from 'ionic-angular';
 
 @Injectable()
 export class AnimaisProvider {
 
   private PATH = 'animais/';
-
-  constructor(private db: AngularFireDatabase) {
+  public loading;
+  constructor(private db: AngularFireDatabase,
+    public loadingCtrl:LoadingController,) {
     console.log('Hello AnimaisProvider Provider');
   }
 
@@ -70,6 +72,18 @@ export class AnimaisProvider {
  
   remove(key: string) {
     return this.db.list(this.PATH).remove(key);
+  }
+
+  abreCarregando() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Carregando' 
+    });
+
+    this.loading.present();
+  }
+
+  fechaCarregando(){
+    this.loading.dismiss();
   }
 
 }

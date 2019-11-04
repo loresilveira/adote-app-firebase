@@ -25,22 +25,22 @@
 
 <ion-content padding>
 
-  <img src="/assets/imgs/logo.png" />
-  Olá {{user.email}}
-<div *ngIf="adotante != null">
-  
-  <p>{{adotante.nome}}</p>
+  <div *ngIf="adotante != null">
+    Olá {{adotante.nome}}
+  <!-- <p>{{adotante.nome}}</p>
   <p>{{adotante.moradia}}</p>
   <p>{{adotante.porte}}</p>
   <p>{{adotante.pelagem}}</p>
-  <p>{{adotante.sexo}}</p>
-</div>
+  <p>{{adotante.sexo}}</p> -->
+  </div>
  
-
-
   <button ion-button block (click)="goToPerfil()">Preferências</button>
   <button ion-button block (click)="goToListaAnimaisPage()">Lista de Animais</button>
   <button ion-button block (click)="goToListaAnimaisPage()">Recomendados</button>
+
+  <ion-item *ngFor="let animal of recomendados">
+    <p> {{animal.nome}}</p>
+  </ion-item>
 
 
 </ion-content>

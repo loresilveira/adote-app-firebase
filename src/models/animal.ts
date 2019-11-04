@@ -5,6 +5,7 @@ export interface AnimalModel{
     porte: string; // 1-pequeno / 2-médio / 3-grande
     pelagem: string; // 1-curta / 2-longa
     sexo: string; // 1- Fêmea / 2- Macho
+    similaridade: number;
     // amigavel_crianca: string; // 1-Sim / 2-Não
     // guarda: string; // 1-Sim / 2-Não
     // brincadeira: string; // 1- Sim / 2- Não
