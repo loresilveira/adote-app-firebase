@@ -19,6 +19,7 @@ import { RegisterPageModule } from '../pages/register/register.module';
 
 import { LoginPage } from '../pages/login/login';
 import { ProfilePageModule } from '../pages/profile/profile.module';
+import { PreferenciasPageModule } from '../pages/preferencias/preferencias.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
     ListaAnimaisPageModule,
     RegisterPageModule,
     ProfilePageModule,
+    PreferenciasPageModule,
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyCh3j2HD3jVE9mfDYiI0_Z-oA7wsTakVrE",
       authDomain: "fir-adote-app.firebaseapp.com",

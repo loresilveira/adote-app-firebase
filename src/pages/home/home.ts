@@ -9,6 +9,7 @@ import { ProfilePage } from '../profile/profile';
 import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalModel } from '../../models/animal';
+import { PreferenciasPage } from '../preferencias/preferencias';
 
 @Component({
   selector: 'page-home',
@@ -113,8 +114,8 @@ ordenar(lista: any) {
   // }
 
   goToPerfil(){
-    this.navCtrl.push(ProfilePage);
-  }
+    this.navCtrl.push(PreferenciasPage, {'adotante':this.adotante});
+    }
 
   goToListaAnimaisPage(){
    
