@@ -25,14 +25,14 @@ export class MyApp {
     splashScreen.hide();
     });
 
-    // this.initializeApp();
+    this.initializeApp();
 
-    // this.pages = [
+    this.pages = [
       
-    //   {title: 'Lista de Animais', component: ListaAnimaisPage.name},
-    //   {title: 'Cadastrar Animal', component: AnimalPage},
-    //   {title: 'Cadastrar Usuário', component: UsuarioPage}
-    // ]
+      {title: 'Lista de Animais', component: ListaAnimaisPage},
+      {title: 'Cadastrar Animal', component: AnimalPage},
+      // {title: 'Cadastrar Usuário', component: UsuarioPage}
+    ]
     
     
   }

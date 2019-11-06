@@ -34,7 +34,7 @@ export class ListaAnimaisPage {
     private provider: AnimaisProvider,
     private toast: ToastController,
     private alert: AlertController,) {
-    this.adotante = navParams.get('adotante');
+    this.animais = navParams.get('animais');
     
   }
 

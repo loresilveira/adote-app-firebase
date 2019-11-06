@@ -119,7 +119,7 @@ ordenar(lista: any) {
 
   goToListaAnimaisPage(){
    
-    this.navCtrl.push(ListaAnimaisPage, {'adotante':this.adotante});
+    this.navCtrl.push(ListaAnimaisPage, {'animais':this.animais});
   }
 
 
