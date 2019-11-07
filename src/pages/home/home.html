@@ -38,9 +38,18 @@
   <button ion-button block (click)="goToListaAnimaisPage()">Lista de Animais</button>
   <button ion-button block (click)="goToListaAnimaisPage()">Recomendados</button>
 
-  <ion-item *ngFor="let animal of recomendados">
-    <p> {{animal.nome}}</p>
-  </ion-item>
+  <ion-list *ngIf="recomendados != null">
+      <ion-item *ngFor="let animal of recomendados">
+          {{animal.nome}}
+          <p> <b>Porte:</b> {{animal.porte}} ...
+               <b>Pelagem:</b> {{animal.pelagem}}
+          </p>
+          <p>
+            <b>Sexo: </b> {{animal.sexo}}
+            <b>Moradia ideal:</b> {{animal.moradia}}
+          </p>
+    
+      </ion-item>
 
-
+  </ion-list>
 </ion-content>

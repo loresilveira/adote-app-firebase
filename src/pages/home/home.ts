@@ -47,8 +47,6 @@ export class HomePage {
         this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
         this.provider.getAll().subscribe(res => { 
           this.animais = res;
-          console.log(this.animais)
-          console.log(this.adotante)
           this.provider.fechaCarregando();
           if(this.adotante && this.animais){
             this.cosineSimilaraty(this.adotante, this.animais);
@@ -68,26 +66,34 @@ export class HomePage {
 
   }
 
-  cosineSimilaraty (adotante: any, animais: any){    
+  cosineSimilaraty (adotante: any, animais: any){ 
     let vetorAdotante = Object.keys(adotante).map(key => adotante[key])
-    animais.forEach(item =>{
-      let vetorAnimal = Object.keys(item).map(key => item[key]);
-      vetorAnimal.shift();
-      let measure = this.recomendacao.similaridadeCosseno(vetorAdotante, vetorAnimal)
-      item.similaridade = measure;
-     
-    })
-  
-    let listaAnimais = this.ordenar(animais)
-    this.recomendados = listaAnimais.filter((item) =>{ return item.similaridade !== 0})
-    console.log(this.recomendados)
+      vetorAdotante.splice(1,1)
+      console.log(vetorAdotante)
+      animais.forEach(item =>{
+        let vetorAnimal = Object.keys(item).map(key => item[key]);
+        vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
+        vetorAnimal.splice(1,1) // retira a propriedade "nome" do objeto para calcular
+        
+        console.log(vetorAnimal)
+        let measure = this.recomendacao.similaridadeCosseno(vetorAdotante, vetorAnimal)
+        item.similaridade = measure;
+        console.log(item.similaridade)
+       
+      })
+    
+      let listaAnimais = this.ordenar(animais)
+      console.log(listaAnimais)
+      this.recomendados = listaAnimais.slice(0,3)
+      console.log(this.recomendados)
+
 
 }
 
 ordenar(lista: any) {
   let ordenados = lista.sort((a,b)=>{
-    if(a.similaridade < b.similaridade) {return -1}
-    if(a.similaridade > b.similaridade) {return 1}
+    if(a.similaridade > b.similaridade) {return -1}
+    if(a.similaridade < b.similaridade) {return 1}
     return 0;
   })
   return ordenados;
