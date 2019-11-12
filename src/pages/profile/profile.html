@@ -10,43 +10,78 @@
         <ion-label floating>Nome:</ion-label>
         <ion-input [(ngModel)]="adotante.nome"></ion-input>
     </ion-item>
-  
-    <ion-item>
-      <ion-label floating>Onde você mora:</ion-label>
-      <ion-select [(ngModel)]="adotante.moradia">
-        <ion-option value="casa">Casa</ion-option>
-        <ion-option value="apto">Apartamento</ion-option>
-      </ion-select>
-    </ion-item>
-  
-    <ion-item>
-      <ion-label floating>Porte do animal:</ion-label>
-      <ion-select [(ngModel)]="adotante.porte">
-        <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-        <ion-option value="pequeno">Pequeno</ion-option>
-        <ion-option value="medio">Médio</ion-option>
-        <ion-option value="grande">Grande</ion-option>
-      </ion-select>
-    </ion-item>
 
-     <ion-item>
-      <ion-label floating>Pelagem</ion-label>
-      <ion-select [(ngModel)]="adotante.pelagem">
-        <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-        <ion-option value="curta">Curta</ion-option>
-        <ion-option value="longa">Longa</ion-option>
-      </ion-select>
+    <ion-item>
+      <ion-label floating>Animal ideal para casa:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.moradia_casa" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Sexo</ion-label>
-      <ion-select [(ngModel)]="adotante.sexo">
-        <!-- <ion-option value="nao_sei"> Sem preferência</ion-option> -->
-          <ion-option value="femea">Fêmea</ion-option>
-          <ion-option value="macho">Macho</ion-option>
-      </ion-select>
+      <ion-label floating>Animal ideal para apto:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.moradia_apto" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
     </ion-item>
-  
+
+    <ion-item>
+      <ion-label floating>Pelagem curta:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.pelagem_curta" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Pelagem longa:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.pelagem_longa" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Porte pequeno:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.porte_pequeno" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Porte médio:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.porte_medio" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Porte grande:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.porte_grande" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label floating>Fêmea:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.sexo_femea" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Macho:</ion-label>
+      <ion-range min="0" max="100" [(ngModel)]="adotante.sexo_macho" color="secondary">
+        <ion-label range-left>0</ion-label>
+        <ion-label range-right>100</ion-label>
+      </ion-range>
+    </ion-item>
   
 <!--
   
