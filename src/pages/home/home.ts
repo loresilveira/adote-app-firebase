@@ -49,8 +49,9 @@ export class HomePage {
           this.animais = res;
           this.provider.fechaCarregando();
           if(this.adotante && this.animais){
-            // this.cosineSimilaraty(this.adotante, this.animais);
+            this.cosineSimilaraty(this.adotante, this.animais);
           }
+          
         })
   
       }else{
