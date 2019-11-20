@@ -21,14 +21,7 @@ export class ListaAnimaisPage {
    animalArray: any[];
   //  adotante : any[];
   
-   adotante : Adotante = {
-    nome : "",
-    moradia: "",
-    porte: "",
-    pelagem: "",
-    sexo: "",
-  }
-
+   adotante : Adotante;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,

@@ -40,12 +40,11 @@ export class AnimaisProvider {
             porte: animal.porte,
             pelagem: animal.pelagem, 
             sexo: animal.sexo, 
-            // amigavel_crianca: animal.amigavel_crianca, 
-            // apartamento: animal.apartamento, 
-            // guarda: animal.guarda, brincadeira: animal.brincadeira, 
-            // exercicio: animal.exercicio,
-            // queda_pelo: animal.queda_pelo, 
-            // tendencia_latir: animal.tendencia_latir
+            amigavel_crianca: animal.amigavel_crianca, 
+            guarda: animal.guarda, brincadeira: animal.brincadeira, 
+            exercicio: animal.exercicio,
+            queda_pelo: animal.queda_pelo, 
+            tendencia_latir: animal.tendencia_latir
           })
           .then(() => resolve())
           .catch((e) => reject(e));
@@ -57,13 +56,12 @@ export class AnimaisProvider {
             porte: animal.porte,
             pelagem: animal.pelagem, 
             sexo: animal.sexo,
-            // amigavel_crianca: animal.amigavel_crianca, 
-            // apartamento: animal.apartamento, 
-            // guarda: animal.guarda, 
-            // brincadeira: animal.brincadeira, 
-            // exercicio: animal.exercicio,
-            // queda_pelo: animal.queda_pelo, 
-            // tendencia_latir: animal.tendencia_latir
+            amigavel_crianca: animal.amigavel_crianca, 
+            guarda: animal.guarda, 
+            brincadeira: animal.brincadeira, 
+            exercicio: animal.exercicio,
+            queda_pelo: animal.queda_pelo, 
+            tendencia_latir: animal.tendencia_latir
            })
           .then(() => resolve());
       }

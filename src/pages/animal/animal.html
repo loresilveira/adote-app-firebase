@@ -76,12 +76,12 @@
       </div>
     </ion-item>
 
-    <!-- <ion-item>
+    <ion-item>
       <ion-label stacked>Amigável com crianças</ion-label>
       <ion-select [(ngModel)]="amigavel_crianca" formControlName="amigavel_crianca">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="sim">Sim</ion-option>
-        <ion-option value="nao">Não/</ion-option>
+        <!-- <ion-option value="nao_sei">Não Sei</ion-option> -->
+        <ion-option value="amigavel">Sim</ion-option>
+        <ion-option value="nao_amigavel">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.amigavel_crianca.valid &&
@@ -92,26 +92,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Consegue conviver em ambiente pequeno, sem quintal e jardim?</ion-label>
-      <ion-select [(ngModel)]="apartamento" formControlName="apartamento">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="sim">Sim</ion-option>
-        <ion-option value="nao">Não/</ion-option>
-      </ion-select>
-    </ion-item>
-    <ion-item *ngIf="!form.controls.apartamento.valid &&
-     (form.controls.apartamento.dirty || form.controls.apartamento.touched)" color="danger">
-      <div [hidden]="!form.controls.apartamento.errors.required">
-        O campo é obrigatório
-      </div>
-    </ion-item>
-
-    <ion-item>
       <ion-label stacked>Serve como cão de guarda?</ion-label>
       <ion-select [(ngModel)]="guarda" formControlName="guarda">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="sim">Sim</ion-option>
-        <ion-option value="nao">Não/</ion-option>
+        <ion-option value="guarda">Sim</ion-option>
+        <ion-option value="nao_guarda">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.guarda.valid && 
@@ -122,13 +106,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Nível do gosto do animal por brincadeiras?</ion-label>
+      <ion-label stacked>É um animal brincalhão?</ion-label>
       <ion-select [(ngModel)]="brincadeira" formControlName="brincadeira">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="nao_gosta">Não gosta</ion-option>
-        <ion-option value="pouco">Pouco</ion-option>
-        <ion-option value="medio">Médio</ion-option>
-        <ion-option value="muito">Muito</ion-option>
+        <ion-option value="brincalhao">Sim</ion-option>
+        <ion-option value="nao_brincalhao">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.brincadeira.valid && 
@@ -139,13 +120,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Tem necessidade de correr, caminhar?</ion-label>
+      <ion-label stacked>Tem necessidade de correr, passear?</ion-label>
       <ion-select [(ngModel)]="exercicio" formControlName="exercicio">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="nao_gosta">Não</ion-option>
-        <ion-option value="pouco">Pouco</ion-option>
-        <ion-option value="medio">Médio</ion-option>
-        <ion-option value="muito">Muito</ion-option>
+        <ion-option value="ativo">Sim</ion-option>
+        <ion-option value="nao_ativo">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.brincadeira.valid && 
@@ -156,12 +134,10 @@
     </ion-item>
 
     <ion-item>
-      <ion-label stacked>Nível de queda de pêlo?</ion-label>
+      <ion-label stacked>Solta muito pêlo?</ion-label>
       <ion-select [(ngModel)]="queda_pelo" formControlName="queda_pelo">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="pouco">Pouco</ion-option>
-        <ion-option value="medio">Médio</ion-option>
-        <ion-option value="muito">Muito</ion-option>
+        <ion-option value="queda_pelo">Sim</ion-option>
+        <ion-option value="nao_queda_pelo">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.queda_pelo.valid && 
@@ -174,9 +150,8 @@
     <ion-item>
       <ion-label stacked>Possui tendência em latir?</ion-label>
       <ion-select [(ngModel)]="tendencia_latir" formControlName="tendencia_latir">
-        <ion-option value="nao_sei">Não Sei</ion-option>
-        <ion-option value="sim">Sim</ion-option>
-        <ion-option value="nao">Não</ion-option>
+        <ion-option value="tende_latir">Sim</ion-option>
+        <ion-option value="nao_tende_latir">Não</ion-option>
       </ion-select>
     </ion-item>
     <ion-item *ngIf="!form.controls.brincadeira.valid && 
@@ -184,7 +159,7 @@
       <div [hidden]="!form.controls.tendencia_latir.errors.required">
         O campo é obrigatório
       </div>
-    </ion-item> -->
+    </ion-item>
   
 
     <div padding>

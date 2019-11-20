@@ -66,7 +66,9 @@ export class HomePage {
 
   }
 
-  cosineSimilaraty (adotante: any, animais: any){ 
+  cosineSimilaraty (adotante: any, animais: any){
+    console.log(adotante) 
+    console.log(animais)
     let vetorAdotante = Object.keys(adotante).map(key => adotante[key])
       vetorAdotante.splice(1,1)
       console.log(vetorAdotante)
