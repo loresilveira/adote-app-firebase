@@ -29,7 +29,8 @@ export class HomePage {
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase,
     private recomendacao : RecomendacaoProvider,
-    private provider: AnimaisProvider) {
+    private provider: AnimaisProvider,
+    public menuCtrl: MenuController) {
     console.log('Hello Home Page')
 
   }
@@ -130,5 +131,8 @@ ordenar(lista: any) {
     this.navCtrl.push(ListaAnimaisPage, {'animais':this.animais});
   }
 
+  openMenu() {
+    this.menuCtrl.open();
+  }
 
 }
