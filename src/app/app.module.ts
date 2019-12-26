@@ -20,6 +20,7 @@ import { RegisterPageModule } from '../pages/register/register.module';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePageModule } from '../pages/profile/profile.module';
 import { PreferenciasPageModule } from '../pages/preferencias/preferencias.module';
+import { DialogoProvider } from '../providers/dialogo/dialogo';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { PreferenciasPageModule } from '../pages/preferencias/preferencias.modul
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AnimaisProvider,
+    DialogoProvider,
     RecomendacaoProvider,
    
   ]

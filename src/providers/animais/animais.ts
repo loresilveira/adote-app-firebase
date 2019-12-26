@@ -72,16 +72,4 @@ export class AnimaisProvider {
     return this.db.list(this.PATH).remove(key);
   }
 
-  abreCarregando() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Carregando' 
-    });
-
-    this.loading.present();
-  }
-
-  fechaCarregando(){
-    this.loading.dismiss();
-  }
-
 }

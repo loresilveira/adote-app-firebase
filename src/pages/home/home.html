@@ -1,22 +1,10 @@
-<!-- <ion-header>
-  <ion-navbar color="primary">
-    <ion-title>
-      RecAdoption
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  <img src="/assets/imgs/principal.png"/>
-
-  <button ion-button full (click)='goToListaUsuarioPage()'>Suas preferências</button>
-  <button ion-button color="secondary" full (click)='goToListaAnimaisPage()'>Lista de Animais</button>
-  <button ion-button color="danger" full (click)='goToRecomendacaoPage()'>Recomendações</button>
-</ion-content> -->
-
 <ion-header>
   <ion-navbar color='primary'>
-    <ion-icon name="menu"  (click)= "openMenu()"></ion-icon>
+    <ion-buttons left>
+      <button ion-button (click)="openMenu()"> 
+        <ion-icon name="menu" ></ion-icon>
+     </button>
+  </ion-buttons>
     <ion-title>
       RecAdoption
     </ion-title>
@@ -27,30 +15,28 @@
 <ion-content padding>
 
   <div *ngIf="adotante != null">
-    Olá {{adotante.nome}}
-  <!-- <p>{{adotante.nome}}</p>
-  <p>{{adotante.moradia}}</p>
-  <p>{{adotante.porte}}</p>
-  <p>{{adotante.pelagem}}</p>
-  <p>{{adotante.sexo}}</p> -->
+    <b> Olá {{adotante.nome}} </b>
+    <p>Recomendados para você:
+    </p>
   </div>
- 
-  <button ion-button block (click)="goToPerfil()">Preferências</button>
-  <button ion-button block (click)="goToListaAnimaisPage()">Lista de Animais</button>
-  <button ion-button block (click)="goToListaAnimaisPage()">Recomendados</button>
 
   <ion-list *ngIf="recomendados != null">
-      <ion-item *ngFor="let animal of recomendados">
+    
+      <ion-card *ngFor="let animal of recomendados">
+        <ion-card-header>
           {{animal.nome}}
-          <p> <b>Porte:</b> {{animal.porte}} ...
-               <b>Pelagem:</b> {{animal.pelagem}}
+        </ion-card-header>
+        <ion-card-content>
+          <p>
+            <b>Porte:</b> {{animal.porte}} ...<b>Pelagem:</b> {{animal.pelagem}}
           </p>
           <p>
-            <b>Sexo: </b> {{animal.sexo}}
-            <b>Moradia ideal:</b> {{animal.moradia}}
+            <b>Sexo: </b> {{animal.sexo}} <b>Moradia ideal:</b> {{animal.moradia}}...
           </p>
-    
-      </ion-item>
-
+        </ion-card-content>
+        <ion-card-content>
+          <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon>
+        </ion-card-content>
+      </ion-card>
   </ion-list>
 </ion-content>

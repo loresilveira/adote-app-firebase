@@ -11,11 +11,8 @@ export class RecomendacaoProvider {
 
 animais:  Observable<any>;
    
-  constructor(
-              private animaisProvider : AnimaisProvider,
-              ) {
+  constructor(private animaisProvider : AnimaisProvider) {
     console.log('Hello RecomendacaoProvider Provider');
-
  }
    
    distancia(a: any, b: any) {
@@ -26,6 +23,35 @@ animais:  Observable<any>;
   similaridadeCosseno(a:any, b:any){
     let measure = cosSimilarity(a,b)
     return measure;
+  }
+
+  cosineSimilaraty (adotante: any, animais: any){
+    let vetorAdotante = Object.keys(adotante).map(key => adotante[key])
+    vetorAdotante.splice(1,1)
+    console.log(vetorAdotante)
+    animais.forEach(item => {
+      let vetorAnimal = Object.keys(item).map(key => item[key]);
+      vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
+      vetorAnimal.splice(1,1) // retira a propriedade "nome" do objeto para calcular
+      console.log(vetorAnimal)
+      let measure = this.similaridadeCosseno(vetorAdotante, vetorAnimal)
+      item.similaridade = measure;
+      console.log(item.similaridade)
+    })
+    
+    let listaAnimais = this.ordenar(animais)
+    console.log(listaAnimais)
+    return listaAnimais.slice(0,3)
+  
+  }
+
+  ordenar(lista: any) {
+    let ordenados = lista.sort((a,b)=>{
+      if(a.similaridade > b.similaridade) {return -1}
+      if(a.similaridade < b.similaridade) {return 1}
+      return 0;
+    })
+    return ordenados;
   }
 
 }
