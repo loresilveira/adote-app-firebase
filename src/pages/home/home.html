@@ -2,11 +2,11 @@
   <ion-navbar color='primary'>
     <ion-buttons left>
       <button ion-button (click)="openMenu()"> 
-        <ion-icon name="menu" ></ion-icon>
+        <ion-icon name="menu"></ion-icon>
      </button>
   </ion-buttons>
     <ion-title>
-      RecAdoption
+      RecAdoptionb
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -35,7 +35,17 @@
           </p>
         </ion-card-content>
         <ion-card-content>
-          <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon>
+          <!-- <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon> -->
+          <ionic3-star-rating #rating
+            activeIcon = "ios-star"
+            defaultIcon = "ios-star-outline"
+            activeColor = "#488aff" 
+            defaultColor = "#f4f4f4"
+            readonly="false"
+            rating="5"
+            fontSize = "32px"
+            (ratingChanged)="logRatingChange($event)">
+          </ionic3-star-rating>
         </ion-card-content>
       </ion-card>
   </ion-list>

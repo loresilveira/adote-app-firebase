@@ -15,6 +15,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { ListaAnimaisPageModule } from '../pages/lista-animais/lista-animais.module';
 import { RecomendacaoProvider } from '../providers/recomendacao/recomendacao';
 import { RegisterPageModule } from '../pages/register/register.module';
+import { StarRatingModule } from 'ionic3-star-rating';
 
 
 import { LoginPage } from '../pages/login/login';
@@ -26,7 +27,8 @@ import { DialogoProvider } from '../providers/dialogo/dialogo';
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+
 
   ],
   imports: [
@@ -46,7 +48,8 @@ import { DialogoProvider } from '../providers/dialogo/dialogo';
       messagingSenderId: "895899701153"
     }),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    StarRatingModule
     
   ],
   bootstrap: [IonicApp],

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, MenuController } from 'ionic-angular';
+import { NavController, ToastController, MenuController, Icon } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
@@ -12,7 +12,8 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+ 
 })
 export class HomePage {
 
@@ -68,6 +69,11 @@ export class HomePage {
   //       this.exibirToast(erro);
   //     });
   // }
+
+  logRatingChange(rating){
+    console.log("changed rating: ",rating);
+    // do your stuff
+  }
 
   goToPerfil(){
     this.navCtrl.push('PreferenciasPage', {'adotante':this.adotante});
