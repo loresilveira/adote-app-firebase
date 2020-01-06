@@ -21,8 +21,8 @@ export class HomePage {
   animais: any[];
   recomendados :  AnimalModel[];
   user: User = {email: '', password:''};
-  stars: number[] = [1,2,3,4,5];
-  
+  ratingValue = 3;
+
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase,

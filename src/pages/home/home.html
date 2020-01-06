@@ -6,7 +6,7 @@
      </button>
   </ion-buttons>
     <ion-title>
-      RecAdoptionb
+      RecAdoption
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -42,7 +42,7 @@
             activeColor = "#488aff" 
             defaultColor = "#f4f4f4"
             readonly="false"
-            rating="5"
+            rating="{{ratingValue}}"
             fontSize = "32px"
             (ratingChanged)="logRatingChange($event)">
           </ionic3-star-rating>

@@ -44,7 +44,8 @@ export class AnimaisProvider {
             guarda: animal.guarda, brincadeira: animal.brincadeira, 
             exercicio: animal.exercicio,
             queda_pelo: animal.queda_pelo, 
-            tendencia_latir: animal.tendencia_latir
+            tendencia_latir: animal.tendencia_latir,
+            
           })
           .then(() => resolve())
           .catch((e) => reject(e));
