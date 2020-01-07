@@ -36,7 +36,6 @@ export class AvaliadosProvider {
         this.db.list(this.PATH)
           .update(avaliado.key, { 
             rating: avaliado.rating, 
-            usuario_key: avaliado.usuario_key,
             animal_key: avaliado.animal_key,            
           })
           .then(() => resolve())
@@ -45,7 +44,6 @@ export class AvaliadosProvider {
         this.db.list(this.PATH)
           .push({ 
             rating: avaliado.rating, 
-            usuario_key: avaliado.usuario_key,
             animal_key: avaliado.animal_key,
            })
           .then(() => resolve());

@@ -24,7 +24,7 @@ export class HomePage {
   recomendados :  AnimalModel[];
   avaliacao: AvaliadoModel;
   user: User = {email: '', password:''};
-  ratingValue = 3;
+  ratingValue = 0;
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -74,23 +74,28 @@ export class HomePage {
   //     });
   // }
 
-  salvaAvaliacao(avaliacao){
-    if(avaliacao){
-      this.avaliacaoProvider.save(avaliacao)
-        .then(() => {
-          this.navCtrl.pop();
-        })
-        .catch((e) => {
-          console.error(e);
-        })
+  salvaAvaliacao(key){
+    if(key){
+      this.avaliacao.rating = this.ratingValue;
+      this.avaliacao.animal_key = key;
+      console.log(this.avaliacao)
+      // this.avaliacaoProvider.save(this.avaliacao)
+      //   .then(() => {
+      //     this.navCtrl.pop();
+      //   })
+      //   .catch((e) => {
+      //     console.error(e);
+      //   })
     }
   }
+
   logRatingChange(rating, key){
     console.log("changed rating: ",rating);
-    this.avaliacao.rating = rating;
-    this.avaliacao.animal_key = key;
     console.log(key)
+
+    this.ratingValue = rating;
     
+    this.salvaAvaliacao(key)
   }
 
   goToPerfil(){
