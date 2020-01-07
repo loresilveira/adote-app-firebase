@@ -9,6 +9,8 @@ import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao'
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalModel } from '../../models/animal';
 import { DialogoProvider } from '../../providers/dialogo/dialogo';
+import { AvaliadosProvider } from '../../providers/avaliados/avaliados';
+import { AvaliadoModel } from '../../models/avaliado';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +22,7 @@ export class HomePage {
   adotante : Adotante;
   animais: any[];
   recomendados :  AnimalModel[];
+  avaliacao: AvaliadoModel;
   user: User = {email: '', password:''};
   ratingValue = 3;
 
@@ -28,6 +31,7 @@ export class HomePage {
     private afDatabase : AngularFireDatabase,
     private recomendacao : RecomendacaoProvider,
     private provider: AnimaisProvider,
+    private avaliacaoProvider: AvaliadosProvider,
     private dialogo: DialogoProvider,
     public menuCtrl: MenuController) {
     console.log('Hello Home Page')
@@ -70,9 +74,23 @@ export class HomePage {
   //     });
   // }
 
-  logRatingChange(rating){
+  salvaAvaliacao(avaliacao){
+    if(avaliacao){
+      this.avaliacaoProvider.save(avaliacao)
+        .then(() => {
+          this.navCtrl.pop();
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+    }
+  }
+  logRatingChange(rating, key){
     console.log("changed rating: ",rating);
-    // do your stuff
+    this.avaliacao.rating = rating;
+    this.avaliacao.animal_key = key;
+    console.log(key)
+    
   }
 
   goToPerfil(){

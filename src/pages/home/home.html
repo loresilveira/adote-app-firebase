@@ -44,7 +44,7 @@
             readonly="false"
             rating="{{ratingValue}}"
             fontSize = "32px"
-            (ratingChanged)="logRatingChange($event)">
+            (ratingChanged)="logRatingChange($event, animal.key)">
           </ionic3-star-rating>
         </ion-card-content>
       </ion-card>

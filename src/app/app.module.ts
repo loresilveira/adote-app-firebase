@@ -22,6 +22,7 @@ import { LoginPage } from '../pages/login/login';
 import { ProfilePageModule } from '../pages/profile/profile.module';
 import { PreferenciasPageModule } from '../pages/preferencias/preferencias.module';
 import { DialogoProvider } from '../providers/dialogo/dialogo';
+import { AvaliadosProvider } from '../providers/avaliados/avaliados';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { DialogoProvider } from '../providers/dialogo/dialogo';
     AnimaisProvider,
     DialogoProvider,
     RecomendacaoProvider,
+    AvaliadosProvider,
    
   ]
 })
