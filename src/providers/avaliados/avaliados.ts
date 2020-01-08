@@ -3,15 +3,19 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import 'rxjs/add/operator/map'
 import { LoadingController } from 'ionic-angular';
 import { AvaliadoModel } from '../../models/avaliado';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Injectable()
 export class AvaliadosProvider {
 
   private PATH = 'avaliados/';
   public loading;
-
+ 
+  avaliacao : AvaliadoModel;
+  
   constructor(private db: AngularFireDatabase,
-    public loadingCtrl:LoadingController,) {
+    public loadingCtrl:LoadingController,
+    ) {
     console.log('Hello AvaliadosProvider Provider');
   }
 
@@ -55,4 +59,5 @@ export class AvaliadosProvider {
     return this.db.list(this.PATH).remove(key);
   }
 
+  
 }

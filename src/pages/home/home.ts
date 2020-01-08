@@ -11,6 +11,7 @@ import { AnimalModel } from '../../models/animal';
 import { DialogoProvider } from '../../providers/dialogo/dialogo';
 import { AvaliadosProvider } from '../../providers/avaliados/avaliados';
 import { AvaliadoModel } from '../../models/avaliado';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'page-home',
@@ -25,6 +26,7 @@ export class HomePage {
   avaliacao: AvaliadoModel;
   user: User = {email: '', password:''};
   ratingValue = 0;
+  form: FormGroup;
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -33,7 +35,8 @@ export class HomePage {
     private provider: AnimaisProvider,
     private avaliacaoProvider: AvaliadosProvider,
     private dialogo: DialogoProvider,
-    public menuCtrl: MenuController) {
+    public menuCtrl: MenuController,
+    private formBuilder: FormBuilder,) {
     console.log('Hello Home Page')
 
     
@@ -54,7 +57,7 @@ export class HomePage {
             this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.animais);
             console.log(this.recomendados)
           }
-          
+          // this.createForm()
         })
   
       }else{
@@ -74,10 +77,15 @@ export class HomePage {
   //     });
   // }
 
-  salvaAvaliacao(key){
-    if(key){
-      this.avaliacao.rating = this.ratingValue;
-      this.avaliacao.animal_key = key;
+  createForm() {
+    this.form = this.formBuilder.group({
+      key: [this.avaliacao.key],
+      rating: [this.avaliacao.rating, ],
+      animal_key: [this.avaliacao.animal_key, ],
+  
+    });
+  }
+  salvaAvaliacao(){
       console.log(this.avaliacao)
       // this.avaliacaoProvider.save(this.avaliacao)
       //   .then(() => {
@@ -86,16 +94,17 @@ export class HomePage {
       //   .catch((e) => {
       //     console.error(e);
       //   })
-    }
+    
   }
 
   logRatingChange(rating, key){
     console.log("changed rating: ",rating);
     console.log(key)
 
-    this.ratingValue = rating;
+    this.avaliacao.rating = rating;
+    this.avaliacao.animal_key = key;
     
-    this.salvaAvaliacao(key)
+    this.salvaAvaliacao()
   }
 
   goToPerfil(){
