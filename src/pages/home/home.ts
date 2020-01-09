@@ -23,10 +23,14 @@ export class HomePage {
   adotante : Adotante;
   animais: any[];
   recomendados :  AnimalModel[];
-  avaliacao: AvaliadoModel;
   user: User = {email: '', password:''};
   ratingValue = 0;
   form: FormGroup;
+  public avaliacao : AvaliadoModel = {
+    key: '',
+    rating: 0,
+    animal_key: '',
+  }
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -86,24 +90,21 @@ export class HomePage {
     });
   }
   salvaAvaliacao(){
-      console.log(this.avaliacao)
-      // this.avaliacaoProvider.save(this.avaliacao)
-      //   .then(() => {
-      //     this.navCtrl.pop();
-      //   })
-      //   .catch((e) => {
-      //     console.error(e);
-      //   })
+      this.createForm();
+      console.log(this.form.value)
+      this.avaliacaoProvider.save(this.avaliacao)
     
+      .catch((e) => {
+        console.error(e);
+      })
   }
 
   logRatingChange(rating, key){
     console.log("changed rating: ",rating);
     console.log(key)
-
+    this.avaliacao.key = key;
     this.avaliacao.rating = rating;
     this.avaliacao.animal_key = key;
-    
     this.salvaAvaliacao()
   }
 
