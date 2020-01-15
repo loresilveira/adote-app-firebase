@@ -6,6 +6,7 @@ import { AnimalPage } from '../animal/animal';
 import { Adotante } from '../../models/adotante';
 import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
 import { AnimalModel } from '../../models/animal';
+import { DialogoProvider } from '../../providers/dialogo/dialogo';
 
 @IonicPage()
 @Component({
@@ -26,7 +27,8 @@ export class ListaAnimaisPage {
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,
     private toast: ToastController,
-    private alert: AlertController,) {
+    private alert: AlertController,
+    private dialogo: DialogoProvider,) {
     this.animais = navParams.get('animais');
     
   }
@@ -35,6 +37,16 @@ export class ListaAnimaisPage {
     console.log('ionViewDidLoad ListaAnimaisPage');
 
   }
+
+  ngOnInit(){
+    this.provider.getAll().subscribe(res => { 
+      this.animais = res;
+      this.dialogo.fechaCarregando();
+
+    })
+  }
+
+  
 
 //  jaccardSimilarity (arr1: any, arr2: any){
 //       let vetor1 = Object.keys(arr1).map(key => arr1[key])

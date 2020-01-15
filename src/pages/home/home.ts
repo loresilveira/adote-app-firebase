@@ -90,13 +90,16 @@ export class HomePage {
     });
   }
   salvaAvaliacao(){
-      this.createForm();
-      console.log(this.form.value)
-      this.avaliacaoProvider.save(this.avaliacao)
+      // this.createForm();
+      // console.log(this.form.value)
+
+      this.afAuth.authState.take(1).subscribe(auth => 
+        {this.afDatabase.object(`avaliados/${auth.uid}`).set(this.avaliacao)})
+      // this.avaliacaoProvider.save(this.avaliacao)
     
-      .catch((e) => {
-        console.error(e);
-      })
+      // .catch((e) => {
+      //   console.error(e);
+      // })
   }
 
   logRatingChange(rating, key){
