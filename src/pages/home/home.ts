@@ -23,7 +23,7 @@ export class HomePage {
   adotante : Adotante;
   animais: any[];
   recomendados :  AnimalModel[];
-  user: User = {email: '', password:''};
+  user: User = {id: '', email: '', password:''};
   ratingValue = 0;
   form: FormGroup;
   public avaliacao : AvaliadoModel = {
@@ -81,25 +81,14 @@ export class HomePage {
   //     });
   // }
 
-  createForm() {
-    this.form = this.formBuilder.group({
-      key: [this.avaliacao.key],
-      rating: [this.avaliacao.rating, ],
-      animal_key: [this.avaliacao.animal_key, ],
-  
-    });
-  }
   salvaAvaliacao(){
-      // this.createForm();
-      // console.log(this.form.value)
-
-      this.afAuth.authState.take(1).subscribe(auth => 
-        {this.afDatabase.object(`avaliados/${auth.uid}`).set(this.avaliacao)})
-      // this.avaliacaoProvider.save(this.avaliacao)
+      // this.afAuth.authState.take(1).subscribe(auth => 
+      //   {this.afDatabase.object(`avaliados/${auth.uid}/aliacoes/`).set(this.avaliacao)})
+      this.avaliacaoProvider.save(this.avaliacao)
     
-      // .catch((e) => {
-      //   console.error(e);
-      // })
+      .catch((e) => {
+        console.error(e);
+      })
   }
 
   logRatingChange(rating, key){
