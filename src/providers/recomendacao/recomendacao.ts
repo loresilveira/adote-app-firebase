@@ -28,15 +28,12 @@ animais:  Observable<any>;
   cosineSimilaraty (adotante: any, animais: any){
     let vetorAdotante = Object.keys(adotante).map(key => adotante[key])
     vetorAdotante.splice(1,1)
-    console.log(vetorAdotante)
     animais.forEach(item => {
       let vetorAnimal = Object.keys(item).map(key => item[key]);
       vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
       vetorAnimal.splice(1,1) // retira a propriedade "nome" do objeto para calcular
-      console.log(vetorAnimal)
       let measure = this.similaridadeCosseno(vetorAdotante, vetorAnimal)
       item.similaridade = measure;
-      console.log(item.similaridade)
     })
     
     let listaAnimais = this.ordenar(animais)

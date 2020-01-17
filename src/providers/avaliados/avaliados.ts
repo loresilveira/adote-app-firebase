@@ -26,7 +26,7 @@ export class AvaliadosProvider {
   }
 
   getAll() {
-    return this.db.list(this.PATH, ref => ref.orderByChild('key'))
+    return this.db.list(this.PATH  + "/"+ this.userId)
       .snapshotChanges()
       .map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
@@ -34,13 +34,13 @@ export class AvaliadosProvider {
   }
 
   get(key: string) {
-    return this.db.object(this.PATH + key).snapshotChanges()
+    return this.db.object(this.PATH  + "/"+ this.userId + key).snapshotChanges()
       .map(c => {
         return { key: c.key, ...c.payload.val() };
       });
   }
  
-  save(avaliado: AvaliadoModel) {
+  save(avaliado: any) {
     return new Promise((resolve, reject) => {
       if (avaliado.key) {
         this.db.list(this.PATH + "/"+ this.userId)
@@ -51,7 +51,7 @@ export class AvaliadosProvider {
           .then(() => resolve())
           .catch((e) => reject(e));
       } else {
-        this.db.list(this.PATH)
+        this.db.list(this.PATH + "/"+ this.userId)
           .push({ 
             rating: avaliado.rating, 
             animal_key: avaliado.animal_key,

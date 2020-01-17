@@ -34,7 +34,7 @@
             <b>Sexo: </b> {{animal.sexo}} <b>Moradia ideal:</b> {{animal.moradia}}...
           </p>
         </ion-card-content>
-        <ion-card-content>
+        <ion-card-content> 
           <!-- <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon> -->
           <ionic3-star-rating #rating
             activeIcon = "ios-star"
@@ -42,7 +42,7 @@
             activeColor = "#488aff" 
             defaultColor = "#f4f4f4"
             readonly="false"
-            rating="{{ratingValue}}"
+            rating={{animal.avaliacao}}
             fontSize = "32px"
             (ratingChanged)="logRatingChange($event, animal.key)">
           </ionic3-star-rating>

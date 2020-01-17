@@ -21,7 +21,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 export class HomePage {
 
   adotante : Adotante;
-  animais: any[];
+  
   recomendados :  AnimalModel[];
   user: User = {id: '', email: '', password:''};
   ratingValue = 0;
@@ -31,6 +31,8 @@ export class HomePage {
     rating: 0,
     animal_key: '',
   }
+  avaliados : any[];
+  listaAnimais : AnimalModel[];
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -55,13 +57,22 @@ export class HomePage {
         // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
         this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
         this.provider.getAll().subscribe(res => { 
-          this.animais = res;
+          const lista : any[] = res
+          this.listaAnimais = lista;
+          console.log(this.listaAnimais)
           this.dialogo.fechaCarregando();
-          if(this.adotante && this.animais){
-            this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.animais);
+          if(this.adotante && this.listaAnimais){
+            this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.listaAnimais);
             console.log(this.recomendados)
           }
-          // this.createForm()
+          this.avaliacaoProvider.getAll().subscribe(item =>{
+          this.avaliados = item;
+            console.log(this.avaliados)
+            if(this.listaAnimais && this.avaliados){
+              this.popularAvaliacao(this.listaAnimais, this.avaliados);
+            }
+          })
+          
         })
   
       }else{
@@ -81,10 +92,34 @@ export class HomePage {
   //     });
   // }
 
+  popularAvaliacao(array: any, avaliacoes: any){
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      for (let index = 0; index < avaliacoes.length; index++) {
+        const avaliacao = avaliacoes[index];
+        if(element.key === avaliacao.animal_key){
+          element.avaliacao = avaliacao.rating
+        }else{
+          element.avaliacao = 0
+        }
+      }
+    }
+    console.log(array)
+  }
+
+  createForm() {
+    this.form = this.formBuilder.group({
+      key: [this.avaliacao.key],
+      rating: [this.avaliacao.rating,],
+      animal_key: [this.avaliacao.animal_key,],  
+    });
+  }
+
   salvaAvaliacao(){
       // this.afAuth.authState.take(1).subscribe(auth => 
       //   {this.afDatabase.object(`avaliados/${auth.uid}/aliacoes/`).set(this.avaliacao)})
-      this.avaliacaoProvider.save(this.avaliacao)
+      this.createForm();
+      this.avaliacaoProvider.save(this.form.value)
     
       .catch((e) => {
         console.error(e);
@@ -98,6 +133,7 @@ export class HomePage {
     this.avaliacao.rating = rating;
     this.avaliacao.animal_key = key;
     this.salvaAvaliacao()
+    this.popularAvaliacao(this.recomendados, this.avaliados)
   }
 
   goToPerfil(){
@@ -106,7 +142,7 @@ export class HomePage {
 
   goToListaAnimaisPage(){
    
-    this.navCtrl.push('ListaAnimaisPage', {'animais':this.animais});
+    this.navCtrl.push('ListaAnimaisPage', {'animais':this.listaAnimais});
   }
 
   openMenu() {

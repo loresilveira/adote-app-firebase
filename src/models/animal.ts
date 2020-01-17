@@ -1,5 +1,5 @@
 export interface AnimalModel{
-    key: string;
+    key: any;
     nome : string;
     moradia: string; // 1-Casa / 2-Apartamento
     porte: string; // 1-pequeno / 2-médio / 3-grande
@@ -12,4 +12,5 @@ export interface AnimalModel{
     queda_pelo: string; // 1- Pouco / 2-Médio / 3-Muito
     tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
     similaridade: number;
+    avaliacao: number;
 }
