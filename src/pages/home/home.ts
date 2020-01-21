@@ -92,6 +92,8 @@ export class HomePage {
   //     });
   // }
 
+
+
   popularAvaliacao(array: any, avaliacoes: any){
     for (let index = 0; index < array.length; index++) {
       const element = array[index];
@@ -132,8 +134,12 @@ export class HomePage {
     this.avaliacao.key = key;
     this.avaliacao.rating = rating;
     this.avaliacao.animal_key = key;
-    this.salvaAvaliacao()
-    this.popularAvaliacao(this.recomendados, this.avaliados)
+    this.salvaAvaliacao();
+    this.avaliacaoProvider.getAll().subscribe(item =>{
+      this.avaliados = item;
+      this.popularAvaliacao(this.recomendados, this.avaliados)
+
+    });  
   }
 
   goToPerfil(){
