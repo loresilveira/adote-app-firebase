@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Adotante } from '../../models/adotante';
 import { AutenticacaoProvider } from '../../providers/autenticacao/autenticacao';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 
 @IonicPage()
@@ -14,16 +16,25 @@ export class PreferenciasPage {
   adotante : Adotante;
   profile: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private autenticacaoProvider: AutenticacaoProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private autenticacaoProvider: AutenticacaoProvider, 
+    public afAuth: AngularFireAuth, private afDatabase : AngularFireDatabase) {
     this.adotante = navParams.get('adotante');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PreferenciasPage');
-    this.getPerfil();
-    if(this.profile){
-      console.log(this.profile)
-    }
+    
+  }
+
+  ngOnInit(){
+    this.afAuth.authState.take(1).subscribe(data => {
+      if(data && data.email && data.uid){
+        // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
+       this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(profile => {
+          this.adotante = profile;
+        })
+      }
+    });
   }
 
   getPerfil(){

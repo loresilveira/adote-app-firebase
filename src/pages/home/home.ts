@@ -12,6 +12,7 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 import { AvaliadosProvider } from '../../providers/avaliados/avaliados';
 import { AvaliadoModel } from '../../models/avaliado';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -92,7 +93,11 @@ export class HomePage {
   //     });
   // }
 
-
+  sair(){
+    this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot(LoginPage)})
+    
+ }
+      
 
   popularAvaliacao(animais: any[], avaliacoes: any[]){
     animais.map(item =>{ 

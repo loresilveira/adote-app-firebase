@@ -3,6 +3,8 @@ import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { LoginPage } from '../pages/login/login';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
   templateUrl: 'app.html'
@@ -13,7 +15,8 @@ export class MyApp {
 
   pages:Array <{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+               public firebaseauth: AngularFireAuth,  private afDatabase : AngularFireDatabase,) {
 
     platform.ready().then(() => {
       statusBar.styleDefault();
@@ -39,6 +42,16 @@ export class MyApp {
   openPage(page){
     this.nav.push(page.component);
   }
+
+  
+  sair(){
+     this.firebaseauth.auth.signOut().then(()=>{ this.nav.setRoot(LoginPage)})
+     
+  }
+    
+    
+      
+  
 
 }
 
