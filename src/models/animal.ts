@@ -12,5 +12,5 @@ export interface AnimalModel{
     queda_pelo: string; // 1- Pouco / 2-Médio / 3-Muito
     tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
     similaridade: number;
-    avaliacao: number;
+    avaliacao: 0;
 }

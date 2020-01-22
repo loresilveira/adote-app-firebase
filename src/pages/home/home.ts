@@ -59,17 +59,17 @@ export class HomePage {
         this.provider.getAll().subscribe(res => { 
           const lista : any[] = res
           this.listaAnimais = lista;
-          console.log(this.listaAnimais)
           this.dialogo.fechaCarregando();
           if(this.adotante && this.listaAnimais){
             this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.listaAnimais);
-            console.log(this.recomendados)
           }
           this.avaliacaoProvider.getAll().subscribe(item =>{
           this.avaliados = item;
             console.log(this.avaliados)
+            console.log(this.recomendados)
             if(this.listaAnimais && this.avaliados){
-              this.popularAvaliacao(this.listaAnimais, this.avaliados);
+              console.log('entrou')
+              this.popularAvaliacao(this.recomendados, this.avaliados);
             }
           })
           
@@ -94,19 +94,21 @@ export class HomePage {
 
 
 
-  popularAvaliacao(array: any, avaliacoes: any){
-    for (let index = 0; index < array.length; index++) {
-      const element = array[index];
-      for (let index = 0; index < avaliacoes.length; index++) {
-        const avaliacao = avaliacoes[index];
-        if(element.key === avaliacao.animal_key){
-          element.avaliacao = avaliacao.rating
-        }else{
-          element.avaliacao = 0
+  popularAvaliacao(animais: any[], avaliacoes: any[]){
+    animais.map(item =>{ 
+      item.avaliacao = 0
+    })
+    for (let index = 0; index < animais.length; index++) {
+      const animal = animais[index];
+      if(avaliacoes.length > 0){
+        for (let index = 0; index < avaliacoes.length; index++) {
+          const avaliacao = avaliacoes[index];
+          if(animal.key === avaliacao.key){
+            animal.avaliacao = avaliacao.rating
+          }
         }
       }
     }
-    console.log(array)
   }
 
   createForm() {
@@ -118,19 +120,14 @@ export class HomePage {
   }
 
   salvaAvaliacao(){
-      // this.afAuth.authState.take(1).subscribe(auth => 
-      //   {this.afDatabase.object(`avaliados/${auth.uid}/aliacoes/`).set(this.avaliacao)})
-      this.createForm();
-      this.avaliacaoProvider.save(this.form.value)
-    
+    this.createForm();
+     this.avaliacaoProvider.save(this.form.value)
       .catch((e) => {
         console.error(e);
       })
   }
 
   logRatingChange(rating, key){
-    console.log("changed rating: ",rating);
-    console.log(key)
     this.avaliacao.key = key;
     this.avaliacao.rating = rating;
     this.avaliacao.animal_key = key;
@@ -138,7 +135,6 @@ export class HomePage {
     this.avaliacaoProvider.getAll().subscribe(item =>{
       this.avaliados = item;
       this.popularAvaliacao(this.recomendados, this.avaliados)
-
     });  
   }
 

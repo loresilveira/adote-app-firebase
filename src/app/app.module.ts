@@ -23,6 +23,7 @@ import { ProfilePageModule } from '../pages/profile/profile.module';
 import { PreferenciasPageModule } from '../pages/preferencias/preferencias.module';
 import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { AvaliadosProvider } from '../providers/avaliados/avaliados';
+import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { AvaliadosProvider } from '../providers/avaliados/avaliados';
     DialogoProvider,
     RecomendacaoProvider,
     AvaliadosProvider,
+    AutenticacaoProvider,
    
   ]
 })
