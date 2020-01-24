@@ -5,11 +5,6 @@
         <ion-icon name="menu"></ion-icon>
      </button>
   </ion-buttons>
-  <ion-buttons right>
-    <button ion-button (click)="sair()"> 
-      <ion-icon name="log-out"></ion-icon>
-   </button>
-</ion-buttons>
     <ion-title>
       RecAdoption
     </ion-title>
@@ -29,6 +24,9 @@
     
       <ion-card *ngFor="let animal of recomendados">
         <ion-card-header>
+          <ion-avatar item-start>
+            <img src="/assets/imgs/sasha.png">
+          </ion-avatar>
           {{animal.nome}}
         </ion-card-header>
         <ion-card-content>
@@ -39,9 +37,9 @@
             <b>Sexo: </b> {{animal.sexo}} <b>Moradia ideal:</b> {{animal.moradia}}...
           </p>
         </ion-card-content>
-        <ion-card-content> 
+        <ion-card-content > 
           <!-- <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon> -->
-          <ionic3-star-rating #rating
+          <ionic3-star-rating #rating 
             activeIcon = "ios-star"
             defaultIcon = "ios-star-outline"
             activeColor = "#488aff" 

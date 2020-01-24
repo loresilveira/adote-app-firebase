@@ -5,6 +5,7 @@ import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
 
+
 import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalModel } from '../../models/animal';
