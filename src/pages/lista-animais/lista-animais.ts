@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController, NavParams, IonicPage, AlertController } from 'ionic-angular';
-import { Observable } from 'rxjs/Observable';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalPage } from '../animal/animal';
-import { Adotante } from '../../models/adotante';
-import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
-import { AnimalModel } from '../../models/animal';
 import { DialogoProvider } from '../../providers/dialogo/dialogo';
 
 @IonicPage()
@@ -15,14 +11,7 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 })
 export class ListaAnimaisPage {
 
-
-  resultadoJaccard : any;
-
    animais: any[];
-   animalArray: any[];
-  //  adotante : any[];
-  
-   adotante : Adotante;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private provider: AnimaisProvider,
@@ -38,26 +27,23 @@ export class ListaAnimaisPage {
 
   }
 
+  ionViewWillEnter(){
+    this.carregarListaAnimais();
+  }
+
   ngOnInit(){
+    this.carregarListaAnimais();
+  }
+
+  carregarListaAnimais(){
+    this.dialogo.abreCarregando();
     this.provider.getAll().subscribe(res => { 
       this.animais = res;
       this.dialogo.fechaCarregando();
 
     })
   }
-
   
-
-//  jaccardSimilarity (arr1: any, arr2: any){
-//       let vetor1 = Object.keys(arr1).map(key => arr1[key])
-//       arr2.forEach(item =>{
-//         let vetor2 = Object.keys(item).map(key => item[key]);
-//          vetor2.shift();
-//         let measure = this.recomendacao.distancia(vetor1, vetor2)
-//              console.log(measure)
-//       })  
-//   }
-
   ordenar(lista: any) {
     let ordenados = lista.sort((a,b)=>{
       if(a.similaridade < b.similaridade) {return -1}

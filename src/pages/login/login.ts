@@ -18,7 +18,7 @@ export class LoginPage {
 
   // user = {} as User;
   public user ={
-    email: "", password: ""
+    email: "lorena@user.com", password: "123456"
     
   }
   
