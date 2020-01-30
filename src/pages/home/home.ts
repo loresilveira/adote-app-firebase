@@ -24,7 +24,7 @@ export class HomePage {
 
   adotante : Adotante;
   
-  recomendados :  AnimalModel[];
+  recomendados :  any[];
   user: User = {id: '', email: '', password:''};
   ratingValue = 0;
   form: FormGroup;
@@ -62,18 +62,23 @@ export class HomePage {
           const lista : any[] = res
           this.listaAnimais = lista;
           this.dialogo.fechaCarregando();
+
           if(this.adotante && this.listaAnimais){
-            this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.listaAnimais);
+            const filtrados = this.listaAnimais.filter(animal => animal.porte === this.adotante.porte);
+            console.log(filtrados)
+            // this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.listaAnimais);
+            // console.log(this.recomendados)
           }
-          this.avaliacaoProvider.getAll().subscribe(item =>{
-          this.avaliados = item;
-            console.log(this.avaliados)
-            console.log(this.recomendados)
-            if(this.listaAnimais && this.avaliados){
-              console.log('entrou')
-              this.popularAvaliacao(this.recomendados, this.avaliados);
-            }
-          })
+
+          // this.avaliacaoProvider.getAll().subscribe(item =>{
+          // this.avaliados = item;
+          //   console.log(this.avaliados)
+          //   console.log(this.recomendados)
+          //   if(this.listaAnimais && this.avaliados){
+          //     console.log('entrou')
+          //     this.removerAvaliados(this.recomendados, this.avaliados);
+          //   }
+          // })
           
         })
   
@@ -84,37 +89,28 @@ export class HomePage {
     )
   }
 
-  //  public Sair(): void {
-  //   this.firebaseauth.auth.signOut()
-  //     .then(() => {
-  //       this.exibirToast('Você saiu');
-  //     })
-  //     .catch((erro: any) => {
-  //       this.exibirToast(erro);
-  //     });
-  // }
-
   sair(){
     this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot(LoginPage)})
     
  }
       
 
-  popularAvaliacao(animais: any[], avaliacoes: any[]){
-    animais.map(item =>{ 
-      item.avaliacao = 0
-    })
+ removerAvaliados(animais: any[], avaliacoes: any[]){
+   
     for (let index = 0; index < animais.length; index++) {
       const animal = animais[index];
       if(avaliacoes.length > 0){
         for (let index = 0; index < avaliacoes.length; index++) {
           const avaliacao = avaliacoes[index];
           if(animal.key === avaliacao.key){
-            animal.avaliacao = avaliacao.rating
+            // animal.avaliacao = avaliacao.rating
+           const novaLisa = animais.splice(index,1)
+            console.log(novaLisa)
           }
         }
       }
     }
+    
   }
 
   createForm() {
@@ -140,7 +136,7 @@ export class HomePage {
     this.salvaAvaliacao();
     this.avaliacaoProvider.getAll().subscribe(item =>{
       this.avaliados = item;
-      this.popularAvaliacao(this.recomendados, this.avaliados)
+      // this.popularAvaliacao(this.recomendados, this.avaliados)
     });  
   }
 

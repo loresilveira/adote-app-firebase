@@ -37,7 +37,7 @@ animais:  Observable<any>;
     })
     
     let listaAnimais = this.ordenar(animais)
-    return listaAnimais.slice(0,3)
+    return listaAnimais.slice(0,5)
   
   }
 
