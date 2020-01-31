@@ -41,7 +41,7 @@ animais:  Observable<any>;
   
   }
 
-  ordenar(lista: any) {
+   ordenar(lista: any) {
     let ordenados = lista.sort((a,b)=>{
       if(a.similaridade > b.similaridade) {return -1}
       if(a.similaridade < b.similaridade) {return 1}
@@ -49,5 +49,7 @@ animais:  Observable<any>;
     })
     return ordenados;
   }
+
+
 
 }

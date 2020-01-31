@@ -29,6 +29,7 @@ export class MyApp {
       {title: 'Preferências', component: 'PreferenciasPage'},
       {title: 'Lista de Animais', component: 'ListaAnimaisPage'},
       {title: 'Cadastrar Animal', component: 'AnimalPage'},
+      {title: 'Minhas avaliações', component: 'AvaliadosPage'},
     ]
   }
 

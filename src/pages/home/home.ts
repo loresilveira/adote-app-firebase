@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, ToastController, MenuController, Icon } from 'ionic-angular';
+import { NavController, MenuController, Icon } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
-import {AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
+import {AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../../models/user';
 import { Adotante } from '../../models/adotante';
-
-
 import { RecomendacaoProvider } from '../../providers/recomendacao/recomendacao';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { AnimalModel } from '../../models/animal';
@@ -23,7 +21,6 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   adotante : Adotante;
-  
   recomendados :  any[];
   user: User = {id: '', email: '', password:''};
   ratingValue = 0;
@@ -36,6 +33,7 @@ export class HomePage {
   avaliados : any[];
   listaAnimais : AnimalModel[];
 
+
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase,
@@ -46,17 +44,13 @@ export class HomePage {
     public menuCtrl: MenuController,
     private formBuilder: FormBuilder,) {
     console.log('Hello Home Page')
-
-    
   }
 
   ngOnInit(){
     this.dialogo.abreCarregando();
-    
     this.afAuth.authState.take(1).subscribe(data => {
       if(data && data.email && data.uid){
         this.user.email = data.email;
-        // this.adotante = this.afDatabase.list(`adontante/${data.uid}`)
         this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
         this.provider.getAll().subscribe(res => { 
           const lista : any[] = res
@@ -64,21 +58,20 @@ export class HomePage {
           this.dialogo.fechaCarregando();
 
           if(this.adotante && this.listaAnimais){
-            const filtrados = this.listaAnimais.filter(animal => animal.porte === this.adotante.porte);
-            console.log(filtrados)
-            // this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, this.listaAnimais);
-            // console.log(this.recomendados)
+            this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
+          
           }
 
-          // this.avaliacaoProvider.getAll().subscribe(item =>{
-          // this.avaliados = item;
-          //   console.log(this.avaliados)
-          //   console.log(this.recomendados)
-          //   if(this.listaAnimais && this.avaliados){
-          //     console.log('entrou')
-          //     this.removerAvaliados(this.recomendados, this.avaliados);
-          //   }
-          // })
+          this.avaliacaoProvider.getAll().subscribe(item =>{
+          this.avaliados = item;
+            if(this.avaliados){
+              console.log('entrou')
+              const listaLimpa = this.removerAvaliados(this.listaAnimais, this.avaliados);
+              this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, listaLimpa);
+              console.log(this.recomendados)
+              console.log(this.avaliados);
+            }
+          })
           
         })
   
@@ -89,28 +82,37 @@ export class HomePage {
     )
   }
 
-  sair(){
-    this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot(LoginPage)})
-    
- }
-      
+  filtrar(lista: any, item: any){
+    const filtrados = lista.filter(animal => animal.porte === item.porte || animal.porte === "medio");
+    return filtrados;
+  }
+   
 
  removerAvaliados(animais: any[], avaliacoes: any[]){
-   
-    for (let index = 0; index < animais.length; index++) {
-      const animal = animais[index];
-      if(avaliacoes.length > 0){
-        for (let index = 0; index < avaliacoes.length; index++) {
-          const avaliacao = avaliacoes[index];
-          if(animal.key === avaliacao.key){
-            // animal.avaliacao = avaliacao.rating
-           const novaLisa = animais.splice(index,1)
-            console.log(novaLisa)
-          }
-        }
-      }
-    }
-    
+   animais.map(animal =>{ animal.avaliacao = 0})
+   for (let index = 0; index < avaliacoes.length; index++) {
+     const avaliacao = avaliacoes[index];
+     const animal = animais.find(item => item.key === avaliacao.key)
+     if(animal){
+       const indice = animais.indexOf(animal)
+       animais.splice(indice,1)
+     }
+   }
+  //  animais.map(animal =>{ animal.avaliacao = 0})
+  //   for (let index = 0; index < animais.length; index++) {
+  //     const animal = animais[index];
+  //     if(avaliacoes.length > 0){
+  //       for (let index = 0; index < avaliacoes.length; index++) {
+  //         const avaliacao = avaliacoes[index];
+  //         if(animal.key === avaliacao.key){
+  //           // animal.avaliacao = avaliacao.rating
+  //          animais.splice(index)
+            
+  //         }
+  //       }
+  //     }
+  //   }
+    return animais
   }
 
   createForm() {
@@ -151,6 +153,10 @@ export class HomePage {
 
   openMenu() {
     this.menuCtrl.open();
+  }
+
+  sair(){
+    this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot(LoginPage)})
   }
 
 }

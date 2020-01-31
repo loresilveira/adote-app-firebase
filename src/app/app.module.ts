@@ -24,6 +24,7 @@ import { PreferenciasPageModule } from '../pages/preferencias/preferencias.modul
 import { DialogoProvider } from '../providers/dialogo/dialogo';
 import { AvaliadosProvider } from '../providers/avaliados/avaliados';
 import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
+import { AvaliadosPageModule } from '../pages/avaliados/avaliados.module';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
     }),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    StarRatingModule
+    StarRatingModule,
+    AvaliadosPageModule,
     
   ],
   bootstrap: [IonicApp],
