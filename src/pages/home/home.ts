@@ -33,7 +33,6 @@ export class HomePage {
   avaliados : any[];
   listaAnimais : AnimalModel[];
 
-
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase,
@@ -55,31 +54,18 @@ export class HomePage {
         this.provider.getAll().subscribe(res => { 
           const lista : any[] = res
           this.listaAnimais = lista;
-          this.dialogo.fechaCarregando();
 
           if(this.adotante && this.listaAnimais){
             this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
-          
           }
-
-          this.avaliacaoProvider.getAll().subscribe(item =>{
-          this.avaliados = item;
-            if(this.avaliados){
-              console.log('entrou')
-              const listaLimpa = this.removerAvaliados(this.listaAnimais, this.avaliados);
-              this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, listaLimpa);
-              console.log(this.recomendados)
-              console.log(this.avaliados);
-            }
-          })
-          
+          this.getAvaliados();  
         })
-  
+        this.dialogo.fechaCarregando();
       }else{
         this.dialogo.exibirToast("Não foi possível se autenticar");
       }
-    }
-    )
+    })
+
   }
 
   filtrar(lista: any, item: any){
@@ -115,6 +101,19 @@ export class HomePage {
     return animais
   }
 
+  getAvaliados(){
+    this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
+      this.avaliados = item;
+      console.log(this.avaliados);
+      if(this.avaliados){
+        console.log('entrou')
+        const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
+        this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista);
+        console.log(this.recomendados)
+      }
+    })
+  }
+
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.avaliacao.key],
@@ -136,10 +135,10 @@ export class HomePage {
     this.avaliacao.rating = rating;
     this.avaliacao.animal_key = key;
     this.salvaAvaliacao();
-    this.avaliacaoProvider.getAll().subscribe(item =>{
-      this.avaliados = item;
-      // this.popularAvaliacao(this.recomendados, this.avaliados)
-    });  
+    // this.avaliacaoProvider.getAll().subscribe(item =>{
+    //   this.avaliados = item;
+    //   // this.popularAvaliacao(this.recomendados, this.avaliados)
+    // });  
   }
 
   goToPerfil(){
