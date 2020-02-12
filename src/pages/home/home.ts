@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, Icon } from 'ionic-angular';
+import { NavController, MenuController, Icon, DateTime } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../../models/user';
@@ -23,15 +23,16 @@ export class HomePage {
   adotante : Adotante;
   recomendados :  any[];
   user: User = {id: '', email: '', password:''};
-  ratingValue = 0;
   form: FormGroup;
   public avaliacao : AvaliadoModel = {
     key: '',
     rating: 0,
-    animal_key: '',
+    dataHora: new Date,
   }
   avaliados : any[];
   listaAnimais : AnimalModel[];
+  animal : AnimalModel;
+  ratingValue : number = 0;
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -54,7 +55,6 @@ export class HomePage {
         this.provider.getAll().subscribe(res => { 
           const lista : any[] = res
           this.listaAnimais = lista;
-
           if(this.adotante && this.listaAnimais){
             this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
           }
@@ -105,6 +105,7 @@ export class HomePage {
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       console.log(this.avaliados);
+      console.log(this.adotante)
       if(this.avaliados){
         console.log('entrou')
         const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
@@ -118,7 +119,7 @@ export class HomePage {
     this.form = this.formBuilder.group({
       key: [this.avaliacao.key],
       rating: [this.avaliacao.rating,],
-      animal_key: [this.avaliacao.animal_key,],  
+      dataHora: [this.avaliacao.dataHora,],  
     });
   }
 
@@ -130,24 +131,35 @@ export class HomePage {
       })
   }
 
-  logRatingChange(rating, key){
-    this.avaliacao.key = key;
+  logRatingChange(rating, animal){
+    console.log(this.animal)
+    this.avaliacao.key = animal.key;
     this.avaliacao.rating = rating;
-    this.avaliacao.animal_key = key;
-    this.salvaAvaliacao();
-    // this.avaliacaoProvider.getAll().subscribe(item =>{
-    //   this.avaliados = item;
-    //   // this.popularAvaliacao(this.recomendados, this.avaliados)
-    // });  
+    this.avaliacao.dataHora = new Date;
+    this.salvaAvaliacao(); 
+    console.log(rating)
+    console.log(this.ratingValue)
+    if(rating > this.ratingValue){
+      this.animal = animal;
+      this.ratingValue = rating;
+      this.recomendarComNovoPerfil(this.animal)
+    }
   }
 
-  goToPerfil(){
-    this.navCtrl.push('PreferenciasPage', {'adotante':this.adotante});
+  recomendarComNovoPerfil(animal : AnimalModel){
+    if(animal.similaridade >= this.animal.similaridade){
+      this.adotante.amigavel_crianca = animal.amigavel_crianca;
+      this.adotante.brincadeira = animal.brincadeira;
+      this.adotante.exercicio = animal.exercicio;
+      this.adotante.guarda = animal.guarda;
+      this.adotante.moradia = animal.moradia;
+      this.adotante.pelagem = animal.pelagem;
+      this.adotante.porte = animal.porte;
+      this.adotante.queda_pelo = animal.queda_pelo;
+      this.adotante.sexo = animal.sexo;
+      this.adotante.tendencia_latir = animal.tendencia_latir;
+      console.log(this.adotante)
     }
-
-  goToListaAnimaisPage(){
-   
-    this.navCtrl.push('ListaAnimaisPage', {'animais':this.listaAnimais});
   }
 
   openMenu() {

@@ -47,12 +47,12 @@
             readonly="false"
             rating={{animal.avaliacao}}
             fontSize = "32px"
-            (ratingChanged)="logRatingChange($event, animal.key)">
+            (ratingChanged)="logRatingChange($event, animal)">
           </ionic3-star-rating>
         </ion-card-content>
       </ion-card>
   </ion-list>
     <button ion-button full (click)="getAvaliados()"> 
-      Carregar mais
+      Ver mais
     </button>
 </ion-content>
