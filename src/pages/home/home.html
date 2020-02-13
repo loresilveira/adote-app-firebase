@@ -52,7 +52,14 @@
         </ion-card-content>
       </ion-card>
   </ion-list>
+  <div *ngIf="countRecomendados !== 10">
     <button ion-button full (click)="getAvaliados()"> 
       Ver mais
     </button>
+  </div>
+  <div *ngIf="countRecomendados === 10">
+    <button ion-button full (click)="goToConclusaoPage()"> 
+      Concluir
+    </button>
+  </div>
 </ion-content>

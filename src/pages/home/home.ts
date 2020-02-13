@@ -33,6 +33,7 @@ export class HomePage {
   listaAnimais : AnimalModel[];
   animal : AnimalModel;
   ratingValue : number = 0;
+  countRecomendados : number = 0; 
 
   constructor(public navCtrl: NavController,
     public afAuth: AngularFireAuth,
@@ -50,15 +51,15 @@ export class HomePage {
     this.dialogo.abreCarregando();
     this.afAuth.authState.take(1).subscribe(data => {
       if(data && data.email && data.uid){
+        this.user.id = data.uid;
         this.user.email = data.email;
         this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
         this.provider.getAll().subscribe(res => { 
           const lista : any[] = res
           this.listaAnimais = lista;
           if(this.adotante && this.listaAnimais){
-            this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
-          }
           this.getAvaliados();  
+          }
         })
         this.dialogo.fechaCarregando();
       }else{
@@ -84,34 +85,20 @@ export class HomePage {
        animais.splice(indice,1)
      }
    }
-  //  animais.map(animal =>{ animal.avaliacao = 0})
-  //   for (let index = 0; index < animais.length; index++) {
-  //     const animal = animais[index];
-  //     if(avaliacoes.length > 0){
-  //       for (let index = 0; index < avaliacoes.length; index++) {
-  //         const avaliacao = avaliacoes[index];
-  //         if(animal.key === avaliacao.key){
-  //           // animal.avaliacao = avaliacao.rating
-  //          animais.splice(index)
-            
-  //         }
-  //       }
-  //     }
-  //   }
     return animais
   }
 
   getAvaliados(){
+    this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       console.log(this.avaliados);
-      console.log(this.adotante)
-      if(this.avaliados){
-        console.log('entrou')
-        const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
-        this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista);
-        console.log(this.recomendados)
-      }
+      console.log('atualizando perfil')
+      const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
+      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista);
+      this.atualizaPerfil();
+      this.countRecomendados += 5;
+      console.log(this.countRecomendados)
     })
   }
 
@@ -132,13 +119,10 @@ export class HomePage {
   }
 
   logRatingChange(rating, animal){
-    console.log(this.animal)
     this.avaliacao.key = animal.key;
     this.avaliacao.rating = rating;
     this.avaliacao.dataHora = new Date;
     this.salvaAvaliacao(); 
-    console.log(rating)
-    console.log(this.ratingValue)
     if(rating > this.ratingValue){
       this.animal = animal;
       this.ratingValue = rating;
@@ -162,6 +146,13 @@ export class HomePage {
     }
   }
 
+  atualizaPerfil(){
+    this.afDatabase.object(`adotante/${this.user.id}`).set(this.adotante).then((result) => console.log(result))
+  }
+
+  goToConclusaoPage(){
+    this.navCtrl.push('ConclusaoPage')
+  }
   openMenu() {
     this.menuCtrl.open();
   }
