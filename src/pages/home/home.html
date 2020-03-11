@@ -30,15 +30,17 @@
           {{animal.nome}}
         </ion-card-header>
         <ion-card-content>
+          <p>Porte {{animal.porte}}...{{animal.sexo}} </p>
+          <p> Pelagem {{animal.pelagem}}...  Ideal p/ {{animal.moradia}}</p>
+          <p>Gosta de crianças:{{animal.amigavel_crianca}} </p>
           <p>
-            <b>Porte:</b> {{animal.porte}} ...<b>Pelagem:</b> {{animal.pelagem}}
+            <b>Cão de guarda:</b>{{animal.propGuarda}}
           </p>
-          <p>
-            <b>Sexo: </b> {{animal.sexo}} <b>Moradia ideal:</b> {{animal.moradia}}...
-          </p>
+          <p> <b>Brincalhão:</b>{{animal.brincadeira}} </p>
+          <p> <b>Necessidade de correr:</b>{{animal.exercicio}} </p>
+          <p> <b>Queda de pêlo:</b>{{animal.queda_pelo}} </p>
+          <p> <b>Tende a latir:</b>{{animal.tendencia_latir}} </p>
         </ion-card-content>
-        <ion-card-content > 
-          <!-- <ion-icon *ngFor="let estrelas of stars" name="star-outline"></ion-icon> -->
           <ionic3-star-rating #rating 
             activeIcon = "ios-star"
             defaultIcon = "ios-star-outline"
@@ -49,7 +51,6 @@
             fontSize = "32px"
             (ratingChanged)="logRatingChange($event, animal)">
           </ionic3-star-rating>
-        </ion-card-content>
       </ion-card>
   </ion-list>
   <div *ngIf="countRecomendados !== 10">

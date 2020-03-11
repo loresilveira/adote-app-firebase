@@ -26,7 +26,12 @@ export class LoginPage {
               private toast: ToastController,public firebaseauth: AngularFireAuth) {
   }
 
- 
+  ionViewDidLoad(){
+    if(this.user){
+      this.login()
+    }
+  }
+
   async login(){
 
     try{

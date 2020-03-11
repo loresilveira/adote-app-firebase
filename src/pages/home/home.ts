@@ -21,7 +21,7 @@ import { LoginPage } from '../login/login';
 export class HomePage {
 
   adotante : Adotante;
-  recomendados :  any[];
+  recomendados :  AnimalModel[];
   user: User = {id: '', email: '', password:''};
   form: FormGroup;
   public avaliacao : AvaliadoModel = {
@@ -89,17 +89,26 @@ export class HomePage {
   }
 
   getAvaliados(){
-    this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
+    // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       console.log(this.avaliados);
       console.log('atualizando perfil')
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
-      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista);
+      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista); 
       this.atualizaPerfil();
       this.countRecomendados += 5;
       console.log(this.countRecomendados)
     })
+  }
+
+
+  tratarRecomendados(lista: any){
+    const recomendados = lista.forEach(item => {
+      item.propGuarda = item.guarda === "guarda" ? "Sim" : "Não";
+    });
+    console.log(recomendados)
+    return recomendados;
   }
 
   createForm() {

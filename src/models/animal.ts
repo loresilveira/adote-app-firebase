@@ -13,4 +13,7 @@ export interface AnimalModel{
     tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
     similaridade: number;
     avaliacao: 0;
+
+    /* Apenas exibicao*/
+    propGuarda : string;
 }
