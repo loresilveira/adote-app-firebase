@@ -29,16 +29,22 @@ animais:  Observable<any>;
     let vetorAdotante = Object.keys(adotante).map(key => adotante[key])
     vetorAdotante.splice(1,1)
     animais.forEach(item => {
-      let vetorAnimal = Object.keys(item).map(key => item[key]);
-      vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
-      vetorAnimal.splice(1,1) // retira a propriedade "nome" do objeto para calcular
-      let measure = this.similaridadeCosseno(vetorAdotante, vetorAnimal)
+      const objAnimal = this.trataObjeto(item);
+      let measure = this.similaridadeCosseno(vetorAdotante, objAnimal)
       item.similaridade = measure;
     })
     
     let listaAnimais = this.ordenar(animais)
     return listaAnimais.slice(0,5)
   
+  }
+
+  trataObjeto(item:any) {
+    let vetorAnimal = Object.keys(item).map(key => item[key]);
+      vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
+      vetorAnimal.splice(1,1); // retira a propriedade "nome" do objeto para calcular
+      vetorAnimal.splice(8,8); // retira as propriedades "prop_" usadas no card
+      return vetorAnimal
   }
 
    ordenar(lista: any) {

@@ -14,6 +14,12 @@ export interface AnimalModel{
     similaridade: number;
     avaliacao: 0;
 
-    /* Apenas exibicao*/
-    propGuarda : string;
+    prop_porte: string;
+    prop_sexo: string;
+    prop_guarda : string;
+    prop_amigavel_crianca : string;
+    prop_brincadeira: string;
+    prop_exercicio: string;
+    prop_queda_pelo: string;
+    prop_tendencia_latir: string;
 }

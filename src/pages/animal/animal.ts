@@ -56,7 +56,14 @@ export class AnimalPage {
       exercicio: [this.animal.exercicio,],
       queda_pelo: [this.animal.queda_pelo,],
       tendencia_latir: [this.animal.tendencia_latir],
-  
+      prop_porte : [this.animal.porte === "medio" ? "médio" : this.animal.porte],
+      prop_sexo : [this.animal.sexo === "femea" ? "fêmea" : "macho"],
+      prop_guarda: [this.animal.guarda === "guarda" ? "sim" : "não"],
+      prop_amigavel_crianca: [this.animal.amigavel_crianca === "amigavel" ? "sim" : "não"],
+      prop_brincadeira: [this.animal.brincadeira === "brincalhao" ? "sim" : "não"],
+      prop_exercicio: [this.animal.exercicio === "ativo" ? "sim" : "não"],
+      prop_queda_pelo: [this.animal.queda_pelo === "queda_pelo" ? "sim" : "não"],
+      prop_tendencia_latir: [this.animal.tendencia_latir === "tende_latir" ? "sim" : "não"]
     });
   }
 
