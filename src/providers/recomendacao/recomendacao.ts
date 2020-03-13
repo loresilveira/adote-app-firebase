@@ -40,10 +40,11 @@ animais:  Observable<any>;
   }
 
   trataObjeto(item:any) {
+    console.log(item)  
     let vetorAnimal = Object.keys(item).map(key => item[key]);
-      vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
-      vetorAnimal.splice(1,1); // retira a propriedade "nome" do objeto para calcular
-      vetorAnimal.splice(8,8); // retira as propriedades "prop_" usadas no card
+    vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
+    vetorAnimal.splice(1,1); // retira a propriedade "nome" do objeto para calcular
+      // vetorAnimal.splice(8,8); // retira as propriedades "prop_" usadas no card
       return vetorAnimal
   }
 
@@ -51,6 +52,15 @@ animais:  Observable<any>;
     let ordenados = lista.sort((a,b)=>{
       if(a.similaridade > b.similaridade) {return -1}
       if(a.similaridade < b.similaridade) {return 1}
+      return 0;
+    })
+    return ordenados;
+  }
+
+  ordemAlfabetica(lista:any){
+    let ordenados = lista.sort((a,b) =>{
+      if(a < b) {return -1}
+      if(a > b) {return 1}
       return 0;
     })
     return ordenados;
