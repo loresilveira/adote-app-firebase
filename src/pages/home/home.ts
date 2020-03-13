@@ -102,15 +102,6 @@ export class HomePage {
     })
   }
 
-
-  tratarRecomendados(lista: any){
-    const recomendados = lista.forEach(item => {
-      item.propGuarda = item.guarda === "guarda" ? "Sim" : "Não";
-    });
-    console.log(recomendados)
-    return recomendados;
-  }
-
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.avaliacao.key],

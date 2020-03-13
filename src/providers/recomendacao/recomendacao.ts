@@ -35,17 +35,17 @@ animais:  Observable<any>;
     })
     
     let listaAnimais = this.ordenar(animais)
+    console.log(listaAnimais)
     return listaAnimais.slice(0,5)
   
   }
 
   trataObjeto(item:any) {
-    console.log(item)  
     let vetorAnimal = Object.keys(item).map(key => item[key]);
     vetorAnimal.shift(); // retira a propriedade "key" do objeto para calcular
-    vetorAnimal.splice(1,1); // retira a propriedade "nome" do objeto para calcular
-      // vetorAnimal.splice(8,8); // retira as propriedades "prop_" usadas no card
-      return vetorAnimal
+    vetorAnimal.splice(5,1); // retira a propriedade "nome" do objeto para calcular
+    vetorAnimal.splice(7,8); // retira as propriedades "prop_" usadas no card
+    return vetorAnimal
   }
 
    ordenar(lista: any) {

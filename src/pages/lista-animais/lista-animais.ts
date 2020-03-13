@@ -27,10 +27,6 @@ export class ListaAnimaisPage {
 
   }
 
-  ionViewWillEnter(){
-    this.carregarListaAnimais();
-  }
-
   ngOnInit(){
     this.carregarListaAnimais();
   }

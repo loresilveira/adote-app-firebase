@@ -30,16 +30,16 @@
           {{animal.nome}}
         </ion-card-header>
         <ion-card-content>
-          <p>Porte {{animal.porte}}...{{animal.sexo}} </p>
+          <p>Porte {{animal.prop_porte}}...{{animal.prop_sexo}} </p>
           <p> Pelagem {{animal.pelagem}}...  Ideal p/ {{animal.moradia}}</p>
-          <p>Gosta de crianças: {{animal.amigavel_crianca}} </p>
+          <p>Gosta de crianças: {{animal.prop_amigavel_crianca}} </p>
           <p>
-            <b>Cão de guarda:</b>{{animal.propGuarda}}
+            <b>Cão de guarda:</b> {{animal.prop_guarda}}
           </p>
-          <p> <b>Brincalhão:</b>{{animal.brincadeira}} </p>
-          <p> <b>Necessidade de correr:</b>{{animal.exercicio}} </p>
-          <p> <b>Queda de pêlo:</b>{{animal.queda_pelo}} </p>
-          <p> <b>Tende a latir:</b>{{animal.tendencia_latir}} </p>
+          <p> <b>Brincalhão:</b> {{animal.prop_brincadeira}} </p>
+          <p> <b>Necessidade de correr:</b> {{animal.prop_exercicio}} </p>
+          <p> <b>Queda de pêlo:</b> {{animal.prop_queda_pelo}} </p>
+          <p> <b>Tende a latir:</b> {{animal.prop_tendencia_latir}} </p>
         </ion-card-content>
           <ionic3-star-rating #rating 
             activeIcon = "ios-star"
