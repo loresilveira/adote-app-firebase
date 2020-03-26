@@ -7,98 +7,16 @@
 
 <ion-content padding *ngIf="adotante != null">
   <ion-item>
-      <ion-label floating>Nome:</ion-label>
-      <ion-input [(ngModel)]="adotante.nome"></ion-input>
+      <p>Porte {{adotante.prop_porte}}...{{adotante.prop_sexo}} </p>
+      <p> Pelagem {{adotante.pelagem}}...  Ideal p/ {{adotante.moradia}}</p>
+      <p>Gosta de crianças: {{adotante.prop_amigavel_crianca}} </p>
+      <p>
+        <b>Cão de guarda:</b> {{adotante.prop_guarda}}
+      </p>
+      <p> <b>Brincalhão:</b> {{adotante.prop_brincadeira}} </p>
+      <p> <b>Necessidade de correr:</b> {{adotante.prop_exercicio}} </p>
+      <p> <b>Queda de pêlo:</b> {{adotante.prop_queda_pelo}} </p>
+      <p> <b>Tende a latir:</b> {{adotante.prop_tendencia_latir}} </p>
   </ion-item>
-
-  <ion-item>
-    <ion-label floating>Onde você mora:</ion-label>
-    <ion-select [(ngModel)]="adotante.moradia">
-      <ion-option value="casa">Casa</ion-option>
-      <ion-option value="apto">Apartamento</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Porte do animal:</ion-label>
-    <ion-select [(ngModel)]="adotante.porte">
-      <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-      <ion-option value="pequeno">Pequeno</ion-option>
-      <ion-option value="medio">Médio</ion-option>
-      <ion-option value="grande">Grande</ion-option>
-    </ion-select>
-  </ion-item>
-
-   <ion-item>
-    <ion-label floating>Pelagem</ion-label>
-    <ion-select [(ngModel)]="adotante.pelagem">
-      <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-      <ion-option value="curta">Curta</ion-option>
-      <ion-option value="longa">Longa</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Sexo</ion-label>
-    <ion-select [(ngModel)]="adotante.sexo">
-      <!-- <ion-option value="nao_sei"> Sem preferência</ion-option> -->
-        <ion-option value="femea">Fêmea</ion-option>
-        <ion-option value="macho">Macho</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label floating>Possui crianças menores de 10 anos em casa?</ion-label>
-    <ion-select [(ngModel)]="adotante.amigavel_crianca">
-      <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-        <ion-option value="amigavel">Sim</ion-option>
-        <ion-option value="nao_amigavel">Não</ion-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-      <ion-label floating>Pretende adotar o pet como cão de guarda?</ion-label>
-      <ion-select [(ngModel)]="adotante.guarda">
-        <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-          <ion-option value="guarda">Sim</ion-option>
-          <ion-option value="nao_guarda">Não</ion-option>
-      </ion-select>
-    </ion-item>
-
-     <ion-item>
-        <ion-label floating>Pet brincalhão?</ion-label>
-        <ion-select [(ngModel)]="adotante.brincadeira">
-          <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-            <ion-option value="brincalhao">Sim</ion-option>
-            <ion-option value="nao_brincalhao">Não</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label floating>Disponibilidade para passear com seu novo amigo?</ion-label>
-        <ion-select [(ngModel)]="adotante.exercicio">
-          <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-            <ion-option value="ativo">Sim</ion-option>
-            <ion-option value="nao_ativo">Não</ion-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-          <ion-label floating> Queda de pêlos é um problema?</ion-label>
-          <ion-select [(ngModel)]="adotante.queda_pelo" >
-            <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-              <ion-option value="nao_queda_pelo">Sim</ion-option>
-              <ion-option value="queda_pelo">Não</ion-option>
-          </ion-select>
-        </ion-item>
-
-        <ion-item>
-            <ion-label floating> Latidos são um problema?</ion-label>
-            <ion-select [(ngModel)]="adotante.tendencia_latir">
-              <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
-                <ion-option value="nao_tende_latir">Sim</ion-option>
-                <ion-option value="tende_latir">Não</ion-option>
-            </ion-select>
-        </ion-item>
   
 </ion-content>

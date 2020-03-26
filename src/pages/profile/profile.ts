@@ -14,6 +14,7 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 export class ProfilePage {
 
   adotante = {} as Adotante;
+  flagEditar = false;
   
 
   constructor(private afAuth : AngularFireAuth, private afDatabase : AngularFireDatabase, 
@@ -21,12 +22,28 @@ export class ProfilePage {
   }
 
   ngOnInit(){
-    this.dialogoProvider.exibirAlert('Preencha os campos de acordo com seus estilo de vida, para oferecermos o melhor amigo ideal para você!')
+    this.verificaProfile();
   }
 
   createProfile(){
     this.afAuth.authState.take(1).subscribe(auth => 
       {this.afDatabase.object(`adotante/${auth.uid}`).set(this.adotante).then(() => this.navCtrl.setRoot(HomePage))})
+  }
+
+  verificaProfile(){
+    this.afAuth.authState.take(1).subscribe(data => {
+      if(data && data.email && data.uid){
+       this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(profile => {
+         if(profile) {
+           console.log(profile); this.adotante = profile;
+           this.flagEditar = true;
+          }else{
+            this.dialogoProvider.exibirAlert('Preencha os campos de acordo com seus estilo de vida, para oferecermos o melhor amigo ideal para você!')
+
+          }
+        })
+      }
+    });
   }
 
 

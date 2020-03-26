@@ -102,7 +102,9 @@
             </ion-item>
   
   <div class="botoes">
-      <button  ion-button block (click)="createProfile()">Cadastrar</button>
+      <button *ngIf="!flagEditar"  ion-button block (click)="createProfile()">Cadastrar</button>
+      <button *ngIf="flagEditar"  ion-button block (click)="createProfile()">Atualizar</button>
+
   </div>
     
   </ion-content>
