@@ -53,12 +53,12 @@
           </ionic3-star-rating>
       </ion-card>
   </ion-list>
-  <div *ngIf="countRecomendados !== 10">
+  <div *ngIf="countRecomendados !== 15">
     <button ion-button full (click)="getAvaliados()"> 
       Ver mais
     </button>
   </div>
-  <div *ngIf="countRecomendados === 10">
+  <div *ngIf="countRecomendados === 15">
     <button ion-button full (click)="goToConclusaoPage()"> 
       Concluir
     </button>

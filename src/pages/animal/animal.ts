@@ -23,7 +23,8 @@ export class AnimalPage {
     // this.createForm();
 
     // // maneira 2
-    this.animal = { };
+
+    this.animal = {};
     this.createForm();
 
     if (this.navParams.data.key) {
@@ -66,8 +67,10 @@ export class AnimalPage {
       prop_tendencia_latir: [this.animal.tendencia_latir === "tende_latir" ? "sim" : "não"]
     });
   }
+ 
 
   onSubmit() {
+    console.log(this.form)
     if (this.form.valid) {
       this.provider.save(this.form.value)
         .then(() => {

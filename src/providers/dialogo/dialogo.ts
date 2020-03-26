@@ -35,6 +35,15 @@ export class DialogoProvider {
     toast.present();
   }
 
+  exibirAlert(mensagem: string){
+    const alert = this.alert.create({
+      title: 'Atenção',
+      subTitle: mensagem,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
     
 }
 

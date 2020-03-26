@@ -53,8 +53,15 @@ export class HomePage {
       if(data && data.email && data.uid){
         this.user.id = data.uid;
         this.user.email = data.email;
-        this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {this.adotante = res})
+        this.afDatabase.object<Adotante>(`adotante/${data.uid}`).valueChanges().subscribe(res => {
+          if(res){
+            this.adotante = res;
+          } else{
+            this.navCtrl.push('ProfilePage')
+          }
+        })
         this.provider.getAll().subscribe(res => { 
+          console.log(res)
           const lista : any[] = res
           this.listaAnimais = lista;
           if(this.adotante && this.listaAnimais){
@@ -89,7 +96,7 @@ export class HomePage {
   }
 
   getAvaliados(){
-    // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
+    this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       console.log(this.avaliados);

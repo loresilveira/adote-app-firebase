@@ -18,7 +18,7 @@ export class LoginPage {
 
   // user = {} as User;
   public user ={
-    email: "", password: ""
+    email: "lorena@user.com", password: "123456"
     
   }
   
@@ -27,9 +27,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad(){
-    if(this.user){
-      this.login()
-    }
+    if(this.user) this.login();
   }
 
   async login(){
