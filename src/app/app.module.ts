@@ -3,6 +3,7 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -26,6 +27,7 @@ import { AvaliadosProvider } from '../providers/avaliados/avaliados';
 import { AutenticacaoProvider } from '../providers/autenticacao/autenticacao';
 import { AvaliadosPageModule } from '../pages/avaliados/avaliados.module';
 import { ConclusaoPageModule } from '../pages/conclusao/conclusao.module';
+import { ApresentacaoPageModule } from '../pages/apresentacao/apresentacao.module';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { ConclusaoPageModule } from '../pages/conclusao/conclusao.module';
     StarRatingModule,
     AvaliadosPageModule,
     ConclusaoPageModule,
+    ApresentacaoPageModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -72,6 +75,7 @@ import { ConclusaoPageModule } from '../pages/conclusao/conclusao.module';
     RecomendacaoProvider,
     AvaliadosProvider,
     AutenticacaoProvider,
+    Camera
    
   ]
 })
