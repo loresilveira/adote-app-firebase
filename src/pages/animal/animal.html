@@ -159,11 +159,23 @@
       <div [hidden]="!form.controls.tendencia_latir.errors.required">
         O campo é obrigatório
       </div>
-    </ion-item>
-  
+    </ion-item> 
 
+    <div *ngIf="flagInserirFoto">
+      <div class="foto">
+        <p>Selecione a foto do cachorro</p>
+        <div *ngIf="photo" class="foto"> <img src="{{ photo }}" /> </div>
+      </div> 
+      
+      <div class="alterarImagem">
+        <button ion-button block  (click)="getImage()">Carregar foto</button>
+      </div>
+    </div>
+    
+  
     <div padding>
       <button ion-button block type="submit" [disabled]="!form.valid" (click)="onSubmit()">Salvar</button>
     </div>
   </form>
+
 </ion-content>

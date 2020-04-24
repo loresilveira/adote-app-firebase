@@ -24,15 +24,19 @@
     
       <ion-card *ngFor="let animal of recomendados">
         <ion-card-header>
-          <ion-avatar item-start>
-            <!-- <img src="/assets/imgs/sasha.png"> -->
+          <ion-avatar color="primary"  item-start (click)="goToPageAlteraFoto()" >
+            <div class="avatar">   
+              <div>
+                <img src="https://firebasestorage.googleapis.com/v0/b/fir-adote-app.appspot.com/o/pictures%2F-M392DyjOWpBU-SNdPXF?alt=media&token=afaea2d3-7b7b-4928-b8b5-21790a058cc3" /> 
+              </div>        
+            </div>
           </ion-avatar>
           {{animal.nome}}
         </ion-card-header>
         <ion-card-content>
-          <p>Porte {{animal.prop_porte}}...{{animal.prop_sexo}} </p>
+          <p>Porte {{animal.porte}}...{{animal.prop_sexo}} </p>
           <p> Pelagem {{animal.pelagem}}...  Ideal p/ {{animal.moradia}}</p>
-          <p>Gosta de crianças: {{animal.prop_amigavel_crianca}} </p>
+          <p><b>Gosta de crianças:</b> {{animal.prop_amigavel_crianca}} </p>
           <p>
             <b>Cão de guarda:</b> {{animal.prop_guarda}}
           </p>

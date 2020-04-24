@@ -4,15 +4,20 @@ import { AngularFireDatabase } from 'angularfire2/database';
 // import { map } from 'rxjs-compat/operators/map';
 import 'rxjs/add/operator/map'
 import { LoadingController } from 'ionic-angular';
+import { storage } from 'firebase';
+import { AnimalPage } from '../../pages/animal/animal';
+import firebase from 'firebase';
 
 @Injectable()
 export class AnimaisProvider {
 
   private PATH = 'animais/';
   public loading;
+  private user;
   constructor(private db: AngularFireDatabase,
     public loadingCtrl:LoadingController,) {
     console.log('Hello AnimaisProvider Provider');
+    this.user = firebase.auth().currentUser.uid;
   }
 
   getAll() {
@@ -53,7 +58,7 @@ export class AnimaisProvider {
             prop_exercicio: animal.prop_exercicio,
             prop_queda_pelo: animal.prop_queda_pelo,
             prop_tendencia_latir: animal.prop_tendencia_latir,
-
+            foto: animal.foto
           })
           .then(() => resolve())
           .catch((e) => reject(e));
@@ -79,6 +84,7 @@ export class AnimaisProvider {
             prop_exercicio: animal.prop_exercicio,
             prop_queda_pelo: animal.prop_queda_pelo,
             prop_tendencia_latir: animal.prop_tendencia_latir,
+            foto: animal.foto
 
            })
           .then(() => resolve());
@@ -90,4 +96,22 @@ export class AnimaisProvider {
     return this.db.list(this.PATH).remove(key);
   }
 
-}
+  setFotoAnimal(imageName: any, image: any){
+    const fotoAnimal = storage().ref('pictures' + '/' + imageName);
+    fotoAnimal.putString(image, 'data_url').then((saveFoto)=>{ 
+      const url =  saveFoto.downloadURL;
+
+      console.log('url'+url)
+      return url;
+    })
+  }  
+
+  getFotoAnimal(imageName: any){
+    const imagem = storage().ref().child('pictures' + '/' + imageName);
+    return imagem.getDownloadURL().then((url) =>{
+      const urlImage = url;    
+      return urlImage; 
+    })
+  }
+
+} 

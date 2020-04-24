@@ -34,9 +34,9 @@ export class RegisterPage {
 
   async register() {
      try{
-       const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-       console.log(result);
-       this.navCtrl.push(ProfilePage);
+      //  const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+      //  console.log(result);
+       this.navCtrl.push('ApresentacaoPage');
      }catch(e){
        console.error(e);    
    }

@@ -66,9 +66,10 @@ export class HomePage {
           this.listaAnimais = lista;
           if(this.adotante && this.listaAnimais){
           this.getAvaliados();  
+          this.dialogo.fechaCarregando();
           }
         })
-        this.dialogo.fechaCarregando();
+        
       }else{
         this.dialogo.exibirToast("Não foi possível se autenticar");
       }
@@ -96,14 +97,22 @@ export class HomePage {
   }
 
   getAvaliados(){
-    this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
+    // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       console.log(this.avaliados);
-      console.log('atualizando perfil')
+      
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
-      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista); 
+      /** Recomendação */
+      
+      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
       this.atualizaPerfil();
+      console.log('atualizando perfil')
+
+       /** Sem recomendação */
+      //  this.recomendados = this.recomendacao.recomendacaoRandom(novaLista).slice(0,5);
+       /** */
+
       this.countRecomendados += 5;
       console.log(this.countRecomendados)
     })

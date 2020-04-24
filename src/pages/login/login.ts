@@ -27,7 +27,7 @@ export class LoginPage {
   }
 
   ionViewDidLoad(){
-    if(this.user) this.login();
+    // if(this.user) this.login();
   }
 
   async login(){

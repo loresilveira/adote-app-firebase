@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimaisProvider } from '../../providers/animais/animais';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { storage } from 'firebase';
+
 
 @IonicPage()
 @Component({
@@ -12,11 +15,15 @@ export class AnimalPage {
   title: string;
   form: FormGroup;
   animal: any;
+  photo: string = '';
+  novaPhoto: string = '';
+  flagInserirFoto = false;
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, private provider: AnimaisProvider,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private camera: Camera) {
 
     // // maneira 1
     // this.animal = this.navParams.data.animal || { };
@@ -30,8 +37,9 @@ export class AnimalPage {
     if (this.navParams.data.key) {
       const subscribe = this.provider.get(this.navParams.data.key).subscribe((c: any) => {
         subscribe.unsubscribe();
-
+        console.log(c)
         this.animal = c;
+        this.provider.getFotoAnimal(this.animal.key).then(url =>{ console.log(url);this.photo = url})
         this.createForm();
       })
     }
@@ -39,8 +47,16 @@ export class AnimalPage {
     this.setupPageTitle();
   }
 
+  ionViewDidLoad(){
+    this.flagInserirFoto = true;
+  }
+
   private setupPageTitle() {
     this.title = this.navParams.data.key ? 'Alterando Animal' : 'Novo animal';
+  }
+
+  converteBas64(img: any){
+    return 'data:image/jpeg;base64,' + img;
   }
 
   createForm() {
@@ -64,18 +80,44 @@ export class AnimalPage {
       prop_brincadeira: [this.animal.brincadeira === "brincalhao" ? "sim" : "não"],
       prop_exercicio: [this.animal.exercicio === "ativo" ? "sim" : "não"],
       prop_queda_pelo: [this.animal.queda_pelo === "queda_pelo" ? "sim" : "não"],
-      prop_tendencia_latir: [this.animal.tendencia_latir === "tende_latir" ? "sim" : "não"]
+      prop_tendencia_latir: [this.animal.tendencia_latir === "tende_latir" ? "sim" : "não"],
+      foto: [this.animal.foto],
+     
     });
   }
  
+  getImage(){
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: true,
+      allowEdit: false
+    }
+
+    this.camera.getPicture(options)
+      .then((imageData) => {
+        const base64image = 'data:image/jpeg;base64,' + imageData;
+        this.photo = base64image;
+        this.novaPhoto = base64image;
+      }, (error) => {
+        console.error(error);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+  }
 
   onSubmit() {
-    console.log(this.form)
     if (this.form.valid) {
+      if(this.novaPhoto !== '') {
+        this.animal.foto = this.provider.setFotoAnimal(this.animal.key, this.photo);
+        console.log('entrou')
+      }
       this.provider.save(this.form.value)
         .then(() => {
           this.toast.create({ message: 'Animal salvo com sucesso.', duration: 3000 }).present();
-          this.navCtrl.pop();
+          
         })
         .catch((e) => {
           this.toast.create({ message: 'Erro ao salvar o animal.', duration: 3000 }).present();

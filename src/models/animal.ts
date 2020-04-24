@@ -13,6 +13,8 @@ export interface AnimalModel{
     tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
     similaridade: number;
     avaliacao: 0;
+    foto: string;
+
 
     prop_porte: string;
     prop_sexo: string;
@@ -22,4 +24,5 @@ export interface AnimalModel{
     prop_exercicio: string;
     prop_queda_pelo: string;
     prop_tendencia_latir: string;
+
 }
