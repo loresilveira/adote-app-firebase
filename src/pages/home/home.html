@@ -24,26 +24,33 @@
     
       <ion-card *ngFor="let animal of recomendados">
         <ion-card-header>
-          <ion-avatar color="primary"  item-start (click)="goToPageAlteraFoto()" >
-            <div class="avatar">   
-              <div>
-                <img src="https://firebasestorage.googleapis.com/v0/b/fir-adote-app.appspot.com/o/pictures%2F-M392DyjOWpBU-SNdPXF?alt=media&token=afaea2d3-7b7b-4928-b8b5-21790a058cc3" /> 
-              </div>        
-            </div>
-          </ion-avatar>
-          {{animal.nome}}
+            <div class="nome">   
+              {{animal.nome}}
+              <div class="foto" *ngIf="animal.foto">
+                <img src={{animal.foto}} /> 
+              </div>    
+              <div class="foto" *ngIf="!animal.foto">
+                <img src="/assets/imgs/semfoto.svg" /> 
+              </div>  
+            </div> 
+           
+          
         </ion-card-header>
         <ion-card-content>
-          <p>Porte {{animal.porte}}...{{animal.prop_sexo}} </p>
-          <p> Pelagem {{animal.pelagem}}...  Ideal p/ {{animal.moradia}}</p>
-          <p><b>Gosta de crianças:</b> {{animal.prop_amigavel_crianca}} </p>
-          <p>
-            <b>Cão de guarda:</b> {{animal.prop_guarda}}
-          </p>
-          <p> <b>Brincalhão:</b> {{animal.prop_brincadeira}} </p>
-          <p> <b>Necessidade de correr:</b> {{animal.prop_exercicio}} </p>
-          <p> <b>Queda de pêlo:</b> {{animal.prop_queda_pelo}} </p>
-          <p> <b>Tende a latir:</b> {{animal.prop_tendencia_latir}} </p>
+          <div class="fonte">
+            <div class="principais">
+              <p><b>{{animal.prop_sexo}}</b></p>
+              <p><b>Pelagem {{animal.pelagem}}</b></p>
+              <p><b>Ideal p/ {{animal.moradia}}</b></p>
+            </div>
+           
+            <p><b>Brinca com crianças:</b> {{animal.prop_amigavel_crianca}} </p>
+            <p> <b>Cão de guarda:</b> {{animal.prop_guarda}}</p>
+            <p> <b>Brincalhão:</b> {{animal.prop_brincadeira}} </p>
+            <p> <b>Necessidade de correr:</b> {{animal.prop_exercicio}} </p>
+            <p> <b>Queda de pêlo:</b> {{animal.prop_queda_pelo}} </p>
+            <p> <b>Tende a latir:</b> {{animal.prop_tendencia_latir}} </p>
+          </div>
         </ion-card-content>
           <ionic3-star-rating #rating 
             activeIcon = "ios-star"

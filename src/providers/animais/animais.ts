@@ -58,7 +58,7 @@ export class AnimaisProvider {
             prop_exercicio: animal.prop_exercicio,
             prop_queda_pelo: animal.prop_queda_pelo,
             prop_tendencia_latir: animal.prop_tendencia_latir,
-            foto: animal.foto
+            foto: animal.foto,
           })
           .then(() => resolve())
           .catch((e) => reject(e));
@@ -84,7 +84,7 @@ export class AnimaisProvider {
             prop_exercicio: animal.prop_exercicio,
             prop_queda_pelo: animal.prop_queda_pelo,
             prop_tendencia_latir: animal.prop_tendencia_latir,
-            foto: animal.foto
+            foto: animal.foto,
 
            })
           .then(() => resolve());
@@ -99,10 +99,7 @@ export class AnimaisProvider {
   setFotoAnimal(imageName: any, image: any){
     const fotoAnimal = storage().ref('pictures' + '/' + imageName);
     fotoAnimal.putString(image, 'data_url').then((saveFoto)=>{ 
-      const url =  saveFoto.downloadURL;
-
-      console.log('url'+url)
-      return url;
+      return 'url';
     })
   }  
 

@@ -96,11 +96,12 @@ export class HomePage {
     return animais
   }
 
+
+
   getAvaliados(){
     // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
-      console.log(this.avaliados);
       
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
       /** Recomendação */

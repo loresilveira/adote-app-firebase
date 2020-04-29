@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { storage } from 'firebase';
+import { AnimalModel } from '../../models/animal';
 
 
 @IonicPage()
@@ -15,7 +16,6 @@ export class AnimalPage {
   title: string;
   form: FormGroup;
   animal: any;
-  photo: string = '';
   novaPhoto: string = '';
   flagInserirFoto = false;
 
@@ -39,8 +39,11 @@ export class AnimalPage {
         subscribe.unsubscribe();
         console.log(c)
         this.animal = c;
-        this.provider.getFotoAnimal(this.animal.key).then(url =>{ console.log(url);this.photo = url})
-        this.createForm();
+        this.provider.getFotoAnimal(this.animal.key).then(url=>{
+          this.animal.foto = url;      
+          this.createForm();
+
+        })
       })
     }
 
@@ -98,7 +101,7 @@ export class AnimalPage {
     this.camera.getPicture(options)
       .then((imageData) => {
         const base64image = 'data:image/jpeg;base64,' + imageData;
-        this.photo = base64image;
+        this.animal.foto = base64image;
         this.novaPhoto = base64image;
       }, (error) => {
         console.error(error);
@@ -111,12 +114,13 @@ export class AnimalPage {
   onSubmit() {
     if (this.form.valid) {
       if(this.novaPhoto !== '') {
-        this.animal.foto = this.provider.setFotoAnimal(this.animal.key, this.photo);
+        this.provider.setFotoAnimal(this.animal.key, this.animal.foto);
         console.log('entrou')
       }
       this.provider.save(this.form.value)
         .then(() => {
           this.toast.create({ message: 'Animal salvo com sucesso.', duration: 3000 }).present();
+          this.navCtrl.pop();
           
         })
         .catch((e) => {

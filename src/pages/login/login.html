@@ -1,16 +1,15 @@
 <ion-header>
   <ion-navbar color='primary'>
-    <ion-title>
-      RecSysAdoption
-    </ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-
-  <img src="/assets/imgs/logo.png" />
-
+  <div>
+    <!-- <img class="logo" src="/assets/imgs/logo3.PNG" /> -->
+    <img class="logo" src="/assets/imgs/logo1.JPG" />
+  </div>
+   
   <ion-item>
     <ion-label floating>Email</ion-label>
     <ion-input type="text" [(ngModel)]="user.email"></ion-input>
@@ -25,8 +24,8 @@
 
 
   <div class="botoes">
-    <button ion-button block (click)="login()">Login</button>
-    <button class="botao_cadastrar" block ion-button (click)="register()">Cadastrar</button>
+    <button ion-button block (click)="login()" round medium>Login</button>
+    <button class="botao_cadastrar" block ion-button (click)="register()" round medium>Cadastrar</button>
   </div>
 
 </ion-content> 
