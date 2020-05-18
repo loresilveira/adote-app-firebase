@@ -40,10 +40,9 @@ export class AnimalPage {
         console.log(c)
         this.animal = c;
         this.provider.getFotoAnimal(this.animal.key).then(url=>{
-          this.animal.foto = url;      
-          this.createForm();
-
-        })
+          if(url) this.animal.foto = url;     
+        });
+        this.createForm();
       })
     }
 
@@ -113,6 +112,7 @@ export class AnimalPage {
 
   onSubmit() {
     if (this.form.valid) {
+      console.log(this.form.value)
       if(this.novaPhoto !== '') {
         this.provider.setFotoAnimal(this.animal.key, this.animal.foto);
         console.log('entrou')

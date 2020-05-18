@@ -10,11 +10,18 @@ import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 export class ApresentacaoPage {
   @ViewChild(Slides) slides: Slides;
 
+  constructor(public navCtrl: NavController){
+    
+  }
+
   slideChanged() {
     let currentIndex = this.slides.getActiveIndex();
     console.log('Current index is', currentIndex);
   }
 
+  goToProfilePage(){
+    this.navCtrl.push('ProfilePage')
+  }
  
 
 }

@@ -106,7 +106,8 @@ export class HomePage {
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
       /** Recomendação */
       
-      this.recomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
+      const listaRecomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
+      this.recomendados = this.getFoto(listaRecomendados)
       this.atualizaPerfil();
       console.log('atualizando perfil')
 
@@ -119,6 +120,12 @@ export class HomePage {
     })
   }
 
+  getFoto(lista: any){
+    lista.forEach(item =>{
+      this.provider.getFotoAnimal(item.key).then(foto => { item.foto = foto})
+    })
+    return lista;
+  }
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.avaliacao.key],
