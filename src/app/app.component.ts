@@ -27,9 +27,9 @@ export class MyApp {
 
     this.pages = [
       {title: 'Preferências', component: 'ProfilePage'},
-      {title: 'Lista de Animais', component: 'ListaAnimaisPage'},
-      {title: 'Cadastrar Animal', component: 'AnimalPage'},
-      {title: 'Minhas avaliações', component: 'AvaliadosPage'},
+      // {title: 'Lista de Animais', component: 'ListaAnimaisPage'},
+      // {title: 'Cadastrar Animal', component: 'AnimalPage'},
+      // {title: 'Minhas avaliações', component: 'AvaliadosPage'},
     ]
   }
 

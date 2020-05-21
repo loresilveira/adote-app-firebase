@@ -57,7 +57,8 @@ export class HomePage {
           if(res){
             this.adotante = res;
           } else{
-            this.navCtrl.push('ProfilePage')
+            this.dialogo.fechaCarregando();
+            this.navCtrl.push('ApresentacaoPage')
           }
         })
         this.provider.getAll().subscribe(res => { 
@@ -104,17 +105,17 @@ export class HomePage {
       this.avaliados = item;
       
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
+
       /** Recomendação */
-      
       const listaRecomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
+
+      /** Sem recomendação */
+      //  const listaRecomendados = this.recomendacao.recomendacaoRandom(novaLista).slice(0,5);
+      /** */
+
       this.recomendados = this.getFoto(listaRecomendados)
       this.atualizaPerfil();
       console.log('atualizando perfil')
-
-       /** Sem recomendação */
-      //  this.recomendados = this.recomendacao.recomendacaoRandom(novaLista).slice(0,5);
-       /** */
-
       this.countRecomendados += 5;
       console.log(this.countRecomendados)
     })

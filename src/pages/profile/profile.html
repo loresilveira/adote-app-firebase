@@ -7,7 +7,7 @@
   
   <ion-content padding>
     <ion-item>
-        <ion-label floating>Nome:</ion-label>
+        <ion-label floating>Seu nome:</ion-label>
         <ion-input [(ngModel)]="adotante.nome"></ion-input>
     </ion-item>
   
@@ -18,9 +18,9 @@
         <ion-option value="apto">Apartamento</ion-option>
       </ion-select>
     </ion-item>
-  
+    
     <ion-item>
-      <ion-label floating>Porte do animal:</ion-label>
+      <ion-label floating>Porte do cão ideal:</ion-label>
       <ion-select [(ngModel)]="adotante.porte">
         <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
         <ion-option value="pequeno">Pequeno</ion-option>
@@ -30,16 +30,15 @@
     </ion-item>
 
      <ion-item>
-      <ion-label floating>Pelagem</ion-label>
+      <ion-label floating>Pelagem do cão ideal:</ion-label>
       <ion-select [(ngModel)]="adotante.pelagem">
         <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
         <ion-option value="curta">Curta</ion-option>
         <ion-option value="longa">Longa</ion-option>
       </ion-select>
     </ion-item>
-
     <ion-item>
-      <ion-label floating>Sexo</ion-label>
+      <ion-label floating>Sexo do cão ideal:</ion-label>
       <ion-select [(ngModel)]="adotante.sexo">
         <!-- <ion-option value="nao_sei"> Sem preferência</ion-option> -->
           <ion-option value="femea">Fêmea</ion-option>
@@ -48,7 +47,7 @@
     </ion-item>
 
     <ion-item>
-      <ion-label floating>Possui crianças menores de 10 anos em casa?</ion-label>
+      <ion-label floating>Prefere um cão que goste de crianças?</ion-label>
       <ion-select [(ngModel)]="adotante.amigavel_crianca">
         <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
           <ion-option value="amigavel">Sim</ion-option>
@@ -66,7 +65,7 @@
       </ion-item>
   
        <ion-item>
-          <ion-label floating>Pet brincalhão?</ion-label>
+          <ion-label floating>Gosta de cão brincalhão?</ion-label>
           <ion-select [(ngModel)]="adotante.brincadeira">
             <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
               <ion-option value="brincalhao">Sim</ion-option>
@@ -75,7 +74,7 @@
         </ion-item>
 
         <ion-item>
-          <ion-label floating>Disponibilidade para passear com seu novo amigo?</ion-label>
+          <ion-label floating>Tem disponibiliade para correr com seu novo cão?</ion-label>
           <ion-select [(ngModel)]="adotante.exercicio">
             <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
               <ion-option value="ativo">Sim</ion-option>
@@ -84,7 +83,7 @@
         </ion-item>
   
         <ion-item>
-            <ion-label floating> Queda de pêlos é um problema?</ion-label>
+            <ion-label floating> Queda de pêlos seria um problema em sua residência?</ion-label>
             <ion-select [(ngModel)]="adotante.queda_pelo">
               <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
                 <ion-option value="nao_queda_pelo">Sim</ion-option>
@@ -93,7 +92,7 @@
           </ion-item>
   
           <ion-item>
-              <ion-label floating> Latidos são um problema?</ion-label>
+              <ion-label floating> Latidos seria um problema em sua residência?</ion-label>
               <ion-select [(ngModel)]="adotante.tendencia_latir">
                 <!-- <ion-option value="nao_sei">Sem preferência</ion-option> -->
                   <ion-option value="nao_tende_latir">Sim</ion-option>

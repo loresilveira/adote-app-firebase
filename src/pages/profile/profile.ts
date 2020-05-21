@@ -38,7 +38,7 @@ export class ProfilePage {
            console.log(profile); this.adotante = profile;
            this.flagEditar = true;
           }else{
-            this.dialogoProvider.exibirAlert('Preencha os campos de acordo com seus estilo de vida, para oferecermos o amigo ideal para você!')
+            this.dialogoProvider.exibirAlert('Toque em cada linha para abrir a pergunta e responder')
 
           }
         })
