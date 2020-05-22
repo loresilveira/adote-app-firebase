@@ -16,11 +16,11 @@ import { ProfilePage } from '../profile/profile';
 })
 export class LoginPage {
 
-  user = {} as User;
-  // public user ={
-  //   email: "lorena@user.com", password: "123456"
+  // user = {} as User;
+  public user ={
+    email: "lorena@user.com", password: "123456"
     
-  // }
+  }
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController,public firebaseauth: AngularFireAuth) {

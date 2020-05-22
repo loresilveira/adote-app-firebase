@@ -1,14 +1,26 @@
 
 <ion-header>
   <ion-navbar>
-    <ion-title>Concluído!</ion-title>
+    <div *ngIf="!randomico">
+      <ion-title>Parte final!</ion-title>
+    </div>
+    <div *ngIf="randomico">
+      <ion-title>Concluído!</ion-title>
+    </div>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <img src="../../assets/imgs/dog.png" />
+  <div *ngIf="!randomico">
+    <p>Agora vamos recomendar mais 10 animais para você!</p>
+    <p>Por favor, avalie-os!</p>
+    <button ion-button full (click)="goToHome()"> 
+      Ir
+    </button>
   </div>
-  <p>Agradeçemos sua participação! </p>
+  <div *ngIf="randomico">
+    <h3>Agradecemos sua participação!</h3>
+  </div>
+ 
   
 </ion-content>

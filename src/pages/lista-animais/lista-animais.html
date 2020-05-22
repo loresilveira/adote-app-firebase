@@ -13,27 +13,35 @@
     <ion-item-sliding *ngFor="let animal of animais">
         
      <ion-item>{{animal.nome}}
-       <p> <b>Porte:</b> {{animal.porte}} ...
+       <p> <b>Porte:</b> {{animal.prop_porte}} ...
             <b>Pelagem:</b> {{animal.pelagem}}
        </p>
        <p>
-         <b>Sexo: </b> {{animal.sexo}}
+         <b>Sexo: </b> {{animal.prop_sexo}}
          <b>Moradia ideal:</b> {{animal.moradia}}
-         <b>Amigável criança:</b> {{animal.amigavel_crianca}}
        </p>
        <p>
-          <b>Cão de guarda:</b> {{animal.guarda}}
+        <b>Amigável c/ criança:</b> {{animal.prop_amigavel_crianca}}
        </p>
        <p>
-         <b>Gosto por brincadeira:</b> {{animal.brincadeira}}         
+          <b>Cão de guarda:</b> {{animal.prop_guarda}}
        </p>
        <p>
-          <b>Tendência em latir:</b> {{animal.exercicio}}
+         <b>Brincalhão:</b> {{animal.prop_brincadeira}}         
+       </p>
+       <p>
+        <b>Necessidade de correr:</b> {{animal.prop_exercicio}}
+      </p>
+      <p>
+        <b>Solta muitos pêlos:</b> {{animal.prop_queda_pelo}}
+      </p>
+       <p>
+          <b>Tendência em latir:</b> {{animal.prop_tendencia_latir}}
        </p>
      </ion-item>
 
 
-      <ion-item-options side="left">
+      <!-- <ion-item-options side="left">
         <button ion-button color="secondary" (click)="editAnimal(animal)">
           <ion-icon name="create"></ion-icon>
         </button>
@@ -42,13 +50,13 @@
           <ion-icon name="trash"></ion-icon>
         </button>
 
-      </ion-item-options>
+      </ion-item-options> -->
     </ion-item-sliding>
   </ion-list>
 
-  <ion-fab bottom right>
+  <!-- <ion-fab bottom right>
     <button ion-fab color="primary" (click)="newAnimal()">
       <ion-icon name="add"></ion-icon>
     </button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

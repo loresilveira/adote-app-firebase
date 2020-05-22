@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController, Icon, DateTime } from 'ionic-angular';
+import { NavController, MenuController, NavParams } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../../models/user';
@@ -11,7 +11,6 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 import { AvaliadosProvider } from '../../providers/avaliados/avaliados';
 import { AvaliadoModel } from '../../models/avaliado';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -24,18 +23,15 @@ export class HomePage {
   recomendados :  AnimalModel[];
   user: User = {id: '', email: '', password:''};
   form: FormGroup;
-  public avaliacao : AvaliadoModel = {
-    key: '',
-    rating: 0,
-    dataHora: new Date,
-  }
+  public avaliacao : AvaliadoModel = { key: '', rating: 0, dataHora: new Date,};
   avaliados : any[];
   listaAnimais : AnimalModel[];
   animal : AnimalModel;
   ratingValue : number = 0;
   countRecomendados : number = 0; 
+  recomendaRandomico = false;
 
-  constructor(public navCtrl: NavController,
+  constructor(public navCtrl: NavController,  public navParams: NavParams,
     public afAuth: AngularFireAuth,
     private afDatabase : AngularFireDatabase,
     private recomendacao : RecomendacaoProvider,
@@ -45,6 +41,9 @@ export class HomePage {
     public menuCtrl: MenuController,
     private formBuilder: FormBuilder,) {
     console.log('Hello Home Page')
+
+    this.recomendaRandomico = this.navParams.get('randomico')
+    console.log(this.recomendaRandomico)
   }
 
   ngOnInit(){
@@ -97,27 +96,27 @@ export class HomePage {
     return animais
   }
 
-
-
   getAvaliados(){
     // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
-      
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
+      let listaRecomendados;
 
-      /** Recomendação */
-      const listaRecomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
-
-      /** Sem recomendação */
-      //  const listaRecomendados = this.recomendacao.recomendacaoRandom(novaLista).slice(0,5);
-      /** */
-
+      if(!this.recomendaRandomico){
+        /** Recomendação */
+        console.log('RECOMENDAAAAR')
+        listaRecomendados = this.recomendacao.cosineSimilaraty(this.adotante, novaLista).slice(0,5); 
+      }else{
+        /** Randômico - sem recomendação */
+        console.log('RANDOM')
+        listaRecomendados = this.recomendacao.recomendacaoRandom(novaLista).slice(0,5);
+      }
       this.recomendados = this.getFoto(listaRecomendados)
       this.atualizaPerfil();
-      console.log('atualizando perfil')
+      console.log('atualizando perfil') 
       this.countRecomendados += 5;
-      console.log(this.countRecomendados)
+
     })
   }
 
@@ -127,6 +126,7 @@ export class HomePage {
     })
     return lista;
   }
+
   createForm() {
     this.form = this.formBuilder.group({
       key: [this.avaliacao.key],
@@ -176,14 +176,14 @@ export class HomePage {
   }
 
   goToConclusaoPage(){
-    this.navCtrl.push('ConclusaoPage')
+    this.navCtrl.push('ConclusaoPage', {'recomendaRandomico': this.recomendaRandomico})
   }
   openMenu() {
     this.menuCtrl.open();
   }
 
   sair(){
-    this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot(LoginPage)})
+    this.afAuth.auth.signOut().then(()=>{ this.navCtrl.setRoot('LoginPage')})
   }
 
 }

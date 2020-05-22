@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ConclusaoPage page.
@@ -15,11 +16,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ConclusaoPage {
 
+  randomico: boolean;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.randomico = this.navParams.get('recomendaRandomico')
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ConclusaoPage');
+  }
+
+  goToHome(){
+    this.navCtrl.setRoot(HomePage, { 'randomico': true })
   }
 
 }
