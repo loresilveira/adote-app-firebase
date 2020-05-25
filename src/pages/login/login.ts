@@ -6,6 +6,7 @@ import { ListaAnimaisPage } from '../lista-animais/lista-animais';
 import { RegisterPage } from '../register/register';
 import { HomePage } from '../home/home';
 import { ProfilePage } from '../profile/profile';
+import { DialogoProvider } from '../../providers/dialogo/dialogo';
 
 
 
@@ -16,14 +17,10 @@ import { ProfilePage } from '../profile/profile';
 })
 export class LoginPage {
 
-  // user = {} as User;
-  public user ={
-    email: "lorena@user.com", password: "123456"
-    
-  }
+  user = {} as User;
   
   constructor(public navCtrl: NavController, public navParams: NavParams,
-              private toast: ToastController,public firebaseauth: AngularFireAuth) {
+              private toast: ToastController,public firebaseauth: AngularFireAuth, private dialogo: DialogoProvider) {
   }
 
   ionViewDidLoad(){
@@ -31,7 +28,7 @@ export class LoginPage {
   }
 
   async login(){
-
+    this.dialogo.abreCarregando()
     try{
       const result = await this.firebaseauth.auth.signInWithEmailAndPassword(this.user.email, this.user.password);
       if(result){
@@ -40,8 +37,10 @@ export class LoginPage {
     }
     catch(e) {
       console.error(e);
+      if(e.code === 'auth/user-not-found') this.dialogo.exibirToast('E-mail não cadastrado')
+      if(e.code === 'auth/wrong-password') this.dialogo.exibirToast('Senha incorreta')
     }
-    
+    this.dialogo.fechaCarregando()
       
   }
 
