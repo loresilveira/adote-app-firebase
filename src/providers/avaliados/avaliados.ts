@@ -33,6 +33,15 @@ export class AvaliadosProvider {
       })
   }
 
+
+  getAllAdmin() {
+    return this.db.list(this.PATH)
+      .snapshotChanges()
+      .map(changes => {
+        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+      })
+  }
+
   get(key: string) {
     return this.db.object(this.PATH  + "/"+ this.userId + key).snapshotChanges()
       .map(c => {

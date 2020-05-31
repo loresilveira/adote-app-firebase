@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { NavController, MenuController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { NavController, MenuController, NavParams, Content } from 'ionic-angular';
 import { AngularFireAuth } from 'angularfire2/auth';
 import {AngularFireDatabase } from 'angularfire2/database';
 import { User } from '../../models/user';
@@ -18,6 +18,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
  
 })
 export class HomePage {
+  @ViewChild(Content)
+  content:Content;
 
   adotante : Adotante;
   recomendados :  AnimalModel[];
@@ -47,8 +49,8 @@ export class HomePage {
   }
 
   ngOnInit(){
-    this.dialogo.abreCarregando();
     this.afAuth.authState.take(1).subscribe(data => {
+      this.dialogo.abreCarregando();
       if(data && data.email && data.uid){
         this.user.id = data.uid;
         this.user.email = data.email;
@@ -98,6 +100,7 @@ export class HomePage {
 
   getAvaliados(){
     // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
+    
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
       this.avaliados = item;
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
@@ -116,13 +119,15 @@ export class HomePage {
       this.atualizaPerfil();
       console.log('atualizando perfil') 
       this.countRecomendados += 5;
-
     })
+   
   }
 
   getFoto(lista: any){
     lista.forEach(item =>{
-      this.provider.getFotoAnimal(item.key).then(foto => { item.foto = foto})
+      this.provider.getFotoAnimal(item.key).then(foto => { 
+        if(foto) item.foto = foto      
+      })
     })
     return lista;
   }
@@ -169,6 +174,13 @@ export class HomePage {
       this.adotante.tendencia_latir = animal.tendencia_latir;
       console.log(this.adotante)
     }
+  }
+  scrollUp(event){
+    this.dialogo.abreCarregando();
+    this.getAvaliados();
+    this.content.scrollToTop();
+    this.dialogo.fechaCarregando();
+
   }
 
   atualizaPerfil(){

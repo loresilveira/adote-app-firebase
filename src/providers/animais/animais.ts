@@ -98,7 +98,7 @@ export class AnimaisProvider {
 
   setFotoAnimal(imageName: any, image: any){
     const fotoAnimal = storage().ref('pictures' + '/' + imageName);
-    fotoAnimal.putString(image, 'data_url').then((saveFoto)=>{ 
+    fotoAnimal.putString(image, 'data_url').then((saveFoto)=>{  console.log(saveFoto)
       return 'url';
     })
   }  

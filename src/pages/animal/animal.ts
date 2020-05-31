@@ -1,11 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController, Content } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AnimaisProvider } from '../../providers/animais/animais';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { storage } from 'firebase';
-import { AnimalModel } from '../../models/animal';
-
+import { DialogoProvider } from '../../providers/dialogo/dialogo';
 
 @IonicPage()
 @Component({
@@ -13,6 +11,9 @@ import { AnimalModel } from '../../models/animal';
   templateUrl: 'animal.html',
 })
 export class AnimalPage {
+  @ViewChild(Content)
+  content:Content;
+  
   title: string;
   form: FormGroup;
   animal: any;
@@ -22,7 +23,7 @@ export class AnimalPage {
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
     private formBuilder: FormBuilder, private provider: AnimaisProvider,
-    private toast: ToastController,
+    private toast: ToastController, private dialogo: DialogoProvider,
     private camera: Camera) {
 
     // // maneira 1
@@ -40,7 +41,8 @@ export class AnimalPage {
         console.log(c)
         this.animal = c;
         this.provider.getFotoAnimal(this.animal.key).then(url=>{
-          if(url) this.animal.foto = url;     
+          if(url) this.animal.foto = url; 
+          console.log(this.animal.foto)
         });
         this.createForm();
       })
@@ -102,6 +104,8 @@ export class AnimalPage {
         const base64image = 'data:image/jpeg;base64,' + imageData;
         this.animal.foto = base64image;
         this.novaPhoto = base64image;
+        // this.content.scrollToBottom();
+
       }, (error) => {
         console.error(error);
       })
@@ -112,21 +116,21 @@ export class AnimalPage {
 
   onSubmit() {
     if (this.form.valid) {
-      console.log(this.form.value)
-      if(this.novaPhoto !== '') {
+      if(this.novaPhoto){
         this.provider.setFotoAnimal(this.animal.key, this.animal.foto);
-        console.log('entrou')
       }
+      console.log(this.form.value)      
       this.provider.save(this.form.value)
-        .then(() => {
+        .then((dado) => {
+          console.log(dado)
           this.toast.create({ message: 'Animal salvo com sucesso.', duration: 3000 }).present();
           this.navCtrl.pop();
-          
         })
         .catch((e) => {
           this.toast.create({ message: 'Erro ao salvar o animal.', duration: 3000 }).present();
           console.error(e);
         })
+
     }
   }
 }

@@ -17,8 +17,8 @@ import { DialogoProvider } from '../../providers/dialogo/dialogo';
 })
 export class LoginPage {
 
-  user = {} as User;
-  
+  // user = {} as User;
+  private user  = {email: 'l0r3@admin.com', password: '7bing72'}
   constructor(public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController,public firebaseauth: AngularFireAuth, private dialogo: DialogoProvider) {
   }
