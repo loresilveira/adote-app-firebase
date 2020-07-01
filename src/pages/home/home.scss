@@ -10,7 +10,12 @@ page-home {
     }
 
     .foto {
-        width: 100px;
+        width: 50%;
+        float: right;
+    }
+
+    .semfoto {
+        width: 155px;
         height: 100px;
         float: right;
     }
@@ -29,5 +34,12 @@ page-home {
 
     .nome {
         font-size: 20px;
+        margin-bottom: 10px;
+        word-wrap: break-word;
+    }
+
+    .cabecalho {
+        text-align: center;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 }

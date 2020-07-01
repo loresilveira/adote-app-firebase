@@ -19,6 +19,10 @@ export class ApresentacaoPage {
     console.log('Current index is', currentIndex);
   }
 
+
+  goToNext(){
+    this.slides.slideNext();
+  }
   goToProfilePage(){
     this.navCtrl.push('ProfilePage')
   }

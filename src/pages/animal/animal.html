@@ -14,7 +14,7 @@
     <button ion-button block  (click)="getImage($event)">Carregar foto</button>
     <ion-item>
       <ion-label stacked>Nome</ion-label>
-      <ion-input type="text" formControlName="nome"></ion-input>
+      <ion-input type="text" formControlName="nome" maxLength="13"></ion-input>
     </ion-item>
     <ion-item *ngIf="!form.controls.nome.valid && 
     (form.controls.nome.dirty || form.controls.nome.touched)" color="danger">

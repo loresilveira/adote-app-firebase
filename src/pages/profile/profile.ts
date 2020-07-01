@@ -37,9 +37,6 @@ export class ProfilePage {
          if(profile) {
            console.log(profile); this.adotante = profile;
            this.flagEditar = true;
-          }else{
-            this.dialogoProvider.exibirAlert('Toque em cada linha para abrir a pergunta e responder')
-
           }
         })
       }

@@ -149,6 +149,10 @@ export class HomePage {
   }
 
   logRatingChange(rating, animal){
+    this.recomendados.forEach(i => {
+      if(i.key === animal.key) i.avaliacao = rating
+    })
+    console.log(this.recomendados)
     this.avaliacao.key = animal.key;
     this.avaliacao.rating = rating;
     this.avaliacao.dataHora = new Date;
@@ -175,12 +179,31 @@ export class HomePage {
       console.log(this.adotante)
     }
   }
+
   scrollUp(event){
+    // this.content.scrollToTop(2000);
+   
     this.dialogo.abreCarregando();
-    this.getAvaliados();
-    this.content.scrollToTop();
+    const pendente = this.avaliacaoPendente();
+    if(!pendente){
+      this.content.scrollTo(0, 85, 1500)
+      this.getAvaliados();
+      
+    }
     this.dialogo.fechaCarregando();
 
+  }
+
+  avaliacaoPendente(){
+    const naoAvaliado = this.recomendados.filter(i => i.avaliacao == 0)
+    if(naoAvaliado.length > 0){
+      console.log(naoAvaliado)
+      this.content.scrollTo(0, 85, 1500)
+      this.dialogo.exibirAlert('Avalie todos os 5 animais recomendados');
+      return true
+    }else{
+      return false;
+    }
   }
 
   atualizaPerfil(){
@@ -188,8 +211,12 @@ export class HomePage {
   }
 
   goToConclusaoPage(){
-    this.navCtrl.push('ConclusaoPage', {'recomendaRandomico': this.recomendaRandomico})
-  }
+    const pendente = this.avaliacaoPendente();
+    if(!pendente){
+      this.navCtrl.push('ConclusaoPage', {'recomendaRandomico': this.recomendaRandomico})
+    }
+  } 
+
   openMenu() {
     this.menuCtrl.open();
   }
