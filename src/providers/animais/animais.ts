@@ -105,9 +105,18 @@ export class AnimaisProvider {
 
   getFotoAnimal(imageName: any){
     const imagem = storage().ref().child('pictures' + '/' + imageName);
-    return imagem.getDownloadURL().then((url) =>{
-      const urlImage = url;    
-      return urlImage; 
+     return imagem.getDownloadURL();
+  }
+
+  getFoto(imageName: any){
+    return new Promise((resolve, reject) =>{
+      const imagem = storage().ref().child('pictures' + '/' + imageName);
+      imagem.getDownloadURL().then((url) =>{
+        const urlImage = url;    
+        return urlImage; 
+      })
+      .then(() => resolve())
+      .catch((e) => reject(e))
     })
   }
 

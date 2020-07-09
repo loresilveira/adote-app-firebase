@@ -35,8 +35,8 @@ export class RegisterPage {
   async register() {
      try{
        this.dialogoProvider.abreCarregando();
-      //  const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
-      //  console.log(result);
+       const result = await this.firebaseauth.auth.createUserWithEmailAndPassword(this.user.email, this.user.password);
+       console.log(result);
        this.navCtrl.push('ApresentacaoPage');
      }catch(e){
        console.error(e); 

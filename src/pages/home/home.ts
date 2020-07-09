@@ -67,8 +67,8 @@ export class HomePage {
           const lista : any[] = res
           this.listaAnimais = lista;
           if(this.adotante && this.listaAnimais){
+            this.dialogo.fechaCarregando();
           this.getAvaliados();  
-          this.dialogo.fechaCarregando();
           }
         })
         
@@ -100,8 +100,8 @@ export class HomePage {
 
   getAvaliados(){
     // this.listaAnimais = this.filtrar(this.listaAnimais, this.adotante);
-    
     this.avaliacaoProvider.getAll().take(1).subscribe(item =>{
+      this.dialogo.abreCarregando()
       this.avaliados = item;
       const novaLista = this.removerAvaliados(this.listaAnimais, this.avaliados);
       let listaRecomendados;
@@ -119,6 +119,7 @@ export class HomePage {
       this.atualizaPerfil();
       console.log('atualizando perfil') 
       this.countRecomendados += 5;
+      this.dialogo.fechaCarregando();
     })
    
   }
@@ -130,6 +131,7 @@ export class HomePage {
       })
     })
     return lista;
+    
   }
 
   createForm() {
@@ -216,7 +218,9 @@ export class HomePage {
       this.navCtrl.push('ConclusaoPage', {'recomendaRandomico': this.recomendaRandomico})
     }
   } 
-
+  go(){
+    this.navCtrl.push('ConclusaoPage', {'recomendaRandomico': true})
+  }
   openMenu() {
     this.menuCtrl.open();
   }

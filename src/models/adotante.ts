@@ -10,4 +10,5 @@ export interface Adotante{
     exercicio: string; // 1- Pouco / 2-Médio / 3-Muito
     queda_pelo: string; // 1- Pouco / 2-Médio / 3-Muito
     tendencia_latir: string;  // 1- Pouco / 2-Médio / 3-Muito
+    sugestao: string;
 }
