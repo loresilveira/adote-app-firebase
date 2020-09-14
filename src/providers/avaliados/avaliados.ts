@@ -4,7 +4,7 @@ import 'rxjs/add/operator/map'
 import { LoadingController } from 'ionic-angular';
 import { AvaliadoModel } from '../../models/avaliado';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { User } from '../../models/user';
+
 
 @Injectable()
 export class AvaliadosProvider {
@@ -40,6 +40,14 @@ export class AvaliadosProvider {
       .map(changes => {
         return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
       })
+  }
+
+  getOneAdmin(key:string){
+    return this.db.list(this.PATH + '/' + key)
+    .snapshotChanges()
+    .map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+    })
   }
 
   get(key: string) {
