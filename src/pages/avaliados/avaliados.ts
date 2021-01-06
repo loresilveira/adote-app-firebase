@@ -31,6 +31,10 @@ export class AvaliadosPage {
   listaDezUltimos: Array<number> = [];
   listaAdotantes: Array<string> = [];
   adotantes: any;
+  totalUsuario : number = 0;
+  listMAP: number = 0;
+  totalMAP: number = 0;
+  totalMRR: number = 0;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -47,42 +51,72 @@ export class AvaliadosPage {
   }
 
   ngOnInit() {
+    //this.avaliacaoProvider.getAll().subscribe(res => console.log(res))
     this.getAdotantes();
+  }
+
+  calcularMAP(posicaoLista, lista){
+    let mapPorUsuario = 0;
+    let map = 0;
+    let count = 1;
+    let relevante = 0;
+
+    for (let index = 0; index <= (posicaoLista-1); index++) {
+        
+      const element = lista[index];
+      if(element.rating >= 4){ // rating >= 4 é considerado relevante
+        relevante = relevante +1; //0
+        map = relevante / count
+        count = count +1;
+      }
+      else{
+        map = relevante /count
+        count = count +1;
+      }
+      mapPorUsuario = mapPorUsuario + map;
+    }
+
+    const total = mapPorUsuario / posicaoLista;
+    this.totalMAP = this.totalMAP + total;
+    console.log(total)
+    console.log('MAP: '+this.totalMAP)
+  }
+  
+  calcularMRR(posicaoLista, lista){
+    let mrr = 0;
+    let countMrr = 1;
+    let relevante = 0;
+
+    for (let index = 0; index <= (posicaoLista-1); index++) {
+      
+      const element = lista[index];
+      if(element.rating >= 4){
+        relevante = relevante +1; //0
+        mrr = relevante / countMrr;
+        this.totalMRR = this.totalMRR + mrr;
+        console.log('MRR: '+this.totalMRR)
+        return
+      }
+      countMrr = countMrr +1;
+    }   
   }
 
   organizarPorUsuario(key: string) {
     this.avaliacaoProvider.getOneAdmin(key).subscribe( async res => {
-      let ordenados = this.ordenar( await res)
+      let lista = this.ordenar( await res)
+      if(lista.length >= 10){
+      const ordenados : any[] = lista.slice(5,10)
+      console.log(lista)
       console.log(ordenados)
-      const cincoPrimeiros: any[] = ordenados.slice(0,4);
-      const cincoUltimos: any[] = ordenados.slice(5, 9);
-      const dezUltimos: any[] = ordenados.slice(10, 20);
-      // console.log(dezPrimeiros)
-      // console.log(dezUltimos)
-      cincoPrimeiros.forEach(element => {
-        this.listaCincoPrimeiros.push(element.rating)
-      });
-      cincoUltimos.forEach(element => {
-        this.listaCincoUltimos.push(element.rating)
-      });
-      dezUltimos.forEach(element => {
-        this.listaDezUltimos.push(element.rating)
-      })
-     
-     const quantUm = this.countOccurrences(this.listaDezUltimos, 1)
-     const quantDois = this.countOccurrences(this.listaDezUltimos, 2)
-     const quantTres =this.countOccurrences(this.listaDezUltimos, 3)
-     const quantQuatro = this.countOccurrences(this.listaDezUltimos, 4)
-     const quantCinco = this.countOccurrences(this.listaDezUltimos, 5)
 
-     console.log(quantUm)
-     console.log(quantDois)
-     console.log(quantTres)
-     console.log(quantQuatro)
-     console.log(quantCinco)
-
+      this.totalUsuario = this.totalUsuario + 1 // quantidade de usuários
+      console.log(this.totalUsuario)
+      
+      this.calcularMAP(3, ordenados)
+      this.calcularMRR(3, ordenados)
+    }
     })
-
+  
   }
 
   countOccurrences (arr, val){
@@ -111,11 +145,10 @@ export class AvaliadosPage {
    getAdotantes() {
       this.avaliacaoProvider.getAllAdmin()
       .subscribe( async res => {
+        console.log(res)
           await res.forEach(item =>{
             console.log(item.key)
             this.organizarPorUsuario(item.key);
-            // console.log(this.listaDezPrimeiros)
-            // console.log(this.listaDezUltimos)
           })
           
       })
